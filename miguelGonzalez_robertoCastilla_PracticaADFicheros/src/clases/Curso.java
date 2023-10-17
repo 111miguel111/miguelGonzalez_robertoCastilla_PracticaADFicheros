@@ -9,14 +9,13 @@ public class Curso {
 	private String nombre;
 	private String descripcion;
 	private HashMap<String,Alumno> alumnos;
-	private HashMap<String,Profesor> profesor;
+	private Profesor profesor;
 	
 	public Curso(String nombre, String descripcion) {
 		codigo++;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		alumnos=new HashMap();
-		profesor=new HashMap();
 	}
 	
 	
@@ -76,28 +75,22 @@ public class Curso {
 	public void setAlumnos(HashMap alumnos) {
 		this.alumnos = alumnos;
 	}
-	public HashMap getProfesores() {
+	public Profesor getProfesor() {
 		return profesor;
 	}
-	public String getProfesoreString() {
-		String profesosString="\n cursos{";
-		for(HashMap.Entry<String, Profesor> entry : this.profesor.entrySet()) {
-		    String key = entry.getKey();
-		    profesosString=profesosString+ entry.getValue().getNombre()+entry.getValue().getDireccion()+entry.getValue().getDni()+entry.getValue().getTelefono()+"\n";
-		}
-		profesosString=profesosString+"}\n";
-		return profesosString;
+	public String getProfesorString() {
+		return "\nprofesor {"+this.profesor.getNombre()+this.profesor.getDireccion()+this.profesor.getDni()+this.profesor.getTelefono()+"\n}";
 	}
-	public void setProfesores(HashMap profesores) {
+	public void setProfesor(Profesor profesores) {
 		this.profesor = profesores;
 	}
 	@Override
 	public String toString() {
-		if(!(this.alumnos.isEmpty()&&this.profesor.isEmpty())) {
-			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + getAlumnosString() + getProfesoreString() + "]";
-		}else if(this.alumnos.isEmpty()&&!this.profesor.isEmpty()) {
-			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + getProfesoreString() + "]";
-		}else if(!this.alumnos.isEmpty()&&this.profesor.isEmpty()) {
+		if(!(this.alumnos.isEmpty()&&this.profesor==null)) {
+			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + getAlumnosString() + getProfesorString() + "]";
+		}else if(this.alumnos.isEmpty()&&this.profesor!=null) {
+			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + getProfesorString() + "]";
+		}else if(!this.alumnos.isEmpty()&&this.profesor==null) {
 			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + getAlumnosString() + "]";
 		}else{
 			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + "]";
