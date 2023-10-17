@@ -47,7 +47,7 @@ public class Curso {
 		this.profesor = profesores;
 	}
 	@Override
-	public String toString() {
+	public String toString() {//creo que hay que cambiar el null por .isEmpty()
 		if(alumnos!=null&&profesor!=null) {
 			return "Curso [nombre=" + nombre + ", descripcion=" + descripcion + ", alumnos=" + alumnos + ", profesores="
 					+ profesor + "]";
