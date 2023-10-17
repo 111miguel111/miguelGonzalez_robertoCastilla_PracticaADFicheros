@@ -9,6 +9,7 @@ public class Curso {
 	private String descripcion;
 	private HashMap alumnos;
 	private HashMap profesor;
+	
 	public Curso(String nombre, String descripcion) {
 		codigo++;
 		this.nombre = nombre;
