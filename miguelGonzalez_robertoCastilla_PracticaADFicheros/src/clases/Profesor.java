@@ -81,7 +81,7 @@ public class Profesor {
 		String cursosString="\n cursos{";
 		for(HashMap.Entry<String, Curso> entry : this.cursos.entrySet()) {
 		    String key = entry.getKey();
-		    cursosString=cursosString+ entry.getValue().getNombre() + entry.getValue().getDescripcion() + entry.getValue().getCodigo()+"\n";
+		    cursosString=cursosString+"[ nombre= "+ entry.getValue().getNombre() +", descripcion= "+ entry.getValue().getDescripcion() +", codigo= "+ entry.getValue().getCodigo()+" ]\n";
 		}
 		cursosString=cursosString+"}\n";
 		return cursosString;
@@ -94,11 +94,11 @@ public class Profesor {
 	@Override
 	public String toString() {
 		if(this.cursos.isEmpty()) {
-			return "Profesor [nombre=" + nombre + "\n dni=" + dni + "\n direccion=" + direccion + "\n telefono=" + telefono
-					+  "]";
+			return "Profesor [ nombre= " + nombre + "\n dni= " + dni + "\n direccion= " + direccion + "\n telefono= " + telefono
+					+  " ]";
 		}else {
-			return "Profesor [nombre=" + nombre + "\n dni=" + dni + "\n direccion=" + direccion + "\n telefono=" + telefono
-					+ getCursosString() + "]";
+			return "Profesor [ nombre=" + nombre + "\n dni=" + dni + "\n direccion=" + direccion + "\n telefono=" + telefono
+					+ getCursosString() + " ]";
 		}
 	}
 	

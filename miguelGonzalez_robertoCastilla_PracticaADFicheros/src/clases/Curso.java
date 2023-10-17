@@ -64,10 +64,10 @@ public class Curso {
 		return alumnos;
 	}
 	public String getAlumnosString() {
-		String alumnosString="\n cursos{";
+		String alumnosString="\n alumnos{";
 		for(HashMap.Entry<String, Alumno> entry : this.alumnos.entrySet()) {
 		    String key = entry.getKey();
-		    alumnosString=alumnosString+ entry.getValue().getNombre() +entry.getValue().getApellidos()+entry.getValue().getDireccion()+entry.getValue().getTelefono()+entry.getValue().getFechaNacimiento()+"\n";
+		    alumnosString=alumnosString+ "[ nombre= "+entry.getValue().getNombre() +", apellidos= "+entry.getValue().getApellidos()+", direccion= "+entry.getValue().getDireccion()+", telefono= "+entry.getValue().getTelefono()+", fechaNacimiento= "+entry.getValue().getFechaNacimiento()+" ]\n";
 		}
 		alumnosString=alumnosString+"}\n";
 		return alumnosString;
@@ -79,7 +79,7 @@ public class Curso {
 		return profesor;
 	}
 	public String getProfesorString() {
-		return "\nprofesor {"+this.profesor.getNombre()+this.profesor.getDireccion()+this.profesor.getDni()+this.profesor.getTelefono()+"\n}";
+		return "\nprofesor {nombre= " + this.profesor.getNombre() + " dni= " + this.profesor.getDni() + ", direccion= " + this.profesor.getDireccion() + ", telefono= " + this.profesor.getTelefono() +"}\n";
 	}
 	public void setProfesor(Profesor profesores) {
 		this.profesor = profesores;
@@ -87,13 +87,13 @@ public class Curso {
 	@Override
 	public String toString() {
 		if(!(this.alumnos.isEmpty()&&this.profesor==null)) {
-			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + getAlumnosString() + getProfesorString() + "]";
+			return "Curso [ nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + getProfesorString() + " ]";
 		}else if(this.alumnos.isEmpty()&&this.profesor!=null) {
-			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + getProfesorString() + "]";
+			return "Curso [ nombre= " + nombre + "\n descripcion= " + descripcion + getProfesorString() + " ]";
 		}else if(!this.alumnos.isEmpty()&&this.profesor==null) {
-			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + getAlumnosString() + "]";
+			return "Curso [ nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + " ]";
 		}else{
-			return "Curso [nombre=" + nombre + "\n descripcion=" + descripcion + "]";
+			return "Curso [ nombre= " + nombre + "\n descripcion= " + descripcion + " ]";
 		}
 	}
 	
