@@ -64,7 +64,7 @@ public class Alumno {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public HashMap getCursos() {
+	public HashMap getCursos() {//implementar que este metodo tiene que devolver solo los nombres y descripciones de los cursos para evitar bucles
 		return cursos;
 	}
 
@@ -76,9 +76,16 @@ public class Alumno {
 
 	@Override
 	public String toString() {
-		return "Alumno [nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", telefono="
-				+ telefono + ", fechaNacimiento=" + fechaNacimiento + ", cursos=" + cursos + "]";
+		if(cursos==null) {
+			return "Alumno [nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", telefono="
+					+ telefono + ", fechaNacimiento=" + fechaNacimiento +  "]";
+		}else {
+			return "Alumno [nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", telefono="
+					+ telefono + ", fechaNacimiento=" + fechaNacimiento + ", cursos=" + cursos + "]";
+		}
+		
 	}
+	
 	
 	
 }
