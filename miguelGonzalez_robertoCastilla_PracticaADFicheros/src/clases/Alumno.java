@@ -13,7 +13,7 @@ public class Alumno {
 	private String fechaNacimiento;
 	private HashMap<String,Curso> cursos;
 	
-	Alumno(String nombre, String apellidos, String direccion, String telefono, String fechaNacimiento){
+	public Alumno(String nombre, String apellidos, String direccion, String telefono, String fechaNacimiento){
 		numExpediente++;
 		this.nombre = nombre;
 		this.apellidos = apellidos;

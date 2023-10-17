@@ -75,6 +75,12 @@ public class Curso {
 	public void setAlumnos(HashMap alumnos) {
 		this.alumnos = alumnos;
 	}
+	public void AlumnoNuevo(Alumno alumno) {
+		this.alumnos.put(alumno.getNombre()+"_"+alumno.getApellidos(), alumno);
+	}
+	public void AlumnoPop(Alumno alumno) {
+		this.alumnos.remove(alumno.getNombre()+"_"+alumno.getApellidos(), alumno);
+	}
 	public Profesor getProfesor() {
 		return profesor;
 	}
