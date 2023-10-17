@@ -2,6 +2,7 @@ package clases;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Alumno {
 	private static int numExpediente = 0;
@@ -9,10 +10,10 @@ public class Alumno {
 	private String apellidos;
 	private String direccion;
 	private String telefono;
-	private LocalDate fechaNacimiento;
-	private HashMap cursos;
+	private String fechaNacimiento;
+	private HashMap<String,Curso> cursos;
 	
-	Alumno(String nombre, String apellidos, String direccion, String telefono, LocalDate fechaNacimiento){
+	Alumno(String nombre, String apellidos, String direccion, String telefono, String fechaNacimiento){
 		numExpediente++;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -24,6 +25,29 @@ public class Alumno {
 
 	
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(apellidos, cursos, direccion, fechaNacimiento, nombre, telefono);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Alumno other = (Alumno) obj;
+		return Objects.equals(apellidos, other.apellidos) && Objects.equals(cursos, other.cursos)
+				&& Objects.equals(direccion, other.direccion) && Objects.equals(fechaNacimiento, other.fechaNacimiento)
+				&& Objects.equals(nombre, other.nombre) && Objects.equals(telefono, other.telefono);
+	}
+
+
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -56,16 +80,25 @@ public class Alumno {
 		this.telefono = telefono;
 	}
 
-	public LocalDate getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public HashMap getCursos() {//implementar que este metodo tiene que devolver solo los nombres y descripciones de los cursos para evitar bucles
 		return cursos;
+	}
+	public String getCursosString() {
+		String cursosString="\n cursos{";
+		for(HashMap.Entry<String, Curso> entry : this.cursos.entrySet()) {
+		    String key = entry.getKey();
+		    cursosString=cursosString+ entry.getValue().getNombre() + entry.getValue().getDescripcion() + entry.getValue().getCodigo()+"\n";
+		}
+		cursosString=cursosString+"}\n";
+		return cursosString;
 	}
 
 	public void setCursos(HashMap cursos) {
@@ -75,13 +108,13 @@ public class Alumno {
 
 
 	@Override
-	public String toString() {//creo que hay que cambiar el null por .isEmpty()
-		if(cursos==null) {
-			return "Alumno [nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", telefono="
-					+ telefono + ", fechaNacimiento=" + fechaNacimiento +  "]";
+	public String toString() {
+		if(this.cursos.isEmpty()) {
+			return "Alumno [nombre=" + nombre + "\n apellidos=" + apellidos + "\n direccion=" + direccion + "\n telefono="
+					+ telefono + "\n fechaNacimiento=" + fechaNacimiento +  "]";
 		}else {
-			return "Alumno [nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", telefono="
-					+ telefono + ", fechaNacimiento=" + fechaNacimiento + ", cursos=" + cursos + "]";
+			return "Alumno [nombre=" + nombre + "\n apellidos=" + apellidos + "\n direccion=" + direccion + "\n telefono="
+					+ telefono + "\n fechaNacimiento=" + fechaNacimiento + getCursosString() + "]";
 		}
 		
 	}

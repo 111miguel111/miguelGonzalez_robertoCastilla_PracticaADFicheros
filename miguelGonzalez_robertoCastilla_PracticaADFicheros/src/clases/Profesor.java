@@ -8,13 +8,14 @@ public class Profesor {
 	private String dni;
 	private String direccion;
 	private String telefono;
-	private HashMap cursos;
+	private HashMap<String,Curso> cursos;
 	
 	public Profesor(String nombre, String dni, String direccion, String telefono){
 		this.nombre=nombre;
 		this.direccion=direccion;
 		this.dni=dni;
 		this.telefono=telefono;
+		this.cursos=new HashMap();
 	}
 
 	
@@ -76,6 +77,15 @@ public class Profesor {
 	public HashMap getCursos() {
 		return cursos;
 	}
+	public String getCursosString() {
+		String cursosString="\n cursos{";
+		for(HashMap.Entry<String, Curso> entry : this.cursos.entrySet()) {
+		    String key = entry.getKey();
+		    cursosString=cursosString+ entry.getValue().getNombre() + entry.getValue().getDescripcion() + entry.getValue().getCodigo()+"\n";
+		}
+		cursosString=cursosString+"}\n";
+		return cursosString;
+	}
 
 	public void setCursos(HashMap cursos) {
 		this.cursos = cursos;
@@ -83,8 +93,13 @@ public class Profesor {
 
 	@Override
 	public String toString() {
-		return "Profesor [nombre=" + nombre + ", dni=" + dni + ", direccion=" + direccion + ", telefono=" + telefono
-				+ ", cursos=" + cursos + "]";
+		if(this.cursos.isEmpty()) {
+			return "Profesor [nombre=" + nombre + "\n dni=" + dni + "\n direccion=" + direccion + "\n telefono=" + telefono
+					+  "]";
+		}else {
+			return "Profesor [nombre=" + nombre + "\n dni=" + dni + "\n direccion=" + direccion + "\n telefono=" + telefono
+					+ getCursosString() + "]";
+		}
 	}
 	
 	
