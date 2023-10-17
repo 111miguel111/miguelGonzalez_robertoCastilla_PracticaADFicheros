@@ -41,7 +41,7 @@ public class Menu {
 			String opcion = sc.nextLine();
 			switch (opcion) {
 			case "1":
-				// crear Alumno		
+				// crear alumno
 				break;
 			case "2":
 				// borrar alumno
