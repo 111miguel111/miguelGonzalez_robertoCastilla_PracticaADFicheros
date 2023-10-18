@@ -8,9 +8,9 @@ import java.util.Scanner;
 public class Utiles {
 	static Scanner sc = new Scanner(System.in);
 
-	//Escribir lo de 5 intentos con el mensaje de pulleo. Devuelve null
-	
-	//Escanea frases sin numeros
+	// Escribir lo de 5 intentos con el mensaje de pulleo. Devuelve null
+
+	// Escanea frases sin numeros
 	static public String scanPalabras() {
 		String nombre;
 		boolean check = true;
@@ -43,7 +43,7 @@ public class Utiles {
 		return nombre;
 	}
 
-	//Escanea numeros sin espacios
+	// Escanea numeros sin espacios
 	static public String scanNumero() {
 		String nombre;
 		boolean check = true;
@@ -71,7 +71,7 @@ public class Utiles {
 		return nombre;
 	}
 
-	//Escaneo de frase sin distincion
+	// Escaneo de frase sin distincion
 	static public String scanTodoTrim() {
 		String nombre;
 		boolean check = true;
@@ -99,7 +99,7 @@ public class Utiles {
 		return nombre;
 	}
 
-	//Escaneo de fecha
+	// Escaneo de fecha
 	static public String scanFecha() {
 		String nombre;
 		boolean check;
@@ -110,30 +110,51 @@ public class Utiles {
 			check = true;
 			System.out.println("Introduzca el dia");
 			dia = scanNumero();
-					if (dia.length()==1) {
-						dia="0"+dia;
-					}
+			if (dia.length() == 1) {
+				dia = "0" + dia;
+			}
 			System.out.println("Introduzca el mes (numero)");
 			mes = scanNumero();
-				if (mes.length()==1) {
-					mes="0"+mes;
-				}
+			if (mes.length() == 1) {
+				mes = "0" + mes;
+			}
 			System.out.println("Introduzca el anyo");
 			year = scanNumero();
 			try {
 				DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-				LocalDate fecha = LocalDate.parse(dia+"-"+mes+"-"+year,format);
-			}catch(Exception e) {
+				LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
+			} catch (Exception e) {
 				System.out.println("La fecha introducida no existe, intentelo otra vez");
 				check = false;
 			}
 		} while (!check);
-		nombre = dia+"-"+mes+"-"+year;
+		nombre = dia + "-" + mes + "-" + year;
 		return nombre;
 	}
-	
-	//Escaneo de dni (9 numeros y letra)
-	//static public String scanDni() {
-		
-	//}
+
+	// Escaneo de dni (9 numeros y letra)
+	static public String scanDni() {
+		String nombre;
+		boolean check = true;
+		do {
+			check = true;
+			System.out.println("Introduzca el dni (9 numeros y una letra)");
+			nombre = sc.nextLine().trim().toUpperCase();
+			if (!nombre.isBlank() && nombre.length() == 10) {
+				for (int i = 0; i < nombre.length(); i++) {
+					if (i <= 8 && !Character.isDigit(nombre.charAt(i))) {
+						check = false;
+					} else if (i == 9 && !Character.isAlphabetic(nombre.charAt(i))) {
+						check = false;
+					}
+				}
+			} else {
+				check = false;
+			}
+			if (!check) {
+				System.out.println("Valor incorrecto, introduzca letras o espacios");
+			}
+		} while (!check);
+		return nombre;
+	}
 }
