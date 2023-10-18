@@ -12,74 +12,74 @@ public class GestorDatos {
 	// cursos en txt
 
 	// metodos para comprobar si el archivo existe y si no crearlos
-	public static void AlumFileCheck() {
+	public static void alumFileCheck() {
 
 	}
 
-	public static void ProfFileCheck() {
+	public static void profFileCheck() {
 
 	}
 
-	public static void CursoFileCheck() {
+	public static void cursoFileCheck() {
 
 	}
 
 	// metodos para serializar todos los datos
 
-	public static void EscribirTodosAlum(HashMap<String, Alumno> listaAlum) {
+	public static void escribirTodosAlum(HashMap<String, Alumno> listaAlum) {
 
 	}
 
-	public static void EscribirTodosProf(HashMap<String, Profesor> listaProf) {
+	public static void escribirTodosProf(HashMap<String, Profesor> listaProf) {
 
 	}
 
-	public static void EscribirTodosCursos(HashMap<String, Curso> listaCursos) {
+	public static void escribirTodosCursos(HashMap<String, Curso> listaCursos) {
 
 	}
 
 	// metodos para serializar un dato
-	public static void EscribirAlum(Alumno alumno) {
+	public static void escribirAlum(Alumno alumno) {
 
 	}
 
-	public static void EscribirProf(Profesor profesor) {
+	public static void escribirProf(Profesor profesor) {
 
 	}
 
-	public static void EscribirCurso(Curso curso) {
+	public static void escribirCurso(Curso curso) {
 
 	}
 
 	// metodos para buscar un dato
 
-	public static Alumno BuscarAlum(String nombre, String apellidos) {
+	public static Alumno buscarAlum(String nombre, String apellidos) {
 		Alumno alumno = null;
 		return alumno;
 	}
 
-	public static Profesor BuscarProf(String dni) {
+	public static Profesor buscarProf(String dni) {
 		Profesor profesor = null;
 		return profesor;
 	}
 
-	public static Curso BuscarCurso(String nombre) {
+	public static Curso buscarCurso(String nombre) {
 		Curso curso = null;
 		return curso;
 	}
 
 	// metodos para enviar lista
-	public static HashMap<String, Alumno> BuscarAlum() {
+	public static HashMap<String, Alumno> getListaAlum() {
 		HashMap<String, Alumno> listaAlum = null;
 		return listaAlum;
 	}
 
-	public static HashMap<String, Profesor> BuscarProf() {
+	public static HashMap<String, Profesor> getListaProf() {
 		HashMap<String, Profesor> listaProf = null;
 		return listaProf;
 	}
 
-	public static HashMap<String, Curso> BuscarCurso() {
+	public static HashMap<String, Curso> getListaCursos() {
 		HashMap<String, Curso> listaCurso = null;
 		return listaCurso;
 	}
