@@ -85,17 +85,57 @@ public class gestorAlumno {
 		}
 	}
 	public void borrarAlumno() {
-		//este metodo esta vacio xd
+		Alumno alumno=buscarAlumno();
+		if(alumno==null) {
+			listaAlumnos.remove(alumno.getNombre()+"_"+alumno.getApellidos());
+			System.out.println("Se ha eliminado el alumno con nombre: "+alumno.getNombre()+" y apellido: "+alumno.getApellidos());
+		}else {
+			System.out.println("No se ha encontrado ningun alumno con el nombre y apellidos proporcionados");
+		}
 	}
 	public void modificarAlumno() {
-		
+		Alumno alumno=buscarAlumno();
+		if(alumno==null) {
+			System.out.println(listaAlumnos.get(alumno.getNombre()+"_"+alumno.getApellidos()).toString());
+			System.out.println("Modificar \nUn atributo 1 \nTodos los atributos 2 ");
+			String opcion="ESCANER"; 
+			switch (opcion) {
+			case "1":
+				
+				break;
+			case "2":
+				
+				break;
+			default:
+				System.out.println("Opcion no valida");
+			}
+			System.out.println("Se ha modificado el alumno con nombre: "+alumno.getNombre()+" y apellido: "+alumno.getApellidos());
+		}else {
+			System.out.println("No se ha encontrado ningun alumno con el nombre y apellidos proporcionados");
+		}
 	}
 	public Alumno buscarAlumno() {
+		System.out.println("Introduzca el nombre del alumno");
+		String nombreAlum="ESCANER"; 
+		System.out.println("Introduzca los apellidos del alumno");
+		String apellidosAlum="ESCANER";
+		if(listaAlumnos.containsKey(nombreAlum+"_"+apellidosAlum)) {
+			System.out.println("Se ha encontrado el alumno: "+listaAlumnos.get(nombreAlum+"_"+apellidosAlum).toString());//linea temporal
+			return listaAlumnos.get(nombreAlum+"_"+apellidosAlum);
+		}else{
+			System.out.println("No se ha encontrado ningun alumno con el nombre: "+nombreAlum +" y el apellido: "+apellidosAlum);//linea temporal
+		}
+		
 		return null;
 	}
 	public void mostrarAlumno() {
 		Alumno alumno=buscarAlumno();
-		System.out.println(listaAlumnos.get(alumno.getNombre()+"_"+alumno.getApellidos()).toString());
+		if(alumno==null) {
+			System.out.println(listaAlumnos.get(alumno.getNombre()+"_"+alumno.getApellidos()).toString());
+		}else {
+			System.out.println("No se ha encontrado ningun alumno con el nombre y apellidos proporcionados");
+		}
+		
 	}
 	public void mostrarAlumnos() {
 		for(HashMap.Entry<String, Alumno> entry : this.listaAlumnos.entrySet()) {
