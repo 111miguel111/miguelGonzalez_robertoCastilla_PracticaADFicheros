@@ -85,7 +85,7 @@ public class gestorAlumno {
 		}
 	}
 	public void borrarAlumno() {
-		
+		//este metodo esta vacio xd
 	}
 	public void modificarAlumno() {
 		
