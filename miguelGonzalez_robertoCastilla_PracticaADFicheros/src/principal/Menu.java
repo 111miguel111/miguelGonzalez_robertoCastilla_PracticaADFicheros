@@ -42,7 +42,6 @@ public class Menu {
 			switch (opcion) {
 			case "1":
 				// crear alumno
-				System.out.println(Utiles.scanDni()); 
 				break;
 			case "2":
 				// borrar alumno

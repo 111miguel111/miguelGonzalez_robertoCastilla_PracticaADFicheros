@@ -14,6 +14,7 @@ public class Utiles {
 	static public String scanPalabras() {
 		String nombre;
 		boolean check = true;
+		int errorCont = 0;
 		do {
 			check = true;
 			nombre = sc.nextLine().trim();
@@ -39,6 +40,7 @@ public class Utiles {
 			if (!check) {
 				System.out.println("Valor incorrecto, introduzca letras o espacios");
 			}
+			errorCont++;
 		} while (!check);
 		return nombre;
 	}
