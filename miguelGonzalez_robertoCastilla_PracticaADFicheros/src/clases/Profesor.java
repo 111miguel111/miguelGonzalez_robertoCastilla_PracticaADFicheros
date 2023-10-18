@@ -1,9 +1,10 @@
 package clases;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Profesor {
+public class Profesor implements Serializable{
 	private String nombre;
 	private String dni;
 	private String direccion;

@@ -1,9 +1,10 @@
 package clases;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Curso {
+public class Curso implements Serializable{
 
 	private static int codigo = 0;
 	private String nombre;

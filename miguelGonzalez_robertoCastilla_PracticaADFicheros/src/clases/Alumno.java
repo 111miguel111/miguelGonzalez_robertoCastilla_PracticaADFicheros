@@ -1,10 +1,11 @@
 package clases;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Alumno {
+public class Alumno implements Serializable{
 	private static int numExpediente = 0;
 	private String nombre;
 	private String apellidos;
