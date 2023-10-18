@@ -94,13 +94,13 @@ public class Curso implements Serializable{
 	@Override
 	public String toString() {
 		if(!(this.alumnos.isEmpty()&&this.profesor==null)) {
-			return "Curso [ nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + getProfesorString() + " ]";
+			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + getProfesorString() + " ]";
 		}else if(this.alumnos.isEmpty()&&this.profesor!=null) {
-			return "Curso [ nombre= " + nombre + "\n descripcion= " + descripcion + getProfesorString() + " ]";
+			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getProfesorString() + " ]";
 		}else if(!this.alumnos.isEmpty()&&this.profesor==null) {
-			return "Curso [ nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + " ]";
+			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + " ]";
 		}else{
-			return "Curso [ nombre= " + nombre + "\n descripcion= " + descripcion + " ]";
+			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + " ]";
 		}
 	}
 	

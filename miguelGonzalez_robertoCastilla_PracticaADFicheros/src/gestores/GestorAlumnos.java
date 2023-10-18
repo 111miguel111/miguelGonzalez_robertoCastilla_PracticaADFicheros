@@ -1,10 +1,12 @@
 package gestores;
 
 import java.util.HashMap;
-
 import clases.*;
+import principal.*;
 
 public class GestorAlumnos {
+	
+	
 	// esto tiene que desaparecer
 	private HashMap<String, Alumno> listaAlumnos;
 	private HashMap<String, Curso> listaCursos;
@@ -139,21 +141,33 @@ public class GestorAlumnos {
 		// mandar nombre y apellido a datos , si me devuelve null me devuelvo null pa
 		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
 		// mi mismo
+		//si no encuentra el alumno en 5 intentos te saca
 		System.out.println("Introduzca el nombre del alumno");
-		String nombreAlum = "ESCANER";
-		System.out.println("Introduzca los apellidos del alumno");
-		String apellidosAlum = "ESCANER";
-		if (listaAlumnos.containsKey(nombreAlum + "_" + apellidosAlum)) {
-			System.out.println(
-					"Se ha encontrado el alumno: " + listaAlumnos.get(nombreAlum + "_" + apellidosAlum).toString());// linea
-																													// temporal
-			return listaAlumnos.get(nombreAlum + "_" + apellidosAlum);
-		} else {
-			System.out.println("No se ha encontrado ningun alumno con el nombre: " + nombreAlum + " y el apellido: "
-					+ apellidosAlum);// linea temporal
+		String nombreAlum = Utiles.scanPalabras();
+		if(nombreAlum!=null) {
+			System.out.println("Introduzca los apellidos del alumno");
+			String apellidosAlum = Utiles.scanPalabras();
+			if(apellidosAlum!=null) {
+				
+			}
 		}
+		
+		
 
 		return null;
+	}
+	public Curso buscarCurso() {
+		// mandar nombre y apellido a datos , si me devuelve null me devuelvo null pa
+		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
+		// mi mismo
+		//si no encuentra el curso en 5 intentos te saca
+		System.out.println("Introduzca el nombre del curso");
+		String nombreCurso = Utiles.scanPalabras();
+		if(nombreCurso!=null) {
+			
+		}
+			return null;
+		
 	}
 
 	public void mostrarAlumno() {

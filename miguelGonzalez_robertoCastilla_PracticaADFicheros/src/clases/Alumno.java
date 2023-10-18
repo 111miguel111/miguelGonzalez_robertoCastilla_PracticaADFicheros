@@ -111,10 +111,10 @@ public class Alumno implements Serializable{
 	@Override
 	public String toString() {
 		if(this.cursos.isEmpty()) {
-			return "Alumno [ nombre= " + nombre + "\n apellidos= " + apellidos + "\n direccion= " + direccion + "\n telefono= "
+			return "Alumno [ numero expediente= "+numExpediente+"\n nombre= " + nombre + "\n apellidos= " + apellidos + "\n direccion= " + direccion + "\n telefono= "
 					+ telefono + "\n fechaNacimiento= " + fechaNacimiento +  " ]";
 		}else {
-			return "Alumno [ nombre= " + nombre + "\n apellidos= " + apellidos + "\n direccion= " + direccion + "\n telefono= "
+			return "Alumno [ numero expediente= "+numExpediente+"\n nombre= " + nombre + "\n apellidos= " + apellidos + "\n direccion= " + direccion + "\n telefono= "
 					+ telefono + "\n fechaNacimiento= " + fechaNacimiento + getCursosString() + " ]";
 		}
 		
