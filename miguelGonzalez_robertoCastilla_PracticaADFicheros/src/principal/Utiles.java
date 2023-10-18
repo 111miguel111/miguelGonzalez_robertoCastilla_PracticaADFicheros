@@ -8,6 +8,9 @@ import java.util.Scanner;
 public class Utiles {
 	static Scanner sc = new Scanner(System.in);
 
+	//Escribir lo de 5 intentos con el mensaje de pulleo. Devuelve null
+	
+	//Escanea frases sin numeros
 	static public String scanPalabras() {
 		String nombre;
 		boolean check = true;
@@ -40,6 +43,7 @@ public class Utiles {
 		return nombre;
 	}
 
+	//Escanea numeros sin espacios
 	static public String scanNumero() {
 		String nombre;
 		boolean check = true;
@@ -67,6 +71,7 @@ public class Utiles {
 		return nombre;
 	}
 
+	//Escaneo de frase sin distincion
 	static public String scanTodoTrim() {
 		String nombre;
 		boolean check = true;
@@ -94,6 +99,7 @@ public class Utiles {
 		return nombre;
 	}
 
+	//Escaneo de fecha
 	static public String scanFecha() {
 		String nombre;
 		boolean check;
@@ -125,4 +131,9 @@ public class Utiles {
 		nombre = dia+"-"+mes+"-"+year;
 		return nombre;
 	}
+	
+	//Escaneo de dni (9 numeros y letra)
+	//static public String scanDni() {
+		
+	//}
 }
