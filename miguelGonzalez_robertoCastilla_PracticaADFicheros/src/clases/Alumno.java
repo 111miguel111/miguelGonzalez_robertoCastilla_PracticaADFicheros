@@ -88,7 +88,7 @@ public class Alumno {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public HashMap getCursos() {//implementar que este metodo tiene que devolver solo los nombres y descripciones de los cursos para evitar bucles
+	public HashMap getCursos() {
 		return cursos;
 	}
 	public String getCursosString() {
