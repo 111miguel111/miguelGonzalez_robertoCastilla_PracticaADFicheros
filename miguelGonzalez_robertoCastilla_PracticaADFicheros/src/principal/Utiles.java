@@ -8,8 +8,6 @@ import java.util.Scanner;
 public class Utiles {
 	static Scanner sc = new Scanner(System.in);
 
-	// Escribir lo de 5 intentos con el mensaje de pulleo. Devuelve null
-
 	// Escanea frases sin numeros
 	static public String scanPalabras() {
 		String nombre;
@@ -17,30 +15,35 @@ public class Utiles {
 		int errorCont = 0;
 		do {
 			check = true;
-			nombre = sc.nextLine().trim();
-			if (!nombre.isBlank()) {
-				String palabras[] = nombre.split(" ");
-				String aux = "";
-				for (int i = 0; i < palabras.length; i++) {
-					if (i == palabras.length) {
-						aux += palabras[i].trim();
-					} else {
-						aux += palabras[i].trim() + " ";
+			if (errorCont < 5) {
+				nombre = sc.nextLine().trim();
+				if (!nombre.isBlank()) {
+					String palabras[] = nombre.split(" ");
+					String aux = "";
+					for (int i = 0; i < palabras.length; i++) {
+						if (i == palabras.length) {
+							aux += palabras[i].trim();
+						} else {
+							aux += palabras[i].trim() + " ";
+						}
 					}
-				}
-				nombre = aux;
-				for (int i = 0; i < nombre.length(); i++) {
-					if (Character.isDigit(nombre.charAt(i))) {
-						check = false;
+					nombre = aux;
+					for (int i = 0; i < nombre.length(); i++) {
+						if (Character.isDigit(nombre.charAt(i))) {
+							check = false;
+						}
 					}
+				} else {
+					check = false;
 				}
+				if (!check) {
+					System.out.println("Valor incorrecto, introduzca letras o espacios");
+				}
+				errorCont++;
 			} else {
-				check = false;
+				nombre = null;
+				System.out.println("Excedido numero de intentos (" + errorCont + ")");
 			}
-			if (!check) {
-				System.out.println("Valor incorrecto, introduzca letras o espacios");
-			}
-			errorCont++;
 		} while (!check);
 		return nombre;
 	}
@@ -49,25 +52,32 @@ public class Utiles {
 	static public String scanNumero() {
 		String nombre;
 		boolean check = true;
+		int errorCont = 0;
 		do {
 			check = true;
-			nombre = sc.nextLine().trim();
-			if (!nombre.isBlank()) {
-				String palabras[] = nombre.split(" ");
-				if (palabras.length != 1) {
-					check = false;
-				} else {
-					for (int i = 0; i < nombre.length(); i++) {
-						if (!Character.isDigit(nombre.charAt(i))) {
-							check = false;
+			if (errorCont < 5) {
+				nombre = sc.nextLine().trim();
+				if (!nombre.isBlank()) {
+					String palabras[] = nombre.split(" ");
+					if (palabras.length != 1) {
+						check = false;
+					} else {
+						for (int i = 0; i < nombre.length(); i++) {
+							if (!Character.isDigit(nombre.charAt(i))) {
+								check = false;
+							}
 						}
 					}
+				} else {
+					check = false;
 				}
+				if (!check) {
+					System.out.println("Valor incorrecto, introduzca letras o espacios");
+				}
+				errorCont++;
 			} else {
-				check = false;
-			}
-			if (!check) {
-				System.out.println("Valor incorrecto, introduzca letras o espacios");
+				nombre = null;
+				System.out.println("Excedido numero de intentos (" + errorCont + ")");
 			}
 		} while (!check);
 		return nombre;
@@ -77,25 +87,32 @@ public class Utiles {
 	static public String scanTodoTrim() {
 		String nombre;
 		boolean check = true;
+		int errorCont = 0;
 		do {
 			check = true;
-			nombre = sc.nextLine().trim();
-			if (!nombre.isBlank()) {
-				String palabras[] = nombre.split(" ");
-				String aux = "";
-				for (int i = 0; i < palabras.length; i++) {
-					if (i == palabras.length) {
-						aux += palabras[i].trim();
-					} else {
-						aux += palabras[i].trim() + " ";
+			if (errorCont < 5) {
+				nombre = sc.nextLine().trim();
+				if (!nombre.isBlank()) {
+					String palabras[] = nombre.split(" ");
+					String aux = "";
+					for (int i = 0; i < palabras.length; i++) {
+						if (i == palabras.length) {
+							aux += palabras[i].trim();
+						} else {
+							aux += palabras[i].trim() + " ";
+						}
 					}
+					nombre = aux;
+				} else {
+					check = false;
 				}
-				nombre = aux;
+				if (!check) {
+					System.out.println("Valor incorrecto, introduzca letras o espacios");
+				}
+				errorCont++;
 			} else {
-				check = false;
-			}
-			if (!check) {
-				System.out.println("Valor incorrecto, introduzca letras o espacios");
+				nombre = null;
+				System.out.println("Excedido numero de intentos (" + errorCont + ")");
 			}
 		} while (!check);
 		return nombre;
@@ -103,34 +120,43 @@ public class Utiles {
 
 	// Escaneo de fecha
 	static public String scanFecha() {
-		String nombre;
+		String nombre=null;
 		boolean check;
-		String dia;
-		String mes;
-		String year;
+		String dia = null;
+		String mes = null;
+		String year = null;
+		int errorCont = 0;
 		do {
 			check = true;
-			System.out.println("Introduzca el dia");
-			dia = scanNumero();
-			if (dia.length() == 1) {
-				dia = "0" + dia;
-			}
-			System.out.println("Introduzca el mes (numero)");
-			mes = scanNumero();
-			if (mes.length() == 1) {
-				mes = "0" + mes;
-			}
-			System.out.println("Introduzca el anyo");
-			year = scanNumero();
-			try {
-				DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-				LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
-			} catch (Exception e) {
-				System.out.println("La fecha introducida no existe, intentelo otra vez");
-				check = false;
+			if (errorCont < 5) {
+				System.out.println("Introduzca el dia");
+				dia = scanNumero();
+				if (dia.length() == 1) {
+					dia = "0" + dia;
+				}
+				System.out.println("Introduzca el mes (numero)");
+				mes = scanNumero();
+				if (mes.length() == 1) {
+					mes = "0" + mes;
+				}
+				System.out.println("Introduzca el anyo");
+				year = scanNumero();
+				try {
+					DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+					LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
+				} catch (Exception e) {
+					System.out.println("La fecha introducida no existe, intentelo otra vez");
+					check = false;
+				}
+				errorCont++;
+			} else {
+				nombre = null;
+				System.out.println("Excedido numero de intentos (" + errorCont + ")");
 			}
 		} while (!check);
-		nombre = dia + "-" + mes + "-" + year;
+		if (errorCont < 5) {
+			nombre = dia + "-" + mes + "-" + year;
+		}
 		return nombre;
 	}
 
@@ -138,23 +164,30 @@ public class Utiles {
 	static public String scanDni() {
 		String nombre;
 		boolean check = true;
+		int errorCont = 0;
 		do {
 			check = true;
-			System.out.println("Introduzca el dni (9 numeros y una letra)");
-			nombre = sc.nextLine().trim().toUpperCase();
-			if (!nombre.isBlank() && nombre.length() == 10) {
-				for (int i = 0; i < nombre.length(); i++) {
-					if (i <= 8 && !Character.isDigit(nombre.charAt(i))) {
-						check = false;
-					} else if (i == 9 && !Character.isAlphabetic(nombre.charAt(i))) {
-						check = false;
+			if (errorCont < 5) {
+				System.out.println("Introduzca el dni (9 numeros y una letra)");
+				nombre = sc.nextLine().trim().toUpperCase();
+				if (!nombre.isBlank() && nombre.length() == 10) {
+					for (int i = 0; i < nombre.length(); i++) {
+						if (i <= 8 && !Character.isDigit(nombre.charAt(i))) {
+							check = false;
+						} else if (i == 9 && !Character.isAlphabetic(nombre.charAt(i))) {
+							check = false;
+						}
 					}
+				} else {
+					check = false;
 				}
+				if (!check) {
+					System.out.println("Valor incorrecto, introduzca letras o espacios");
+				}
+				errorCont++;
 			} else {
-				check = false;
-			}
-			if (!check) {
-				System.out.println("Valor incorrecto, introduzca letras o espacios");
+				nombre = null;
+				System.out.println("Excedido numero de intentos (" + errorCont + ")");
 			}
 		} while (!check);
 		return nombre;
