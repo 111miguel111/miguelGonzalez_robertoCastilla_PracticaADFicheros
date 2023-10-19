@@ -16,7 +16,7 @@ public class Curso implements Serializable{
 		codigo++;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		alumnos=new HashMap();
+		alumnos=new HashMap<String,Alumno>();
 	}
 	
 	
@@ -61,7 +61,7 @@ public class Curso implements Serializable{
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public HashMap getAlumnos() {
+	public HashMap<String,Alumno> getAlumnos() {
 		return alumnos;
 	}
 	public String getAlumnosString() {
@@ -73,7 +73,7 @@ public class Curso implements Serializable{
 		alumnosString=alumnosString+"}\n";
 		return alumnosString;
 	}
-	public void setAlumnos(HashMap alumnos) {
+	public void setAlumnos(HashMap<String,Alumno> alumnos) {
 		this.alumnos = alumnos;
 	}
 	public void AlumnoNuevo(Alumno alumno) {
