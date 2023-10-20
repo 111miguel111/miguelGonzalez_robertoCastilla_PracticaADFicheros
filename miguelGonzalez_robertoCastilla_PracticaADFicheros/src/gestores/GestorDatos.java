@@ -242,6 +242,7 @@ public class GestorDatos {
 			}
 		return curso;
 	}
+		
 
 	// metodos para enviar lista
 	public static HashMap<String, Alumno> getListaAlum() {

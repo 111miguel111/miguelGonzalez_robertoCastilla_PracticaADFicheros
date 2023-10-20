@@ -20,6 +20,12 @@ public class Curso implements Serializable{
 		this.descripcion = descripcion;
 		alumnos=new HashMap<String,Alumno>();
 	}
+	public Curso(String codigo,String nombre, String descripcion) {
+		this.codigo=codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		alumnos=new HashMap<String,Alumno>();
+	}
 	
 	
 	

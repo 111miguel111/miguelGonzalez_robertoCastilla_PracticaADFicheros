@@ -25,6 +25,16 @@ public class Alumno implements Serializable{
 		this.fechaNacimiento=fechaNacimiento;
 		cursos = new HashMap<String,Curso>();
 	}
+	public Alumno(String numExpediente,String nombre, String apellidos, String direccion, String telefono, String fechaNacimiento){
+		
+		this.numExpediente=numExpediente;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.fechaNacimiento=fechaNacimiento;
+		cursos = new HashMap<String,Curso>();
+	}
 
 	
 	
