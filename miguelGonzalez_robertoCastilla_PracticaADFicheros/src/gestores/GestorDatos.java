@@ -20,6 +20,7 @@ import java.util.Scanner;
 import clases.Alumno;
 import clases.Curso;
 import clases.Profesor;
+import principal.Utiles;
 
 public class GestorDatos {
 	// baja, modificar, relacionar fuera
@@ -75,6 +76,7 @@ public class GestorDatos {
 			for (Map.Entry<String, Alumno> i : listaAlum.entrySet()) {
 				salida.writeObject(i.getValue());
 			}
+			salida.write(Alumno.getCont());
 			salida.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -101,6 +103,7 @@ public class GestorDatos {
 		try {
 			PrintWriter myWriter = new PrintWriter("archivo.txt");
 			BufferedWriter bw = new BufferedWriter(myWriter);
+			bw.write(Curso.getCont());
 			for (Map.Entry<String, Curso> i : listaCursos.entrySet()) {
 				bw.write(i.getValue().getCodigo());
 				bw.write(i.getValue().getNombre());
@@ -260,6 +263,7 @@ public class GestorDatos {
 		try {
 			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
 			try {
+				Alumno.setCont(entrada.readInt());
 				while (true) {
 					Alumno alumno = (Alumno) entrada.readObject();
 					listaAlum.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
@@ -329,6 +333,14 @@ public class GestorDatos {
 		try {
 			fr = new FileReader("cursos.txt");
 			Scanner sc = new Scanner("cursos.txt");
+			if (sc.hasNextLine()) {
+				String contador = sc.nextLine();
+				if (Utiles.esDigito(contador)) {
+					Curso.setCont(Integer.parseInt(contador));
+				}else {
+					Curso.setCont(0);
+				}
+			}
 			while (sc.hasNextLine()) {
 				String cursoTexto = sc.nextLine();
 				String cursoAlum = sc.nextLine();

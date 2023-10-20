@@ -62,11 +62,7 @@ public class Utiles {
 					if (palabras.length != 1) {
 						check = false;
 					} else {
-						for (int i = 0; i < nombre.length(); i++) {
-							if (!Character.isDigit(nombre.charAt(i))) {
-								check = false;
-							}
-						}
+						check=esDigito(nombre);
 					}
 				} else {
 					check = false;
@@ -82,6 +78,32 @@ public class Utiles {
 		} while (!check);
 		return nombre;
 	}
+	
+	// Escanea numeros de telefono
+		static public String scanTelefono() {
+			String nombre;
+			boolean check = true;
+			int errorCont = 0;
+			do {
+				check = true;
+				if (errorCont < 5) {
+					nombre = sc.nextLine().trim();
+					if (!nombre.isBlank()&&nombre.length()==9) {
+							check=esDigito(nombre);
+					} else {
+						check = false;
+					}
+					if (!check) {
+						System.out.println("Valor incorrecto, introduzca letras o espacios");
+					}
+					errorCont++;
+				} else {
+					nombre = null;
+					System.out.println("Excedido numero de intentos (" + errorCont + ")");
+				}
+			} while (!check);
+			return nombre;
+		}
 
 	// Escaneo de frase sin distincion
 	static public String scanTodoTrim() {
@@ -192,4 +214,14 @@ public class Utiles {
 		} while (!check);
 		return nombre;
 	}
+	public static boolean esDigito(String nombre) {
+		boolean check = true;
+		for (int i = 0; i < nombre.length(); i++) {
+			if (!Character.isDigit(nombre.charAt(i))) {
+				check = false;
+			}
+		}
+		return check;
+	}
+	
 }
