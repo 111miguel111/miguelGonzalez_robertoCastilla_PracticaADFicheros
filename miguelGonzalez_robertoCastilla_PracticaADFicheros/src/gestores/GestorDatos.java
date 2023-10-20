@@ -140,11 +140,11 @@ public class GestorDatos {
 
 	// metodos para buscar un dato
 
-	//No se que hace el cuarto catch pero me da cosa quitarlo sin probarlo
+	// No se que hace el cuarto catch pero me da cosa quitarlo sin probarlo
 	public static Alumno buscarAlum(String nombre, String apellidos) {
 		Alumno alumno = null;
 		alumFileCheck();
-		ObjectInputStream entrada= null;
+		ObjectInputStream entrada = null;
 		try {
 			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
 			try {
@@ -168,7 +168,7 @@ public class GestorDatos {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				entrada.close();
 			} catch (IOException e) {
@@ -182,7 +182,7 @@ public class GestorDatos {
 	public static Profesor buscarProf(String dni) {
 		Profesor profesor = null;
 		profFileCheck();
-		ObjectInputStream entrada= null;
+		ObjectInputStream entrada = null;
 		try {
 			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
 			try {
@@ -205,7 +205,7 @@ public class GestorDatos {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				entrada.close();
 			} catch (IOException e) {
@@ -221,40 +221,48 @@ public class GestorDatos {
 		FileReader fr;
 		try {
 			fr = new FileReader("cursos.txt");
-			BufferedReader bf = new BufferedReader(fr);
-			try {
-				Scanner sc = new Scanner("cursos.txt");
-				while (sc.hasNextLine()) {
-					String cursoTexto = sc.nextLine();
-					String cursoAlum = sc.nextLine();
-					String cursoProf = sc.nextLine();
-					if (cursoTexto.split("¬")[1].equals(nombre)) {
-						curso = new Curso(cursoTexto.split("¬")[1],cursoTexto.split("¬")[2]);
-						curso.setCodigo(cursoTexto.split("¬")[0]);
-						curso.setProfesor(new Profesor(cursoProf.split("¬")[0],cursoProf.split("¬")[1],cursoProf.split("¬")[2],cursoProf.split("¬")[3]));
-						
+			Scanner sc = new Scanner("cursos.txt");
+			while (sc.hasNextLine()) {
+				String cursoTexto = sc.nextLine();
+				String cursoAlum = sc.nextLine();
+				String cursoProf = sc.nextLine();
+				if (cursoTexto.split("¬")[1].equals(nombre)) {
+					curso = new Curso(cursoTexto.split("¬")[1], cursoTexto.split("¬")[2]);
+					curso.setCodigo(cursoTexto.split("¬")[0]);
+					curso.setProfesor(new Profesor(cursoProf.split("¬")[0], cursoProf.split("¬")[1],
+							cursoProf.split("¬")[2], cursoProf.split("¬")[3]));
+					HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
+					for (int i = 0; i < cursoAlum.split("¬").length; i++) {
+						listaAlum.put(cursoAlum.split("¬")[i] + "_" + cursoAlum.split("¬")[i + 1],
+								new Alumno(cursoAlum.split("¬")[i], cursoAlum.split("¬")[i + 1],
+										cursoAlum.split("¬")[i + 2], cursoAlum.split("¬")[i + 3],
+										cursoAlum.split("¬")[+4]));
+						i += 5;
 					}
+					curso.setAlumnos(listaAlum);
+					return curso;
 				}
-				sc.close();
-			} catch (FileNotFoundException e) {
-				System.out.println("No se ha encontrado el archivo");
-				e.printStackTrace();
 			}
+			sc.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		return curso;
+
 	}
-		
 
 	// metodos para enviar lista
 	public static HashMap<String, Alumno> getListaAlum() {
 		HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
 		alumFileCheck();
-		ObjectInputStream entrada=null;
+		ObjectInputStream entrada = null;
 		try {
 			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
 			try {
 				while (true) {
 					Alumno alumno = (Alumno) entrada.readObject();
-					listaAlum.put(alumno.getNombre()+"_"+alumno.getApellidos(), alumno);
+					listaAlum.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -269,7 +277,7 @@ public class GestorDatos {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				entrada.close();
 			} catch (IOException e) {
@@ -281,9 +289,9 @@ public class GestorDatos {
 	}
 
 	public static HashMap<String, Profesor> getListaProf() {
-		HashMap<String, Profesor> listaProf = new HashMap<String,Profesor>();
+		HashMap<String, Profesor> listaProf = new HashMap<String, Profesor>();
 		profFileCheck();
-		ObjectInputStream entrada= null;
+		ObjectInputStream entrada = null;
 		try {
 			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
 			try {
@@ -304,7 +312,7 @@ public class GestorDatos {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				entrada.close();
 			} catch (IOException e) {
@@ -316,7 +324,35 @@ public class GestorDatos {
 	}
 
 	public static HashMap<String, Curso> getListaCursos() {
-		HashMap<String, Curso> listaCurso = null;
+		HashMap<String, Curso> listaCurso = new HashMap<String,Curso>();
+		FileReader fr;
+		try {
+			fr = new FileReader("cursos.txt");
+			Scanner sc = new Scanner("cursos.txt");
+			while (sc.hasNextLine()) {
+				String cursoTexto = sc.nextLine();
+				String cursoAlum = sc.nextLine();
+				String cursoProf = sc.nextLine();
+				Curso curso = new Curso(cursoTexto.split("¬")[1], cursoTexto.split("¬")[2]);
+				curso.setCodigo(cursoTexto.split("¬")[0]);
+				curso.setProfesor(new Profesor(cursoProf.split("¬")[0], cursoProf.split("¬")[1],
+						cursoProf.split("¬")[2], cursoProf.split("¬")[3]));
+				HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
+				for (int i = 0; i < cursoAlum.split("¬").length; i++) {
+					listaAlum.put(cursoAlum.split("¬")[i] + "_" + cursoAlum.split("¬")[i + 1],
+							new Alumno(cursoAlum.split("¬")[i], cursoAlum.split("¬")[i + 1],
+									cursoAlum.split("¬")[i + 2], cursoAlum.split("¬")[i + 3],
+									cursoAlum.split("¬")[+4]));
+					i += 5;
+				}
+				curso.setAlumnos(listaAlum);
+				listaCurso.put(curso.getNombre(), curso);
+			}
+			sc.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		return listaCurso;
 	}
 
