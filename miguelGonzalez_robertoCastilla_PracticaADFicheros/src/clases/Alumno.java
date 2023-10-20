@@ -69,7 +69,12 @@ public class Alumno implements Serializable{
 	public void setNumExpediente(String numExpediente) {
 		this.numExpediente = numExpediente;
 	}
-
+	public static int getCont() {
+		return cont;
+	}
+	public static void setCont(int contador) {
+		cont = contador;
+	}
 
 	public String getNombre() {
 		return nombre;

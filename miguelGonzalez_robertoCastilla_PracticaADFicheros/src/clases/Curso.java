@@ -57,6 +57,12 @@ public class Curso implements Serializable{
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+	public static int getCont() {
+		return cont;
+	}
+	public static void setCont(int contador) {
+		cont = contador;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -124,13 +130,13 @@ public class Curso implements Serializable{
 	}
 	public String toStringDatos() {
 		if(!(this.alumnos.isEmpty()&&this.profesor==null)) {
-			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+ getAlumnosStringDatos() +"\n"+ getProfesorStringDatos() ;
+			return cont+ "¬" +codigo+ "¬" + nombre + "¬" + descripcion +"\n"+ getAlumnosStringDatos() +"\n"+ getProfesorStringDatos() ;
 		}else if(this.alumnos.isEmpty()&&this.profesor!=null) {
-			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+"\n"+ getProfesorStringDatos() ;
+			return cont+ "¬" +codigo+ "¬" + nombre + "¬" + descripcion +"\n"+"\n"+ getProfesorStringDatos() ;
 		}else if(!this.alumnos.isEmpty()&&this.profesor==null) {
-			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+ getAlumnosStringDatos() + "\n";
+			return cont+ "¬" +codigo+ "¬" + nombre + "¬" + descripcion +"\n"+ getAlumnosStringDatos() + "\n";
 		}else{
-			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+"\n";
+			return cont+ "¬" +codigo+ "¬" + nombre + "¬" + descripcion +"\n"+"\n";
 		}
 	}
 	
