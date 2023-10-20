@@ -6,14 +6,16 @@ import java.util.Objects;
 
 public class Curso implements Serializable{
 
-	private static int codigo = 0;
+	private static int cont = 0;
+	private String codigo;
 	private String nombre;
 	private String descripcion;
 	private HashMap<String,Alumno> alumnos;
 	private Profesor profesor;
 	
 	public Curso(String nombre, String descripcion) {
-		codigo++;
+		cont++;
+		this.codigo=cont+"";
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		alumnos=new HashMap<String,Alumno>();
@@ -43,11 +45,11 @@ public class Curso implements Serializable{
 
 
 
-	public static int getCodigo() {
-		return codigo;
+	public String getCodigo() {
+		return this.codigo;
 	}
-	public static void setCodigo(int codigo) {
-		Curso.codigo = codigo;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	public String getNombre() {
 		return nombre;

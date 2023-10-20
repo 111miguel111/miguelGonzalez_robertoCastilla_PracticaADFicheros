@@ -1,17 +1,21 @@
 package gestores;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import clases.Alumno;
 import clases.Curso;
@@ -140,8 +144,9 @@ public class GestorDatos {
 	public static Alumno buscarAlum(String nombre, String apellidos) {
 		Alumno alumno = null;
 		alumFileCheck();
+		ObjectInputStream entrada= null;
 		try {
-			ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
+			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
 			try {
 				while (true) {
 					Alumno alumnoAux = (Alumno) entrada.readObject();
@@ -163,15 +168,23 @@ public class GestorDatos {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
+		}finally {
+			try {
+				entrada.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return alumno;
 	}
 
 	public static Profesor buscarProf(String dni) {
 		Profesor profesor = null;
-		alumFileCheck();
+		profFileCheck();
+		ObjectInputStream entrada= null;
 		try {
-			ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
+			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
 			try {
 				while (true) {
 					Profesor profesorAux = (Profesor) entrada.readObject();
@@ -192,24 +205,112 @@ public class GestorDatos {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
+		}finally {
+			try {
+				entrada.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return profesor;
 	}
 
 	public static Curso buscarCurso(String nombre) {
 		Curso curso = null;
-		
+		FileReader fr;
+		try {
+			fr = new FileReader("cursos.txt");
+			BufferedReader bf = new BufferedReader(fr);
+			try {
+				Scanner sc = new Scanner("cursos.txt");
+				while (sc.hasNextLine()) {
+					String cursoTexto = sc.nextLine();
+					String cursoAlum = sc.nextLine();
+					String cursoProf = sc.nextLine();
+					if (cursoTexto.split("¬")[1].equals(nombre)) {
+						curso = new Curso(cursoTexto.split("¬")[1],cursoTexto.split("¬")[2]);
+						curso.setCodigo(cursoTexto.split("¬")[0]);
+						curso.setProfesor(new Profesor(cursoProf.split("¬")[0],cursoProf.split("¬")[1],cursoProf.split("¬")[2],cursoProf.split("¬")[3]));
+						
+					}
+				}
+				sc.close();
+			} catch (FileNotFoundException e) {
+				System.out.println("No se ha encontrado el archivo");
+				e.printStackTrace();
+			}
 		return curso;
 	}
 
 	// metodos para enviar lista
 	public static HashMap<String, Alumno> getListaAlum() {
-		HashMap<String, Alumno> listaAlum = null;
+		HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
+		alumFileCheck();
+		ObjectInputStream entrada=null;
+		try {
+			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
+			try {
+				while (true) {
+					Alumno alumno = (Alumno) entrada.readObject();
+					listaAlum.put(alumno.getNombre()+"_"+alumno.getApellidos(), alumno);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Fin de lectura");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("No se ha encontrado el archivo");
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}finally {
+			try {
+				entrada.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return listaAlum;
 	}
 
 	public static HashMap<String, Profesor> getListaProf() {
-		HashMap<String, Profesor> listaProf = null;
+		HashMap<String, Profesor> listaProf = new HashMap<String,Profesor>();
+		profFileCheck();
+		ObjectInputStream entrada= null;
+		try {
+			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
+			try {
+				while (true) {
+					Profesor profesor = (Profesor) entrada.readObject();
+					listaProf.put(profesor.getDni(), profesor);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Fin de lectura");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("No se ha encontrado el archivo");
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}finally {
+			try {
+				entrada.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return listaProf;
 	}
 

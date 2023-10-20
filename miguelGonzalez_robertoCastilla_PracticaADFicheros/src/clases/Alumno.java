@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class Alumno implements Serializable{
-	private static int numExpediente = 0;
+	private static int cont = 0;
+	private String numExpediente;
 	private String nombre;
 	private String apellidos;
 	private String direccion;
@@ -15,7 +16,8 @@ public class Alumno implements Serializable{
 	private HashMap<String,Curso> cursos;
 	
 	public Alumno(String nombre, String apellidos, String direccion, String telefono, String fechaNacimiento){
-		numExpediente++;
+		cont++;
+		this.numExpediente=cont+"";
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
@@ -47,6 +49,16 @@ public class Alumno implements Serializable{
 				&& Objects.equals(nombre, other.nombre) && Objects.equals(telefono, other.telefono);
 	}
 
+
+
+	public String getNumExpediente() {
+		return numExpediente;
+	}
+
+
+	public void setNumExpediente(String numExpediente) {
+		this.numExpediente = numExpediente;
+	}
 
 
 	public String getNombre() {
