@@ -8,7 +8,7 @@ import principal.*;
 import gestores.*;
 
 public class GestorProfesores {
-	public void vinvularProfesor() {
+	public static void vinvularProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -34,7 +34,7 @@ public class GestorProfesores {
 		}
 	}
 
-	public void desvinvularProfesor() {
+	public static void desvinvularProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -60,7 +60,7 @@ public class GestorProfesores {
 		}
 	}
 
-	public void crearProfesor() {
+	public static void crearProfesor() {
 		Profesor profesor = null;
 		System.out.println("Introduzca el DNI del profesor");
 		String dniProfesor = Utiles.scanDni();
@@ -86,7 +86,7 @@ public class GestorProfesores {
 		}
 	}
 
-	public void borrarProfesor() {
+	public static void borrarProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -104,7 +104,7 @@ public class GestorProfesores {
 		}
 	}
 
-	public void modificarProfesor() {
+	public static void modificarProfesor() {
 		String nombreProfesor = null;
 		String dniProfesor = null;
 		String direccionProfesor = null;
@@ -206,7 +206,7 @@ public class GestorProfesores {
 		}
 	}
 
-	public Profesor confirmarInexistenciaProfesor(String dniProfesor) {
+	public static Profesor confirmarInexistenciaProfesor(String dniProfesor) {
 		// busco alumno y si no existe devuelve null
 		Profesor profesor = GestorDatos.buscarProf(dniProfesor);
 		if (profesor == null) {
@@ -217,7 +217,7 @@ public class GestorProfesores {
 		return profesor;
 	}
 
-	public Profesor buscarProfesor() {
+	public static Profesor buscarProfesor() {
 		Profesor profesor = null;
 		boolean check = true;
 		int errorCont = 0;
@@ -243,7 +243,7 @@ public class GestorProfesores {
 		return profesor;
 	}
 
-	public Curso buscarCurso() {
+	public static Curso buscarCurso() {
 		// mandar nombre y apellido a datos , si me devuelve null me devuelvo null pa
 		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
 		// mi mismo
@@ -273,14 +273,14 @@ public class GestorProfesores {
 		return curso;
 	}
 
-	public void mostrarProfesor() {
+	public static void mostrarProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
 		}
 	}
 
-	public void mostrarProfesores() {
+	public static void mostrarProfesores() {
 		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 		for (HashMap.Entry<String, Profesor> entry : profesores.entrySet()) {
 			System.out.println(entry.getValue().toString());

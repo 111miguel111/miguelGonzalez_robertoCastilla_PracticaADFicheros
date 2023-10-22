@@ -3,10 +3,10 @@ package gestores;
 import java.util.HashMap;
 import clases.*;
 import principal.*;
-import gestores.*;
+
 public class GestorCursos {
-	
-	public void vinvularProfesor() {
+
+	public static void vinvularProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -31,8 +31,8 @@ public class GestorCursos {
 			}
 		}
 	}
-	
-	public void desvinvularProfesor() {
+
+	public static void desvinvularProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -57,10 +57,11 @@ public class GestorCursos {
 			}
 		}
 	}
-	
-	public void matricularAlumno() {
+
+	public static void matricularAlumno() {
 		// buscar alumno , buscar curso , if ambos not null pido lista alumnos ,lista
-		// cursos ,elimino el alumno de la lista de alumnos de los cursos, mopdifico ambas listas y las mando a sus metodos de datos pa
+		// cursos ,elimino el alumno de la lista de alumnos de los cursos, mopdifico
+		// ambas listas y las mando a sus metodos de datos pa
 		// serializar
 		Alumno alumno = buscarAlumno();
 		if (alumno != null) {
@@ -92,7 +93,7 @@ public class GestorCursos {
 		}
 	}
 
-	public void desmatricularAlumno() {
+	public static void desmatricularAlumno() {
 		// buscar alumno, buscar curso if not null pedir lista y desmatricular de las
 		// listas y mandar a
 		// escribir Alumnosssss y cursosssss
@@ -111,7 +112,7 @@ public class GestorCursos {
 					HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
 					if (cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno)) {
 						cursosAlum.remove(curso.getNombre(), curso);
-						
+
 						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 						GestorDatos.escribirTodosAlum(alumnos);
 
@@ -127,31 +128,28 @@ public class GestorCursos {
 		}
 	}
 
-	public void crearCurso() {
+	public static void crearCurso() {
 		Curso curso = null;
 		System.out.println("Introduzca el nombre del curso");
 		String nombreCurso = Utiles.scanPalabras();
 		if (nombreCurso != null) {
 			curso = confirmarInexistenciaCurso(nombreCurso);
-				if (curso == null) {
-					System.out.println("Introduzca la descripcion del curso");
-					String descripcionCurso = Utiles.scanTodoTrim();
-					if (descripcionCurso != null) {
-						curso = new Curso(nombreCurso, descripcionCurso );
-								GestorDatos.escribirCurso(curso);// falta confirmacion
-								
-								System.out.println("El curso ha sido creado exitosamente");
-								
+			if (curso == null) {
+				System.out.println("Introduzca la descripcion del curso");
+				String descripcionCurso = Utiles.scanTodoTrim();
+				if (descripcionCurso != null) {
+					curso = new Curso(nombreCurso, descripcionCurso);
+					GestorDatos.escribirCurso(curso);// falta confirmacion
 
-							}
-						}
-					}
-				
-			
-		
+					System.out.println("El curso ha sido creado exitosamente");
+
+				}
+			}
+		}
 	}
-	public void borrarCurso() {
-		//jajaja luego lidio contigo
+
+	public static void borrarCurso() {
+		// jajaja luego lidio contigo
 		Alumno alumno = buscarAlumno();
 		if (alumno != null) {
 			System.out.println(alumno.toString());
@@ -160,16 +158,16 @@ public class GestorCursos {
 			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
 				HashMap<String, Alumno> alumnosCurso = cursos.get(entry.getKey()).getAlumnos();
 				Alumno alumnoAux = alumnosCurso.get(alumno.getNombre() + "_" + alumno.getApellidos());
-				if(alumnoAux!=null) {
-					alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(),alumno);
+				if (alumnoAux != null) {
+					alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 				}
 				cursos.get(entry.getKey()).setAlumnos(alumnosCurso);
 			}
-			alumnos.remove(alumno.getNombre()+"_"+alumno.getApellidos(),alumno);
+			alumnos.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 			GestorDatos.escribirTodosAlum(alumnos);
 			GestorDatos.escribirTodosCursos(cursos);
 		}
-		
+
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -185,9 +183,10 @@ public class GestorCursos {
 			GestorDatos.escribirTodosProf(profesores);
 			GestorDatos.escribirTodosCursos(cursos);
 		}
-		
+
 	}
-	public void modificarCurso() {
+
+	public static void modificarCurso() {
 		String nombreCurso = null;
 		String descripcionCurso = null;
 		Curso curso = buscarCurso();
@@ -200,8 +199,7 @@ public class GestorCursos {
 					boolean check = true;
 					System.out.println("Se ha encontrado el profesor: " + curso.toString());
 					do {
-						System.out.println(
-								"Que desea modificar?\nNombre 1\nDescripcion 2\nTodo 3\n Salir 0");
+						System.out.println("Que desea modificar?\nNombre 1\nDescripcion 2\nTodo 3\n Salir 0");
 						String opcion = Utiles.scanNumero();
 						switch (opcion) {
 						case "1":
@@ -225,21 +223,21 @@ public class GestorCursos {
 							}
 							break;
 						case "3":
-								System.out.println("Introduzca el nombre del curso");
-								nombreCurso = Utiles.scanPalabras();
-								if (nombreCurso != null) {
-									curso2 = confirmarInexistenciaCurso(nombreCurso);
-									if (curso2 == null) {
-											System.out.println("Introduzca la descripcion del curso");
-											descripcionCurso = Utiles.scanTodoTrim();
-											if (descripcionCurso != null) {
-												curso3.setNombre(nombreCurso);
-												curso3.setDescripcion(descripcionCurso);
-										}
-									} else {
-										System.out.println(
-												"El nombre del curso coincide con el de otro curso, porfavor cambie el nombre");
+							System.out.println("Introduzca el nombre del curso");
+							nombreCurso = Utiles.scanPalabras();
+							if (nombreCurso != null) {
+								curso2 = confirmarInexistenciaCurso(nombreCurso);
+								if (curso2 == null) {
+									System.out.println("Introduzca la descripcion del curso");
+									descripcionCurso = Utiles.scanTodoTrim();
+									if (descripcionCurso != null) {
+										curso3.setNombre(nombreCurso);
+										curso3.setDescripcion(descripcionCurso);
 									}
+								} else {
+									System.out.println(
+											"El nombre del curso coincide con el de otro curso, porfavor cambie el nombre");
+								}
 							}
 							break;
 						case "0":
@@ -261,8 +259,9 @@ public class GestorCursos {
 			}
 		}
 	}
-	public Curso confirmarInexistenciaCurso(String nombreCurso) {
-		//busco alumno y si no existe devuelve null
+
+	public static Curso confirmarInexistenciaCurso(String nombreCurso) {
+		// busco alumno y si no existe devuelve null
 		Curso curso = GestorDatos.buscarCurso(nombreCurso);
 		if (curso == null) {
 			System.out.println("El curso no existe siga introcuciendo datos");
@@ -272,7 +271,8 @@ public class GestorCursos {
 
 		return curso;
 	}
-	public Curso buscarCurso() {
+
+	public static Curso buscarCurso() {
 		Curso curso = null;
 		boolean check = true;
 		int errorCont = 0;
@@ -297,7 +297,8 @@ public class GestorCursos {
 		} while (!check);
 		return curso;
 	}
-	public Profesor confirmarInexistenciaProfesor(String dniProfesor) {
+
+	public static Profesor confirmarInexistenciaProfesor(String dniProfesor) {
 		Profesor profesor = GestorDatos.buscarProf(dniProfesor);
 		if (profesor == null) {
 			System.out.println("El profesor no existe siga introcuciendo datos");
@@ -307,7 +308,7 @@ public class GestorCursos {
 		return profesor;
 	}
 
-	public Profesor buscarProfesor() {
+	public static Profesor buscarProfesor() {
 		Profesor profesor = null;
 		boolean check = true;
 		int errorCont = 0;
@@ -332,10 +333,10 @@ public class GestorCursos {
 		} while (!check);
 		return profesor;
 	}
-	
-	public Alumno confirmarInexistenciaAlumno(String nombreAlum, String apellidosAlum) {
-		//busco alumno y si no existe devuelve null
-		 Alumno alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
+
+	public static Alumno confirmarInexistenciaAlumno(String nombreAlum, String apellidosAlum) {
+		// busco alumno y si no existe devuelve null
+		Alumno alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 		if (alumno == null) {
 			System.out.println("El alumno no existe siga introcuciendo datos");
 		} else {
@@ -345,7 +346,7 @@ public class GestorCursos {
 		return alumno;
 	}
 
-	public Alumno buscarAlumno() {
+	public static Alumno buscarAlumno() {
 		// mandar nombre y apellido a datos , si me devuelve null me devuelvo null pa
 		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
 		// mi mismo
@@ -380,20 +381,18 @@ public class GestorCursos {
 		return alumno;
 	}
 
-	public void mostrarCurso() {
+	public static void mostrarCurso() {
 		Curso curso = buscarCurso();
 		if (curso != null) {
 			System.out.println(curso.toString());
 		}
 	}
-	
-	public void mostrarCursos() {
+
+	public static void mostrarCursos() {
 		HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
 		for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
 			System.out.println(entry.getValue().toString());
 		}
 	}
-	
-	
-	
+
 }
