@@ -73,12 +73,12 @@ public class GestorDatos {
 		try {
 			FileOutputStream fileOut = new FileOutputStream(archivoAlum);
 			ObjectOutputStream salida = new ObjectOutputStream(fileOut);
+			//Se escribe el contador de alumnos
+			salida.write(Alumno.getCont());
 			//Se recorre la lista de alumnos y se escriben todos
 			for (Map.Entry<String, Alumno> i : listaAlum.entrySet()) {
 				salida.writeObject(i.getValue());
 			}
-			//Se escribe el contador de alumnos
-			salida.write(Alumno.getCont());
 			//Se cierran el fileOutput y el object output
 			salida.close();
 			fileOut.close();
@@ -191,13 +191,15 @@ public class GestorDatos {
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			System.out.println("Fichero vacio");
 		} finally {
 			try {
-				entrada.close();
+				if (entrada!=null) {
+					entrada.close();
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Esta en null el Object imput stream");
 			}
 		}
 		//Si no se encuentra al alumno se devuelve un null
@@ -311,10 +313,12 @@ public class GestorDatos {
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			System.out.println("Fichero vacio");
 		} finally {
 			try {
-				entrada.close();
+				if (entrada!=null) {
+					entrada.close();
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
