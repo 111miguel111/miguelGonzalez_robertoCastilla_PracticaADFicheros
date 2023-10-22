@@ -6,10 +6,11 @@ import principal.*;
 import gestores.*;
 
 public class GestorAlumnos {
-	
+
 	public static void matricularAlumno() {
 		// buscar alumno , buscar curso , if ambos not null pido lista alumnos ,lista
-		// cursos ,elimino el alumno de la lista de alumnos de los cursos, mopdifico ambas listas y las mando a sus metodos de datos pa
+		// cursos ,elimino el alumno de la lista de alumnos de los cursos, mopdifico
+		// ambas listas y las mando a sus metodos de datos pa
 		// serializar
 		Alumno alumno = buscarAlumno();
 		if (alumno != null) {
@@ -60,7 +61,7 @@ public class GestorAlumnos {
 					HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
 					if (cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno)) {
 						cursosAlum.remove(curso.getNombre(), curso);
-						
+
 						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 						GestorDatos.escribirTodosAlum(alumnos);
 
@@ -77,7 +78,8 @@ public class GestorAlumnos {
 	}
 
 	public static void crearAlumno() {
-		// busco alumno if null pido el resto de datos y mando alumno a datos para que se añada
+		// busco alumno if null pido el resto de datos y mando alumno a datos para que
+		// se añada
 		Alumno alumno = null;
 		System.out.println("Introduzca el nombre del alumno");
 		String nombreAlum = Utiles.scanPalabras();
@@ -99,9 +101,7 @@ public class GestorAlumnos {
 								alumno = new Alumno(nombreAlum, apellidosAlum, direccionAlum, telefonoAlum,
 										fechaNacimientoAlum);
 								GestorDatos.escribirAlum(alumno);// falta confirmacion
-								
 								System.out.println("El alumno ha sido creado exitosamente");
-								
 
 							}
 						}
@@ -123,14 +123,17 @@ public class GestorAlumnos {
 			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
 				HashMap<String, Alumno> alumnosCurso = cursos.get(entry.getKey()).getAlumnos();
 				Alumno alumnoAux = alumnosCurso.get(alumno.getNombre() + "_" + alumno.getApellidos());
-				if(alumnoAux!=null) {
-					alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(),alumno);
+				if (alumnoAux != null) {
+					alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 				}
 				cursos.get(entry.getKey()).setAlumnos(alumnosCurso);
 			}
-			alumnos.remove(alumno.getNombre()+"_"+alumno.getApellidos(),alumno);
-			GestorDatos.escribirTodosAlum(alumnos);
-			GestorDatos.escribirTodosCursos(cursos);
+			if (Utiles.confirmarAccion() == null) {
+
+				alumnos.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
+				GestorDatos.escribirTodosAlum(alumnos);
+				GestorDatos.escribirTodosCursos(cursos);
+			}
 		}
 
 	}
@@ -264,8 +267,10 @@ public class GestorAlumnos {
 								.setTelefono(alumno3.getTelefono());
 						alumnos.get(alumno.getNombre() + "_" + alumno.getFechaNacimiento())
 								.setNombre(alumno3.getFechaNacimiento());
-						GestorDatos.escribirTodosAlum(alumnos);
-					}else {
+						if (Utiles.confirmarAccion() == null) {
+							GestorDatos.escribirTodosAlum(alumnos);
+						}
+					} else {
 						System.out.println(
 								"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
 					}
@@ -276,8 +281,8 @@ public class GestorAlumnos {
 	}
 
 	public static Alumno confirmarInexistenciaAlumno(String nombreAlum, String apellidosAlum) {
-		//busco alumno y si no existe devuelve null
-		 Alumno alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
+		// busco alumno y si no existe devuelve null
+		Alumno alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 		if (alumno == null) {
 			System.out.println("El alumno no existe siga introcuciendo datos");
 		} else {

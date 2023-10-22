@@ -149,43 +149,42 @@ public class GestorCursos {
 	}
 
 	public static void borrarCurso() {
-		// busco curso if not null pido las tres listas , recorro alumnos y pido de cada alumno la lista de cursos 
-		//si tiene el curso, lo quito ,se recorren ambos cosos recorro profesores y si alguno tiene el curso, lo elimino
-		//
-		Alumno alumno = buscarAlumno();
-		if (alumno != null) {
-			System.out.println(alumno.toString());
+		// busco curso if not null pido las tres listas , recorro alumnos y pido de cada
+		// alumno la lista de cursos
+		// si tiene el curso, lo quito ,se recorren ambos cosos recorro profesores y si
+		// alguno tiene el curso, lo elimino
+		// despues de eso elimino el curso
+		Curso curso = buscarCurso();
+		if (curso != null) {
+			System.out.println(curso.toString());
+			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+
 			HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
-			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
-			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
-				HashMap<String, Alumno> alumnosCurso = cursos.get(entry.getKey()).getAlumnos();
-				Alumno alumnoAux = alumnosCurso.get(alumno.getNombre() + "_" + alumno.getApellidos());
-				if (alumnoAux != null) {
-					alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
+			for (HashMap.Entry<String, Alumno> entry : alumnos.entrySet()) {
+				HashMap<String, Curso> cursosAlum = entry.getValue().getCursos();
+				Curso cursoAux = cursosAlum.get(curso.getNombre());
+				if (cursoAux != null) {
+					cursosAlum.remove(curso.getNombre(), curso);
 				}
-				cursos.get(entry.getKey()).setAlumnos(alumnosCurso);
+				alumnos.get(entry.getValue()).setCursos(cursosAlum);
 			}
-			alumnos.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
-			GestorDatos.escribirTodosAlum(alumnos);
-			GestorDatos.escribirTodosCursos(cursos);
-		}
 
-		Profesor profesor = buscarProfesor();
-		if (profesor != null) {
-			System.out.println(profesor.toString());
 			HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
-			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
-			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
-				Profesor profesorAux = entry.getValue().getProfesor();
-				if (profesorAux != null) {
-					entry.getValue().setProfesor(null);
+			for (HashMap.Entry<String, Profesor> entry : profesores.entrySet()) {
+				HashMap<String, Curso> cursosProfesor = entry.getValue().getCursos();
+				Curso cursoAux = cursosProfesor.get(curso.getNombre());
+				if (cursoAux != null) {
+					cursosProfesor.remove(curso.getNombre(), curso);
 				}
+				profesores.get(entry.getValue()).setCursos(cursosProfesor);
 			}
-			profesores.remove(profesor);
-			GestorDatos.escribirTodosProf(profesores);
-			GestorDatos.escribirTodosCursos(cursos);
+			if (Utiles.confirmarAccion() == null) {
+				cursos.remove(curso.getNombre());
+				GestorDatos.escribirTodosProf(profesores);
+				GestorDatos.escribirTodosAlum(alumnos);
+				GestorDatos.escribirTodosCursos(cursos);
+			}
 		}
-
 	}
 
 	public static void modificarCurso() {
@@ -252,7 +251,9 @@ public class GestorCursos {
 					if (!(curso.getNombre().equals(curso3.getNombre()))) {
 						cursos.get(curso.getNombre()).setNombre(curso3.getNombre());
 						cursos.get(curso.getNombre()).setDescripcion(curso3.getDescripcion());
-						GestorDatos.escribirTodosCursos(cursos);
+						if (Utiles.confirmarAccion() == null) {
+							GestorDatos.escribirTodosCursos(cursos);
+						}
 					} else {
 						System.out.println(
 								"El nombre del curso coincide con el de otro curso, porfavor cambie el nombre");

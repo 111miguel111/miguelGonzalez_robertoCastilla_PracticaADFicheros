@@ -7,11 +7,23 @@ import java.util.Scanner;
 public class Utiles {
 	static Scanner sc = new Scanner(System.in);
 
-	//Escanea sin restricciones
+	// Escanea sin restricciones
 	public static String scanLibre() {
 		return sc.nextLine();
 	}
-	
+
+	static public String confirmarAccion() {
+		System.out.println("Seguro que quiere realizar la accion?\nSi o No");
+		String respuesta = scanPalabras();
+		if (respuesta.equalsIgnoreCase("si")) {
+			respuesta = null;
+			System.out.println("Confirmacion aceptada , la accion se realizara");
+		} else {
+			System.out.println("Confirmacion denegada , la accion no se realizara");
+		}
+		return respuesta;
+	}
+
 	// Escanea frases sin numeros
 	static public String scanPalabras() {
 		// Declaracion de la string que se va a escanear
@@ -81,18 +93,18 @@ public class Utiles {
 			if (errorCont < 5) {
 				// Input del usuario
 				nombre = sc.nextLine().trim();
-				//Se comprueba si la cadena esta vacia
+				// Se comprueba si la cadena esta vacia
 				if (!nombre.isBlank()) {
-					//Se comprueba si hay solo una palabra
+					// Se comprueba si hay solo una palabra
 					String palabras[] = nombre.split(" ");
 					if (palabras.length != 1) {
 						check = false;
 					} else {
-						//Se comprueba si son todo numeros
+						// Se comprueba si son todo numeros
 						check = esDigito(nombre);
 					}
 				} else {
-					//cambio por cadena vacia
+					// cambio por cadena vacia
 					check = false;
 				}
 				// Print de confirmacion de error en la introduccion de datos
@@ -127,9 +139,9 @@ public class Utiles {
 			if (errorCont < 5) {
 				// Input del usuario
 				nombre = sc.nextLine().trim();
-				//Se comprueba si la cadena esta vacia y si la longitud de esta es 9
+				// Se comprueba si la cadena esta vacia y si la longitud de esta es 9
 				if (!nombre.isBlank() && nombre.length() == 9) {
-					//Se comprueba si son todo numeros
+					// Se comprueba si son todo numeros
 					check = esDigito(nombre);
 				} else {
 					check = false;
@@ -166,7 +178,7 @@ public class Utiles {
 			if (errorCont < 5) {
 				// Imput del usuario
 				nombre = sc.nextLine().trim();
-				//Se comprueba si la cadena esta vacia
+				// Se comprueba si la cadena esta vacia
 				if (!nombre.isBlank()) {
 					// Split de la cadena en cada espacio para despues reducir el numero de espacios
 					// entre palabras a 1
@@ -181,7 +193,7 @@ public class Utiles {
 					}
 					nombre = aux;
 				} else {
-					//cambio por cadena vacia
+					// cambio por cadena vacia
 					check = false;
 				}
 				// Print de confirmacion de error en la introduccion de datos
@@ -202,11 +214,11 @@ public class Utiles {
 
 	// Escaneo de fecha
 	static public String scanFecha() {
-		//Declaracion de la variable que contendra el dia
+		// Declaracion de la variable que contendra el dia
 		String dia = null;
-		//Declaracion de la variable que contendra el mes
+		// Declaracion de la variable que contendra el mes
 		String mes = null;
-		//Declaracion de la variable que contendra el anyo
+		// Declaracion de la variable que contendra el anyo
 		String year = null;
 		// Declaracion de la string que se va a escanear
 		String nombre = null;
@@ -220,24 +232,25 @@ public class Utiles {
 			check = true;
 			// comprobacion del numero de ciclos del bucle
 			if (errorCont < 5) {
-				//Input de dia del usuario
+				// Input de dia del usuario
 				System.out.println("Introduzca el dia");
 				dia = scanNumero();
-				//Si el valor de dia es solo un numero se le pone un cero delante
+				// Si el valor de dia es solo un numero se le pone un cero delante
 				if (dia.length() == 1) {
 					dia = "0" + dia;
 				}
-				//Input de mes del usuario
+				// Input de mes del usuario
 				System.out.println("Introduzca el mes (numero)");
 				mes = scanNumero();
-				//Si el valor de dia es solo un numero se le pone un cero delante
+				// Si el valor de dia es solo un numero se le pone un cero delante
 				if (mes.length() == 1) {
 					mes = "0" + mes;
 				}
-				//Input de anyo del usuario
+				// Input de anyo del usuario
 				System.out.println("Introduzca el anyo");
 				year = scanNumero();
-				//Se comprueba si la fecha existe creando un objeto LocalDate. Si da error la fecha no es valida
+				// Se comprueba si la fecha existe creando un objeto LocalDate. Si da error la
+				// fecha no es valida
 				try {
 					DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 					LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
@@ -253,7 +266,7 @@ public class Utiles {
 				System.out.println("Excedido numero de intentos (" + errorCont + ")");
 			}
 		} while (!check);
-		//Si el contador de errores es menor a 5 se guarda el la fecha en la string
+		// Si el contador de errores es menor a 5 se guarda el la fecha en la string
 		if (errorCont < 5) {
 			nombre = dia + "-" + mes + "-" + year;
 		}
@@ -299,7 +312,7 @@ public class Utiles {
 
 	public static boolean esDigito(String nombre) {
 		boolean check = true;
-		//Se recorre la string y si encuentra algo que no sea digito devuelve false
+		// Se recorre la string y si encuentra algo que no sea digito devuelve false
 		for (int i = 0; i < nombre.length(); i++) {
 			if (!Character.isDigit(nombre.charAt(i))) {
 				check = false;
@@ -310,7 +323,7 @@ public class Utiles {
 
 	public static boolean esLetra(String nombre) {
 		boolean check = true;
-		//Se recorre la string y si encuentra algo que no sea digito devuelve true
+		// Se recorre la string y si encuentra algo que no sea digito devuelve true
 		for (int i = 0; i < nombre.length(); i++) {
 			if (Character.isDigit(nombre.charAt(i))) {
 				check = false;

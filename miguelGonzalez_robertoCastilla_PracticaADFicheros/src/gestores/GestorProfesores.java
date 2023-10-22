@@ -98,9 +98,11 @@ public class GestorProfesores {
 					entry.getValue().setProfesor(null);
 				}
 			}
-			profesores.remove(profesor);
-			GestorDatos.escribirTodosProf(profesores);
-			GestorDatos.escribirTodosCursos(cursos);
+			if (Utiles.confirmarAccion() == null) {
+				profesores.remove(profesor);
+				GestorDatos.escribirTodosProf(profesores);
+				GestorDatos.escribirTodosCursos(cursos);
+			}
 		}
 	}
 
@@ -197,7 +199,9 @@ public class GestorProfesores {
 						profesores.get(profesor.getDni()).setDni(profesor3.getDni());
 						profesores.get(profesor.getDni()).setDireccion(profesor3.getDireccion());
 						profesores.get(profesor.getDni()).setTelefono(profesor3.getTelefono());
-						GestorDatos.escribirTodosProf(profesores);
+						if (Utiles.confirmarAccion() == null) {
+							GestorDatos.escribirTodosProf(profesores);
+						}
 					} else {
 						System.out.println("El DNI coincide con el de otro profesor, porfavor cambie el DNI");
 					}
