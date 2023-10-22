@@ -7,7 +7,7 @@ import gestores.*;
 
 public class GestorAlumnos {
 	
-	public void matricularAlumno() {
+	public static void matricularAlumno() {
 		// buscar alumno , buscar curso , if ambos not null pido lista alumnos ,lista
 		// cursos ,elimino el alumno de la lista de alumnos de los cursos, mopdifico ambas listas y las mando a sus metodos de datos pa
 		// serializar
@@ -41,7 +41,7 @@ public class GestorAlumnos {
 		}
 	}
 
-	public void desmatricularAlumno() {
+	public static void desmatricularAlumno() {
 		// buscar alumno, buscar curso if not null pedir lista y desmatricular de las
 		// listas y mandar a
 		// escribir Alumnosssss y cursosssss
@@ -76,7 +76,7 @@ public class GestorAlumnos {
 		}
 	}
 
-	public void crearAlumno() {
+	public static void crearAlumno() {
 		// busco alumno if null pido el resto de datos y mando alumno a datos para que se añada
 		Alumno alumno = null;
 		System.out.println("Introduzca el nombre del alumno");
@@ -111,7 +111,7 @@ public class GestorAlumnos {
 		}
 	}
 
-	public void borrarAlumno() {
+	public static void borrarAlumno() {
 		// buscar alumno if not null pedir lista pedir lista cursos , borrar de cursos y
 		// borrar de la lista y mandar a
 		// escribir Alumnosssss y cursossss
@@ -135,7 +135,7 @@ public class GestorAlumnos {
 
 	}
 
-	public void modificarAlumno() {
+	public static void modificarAlumno() {
 		// buscar alumno if not null pedir lista y modificar alumno de la lista y mandar
 		// a escribir Alumnosssss
 		String nombreAlum = null;
@@ -275,7 +275,7 @@ public class GestorAlumnos {
 
 	}
 
-	public Alumno confirmarInexistenciaAlumno(String nombreAlum, String apellidosAlum) {
+	public static Alumno confirmarInexistenciaAlumno(String nombreAlum, String apellidosAlum) {
 		//busco alumno y si no existe devuelve null
 		 Alumno alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 		if (alumno == null) {
@@ -287,7 +287,7 @@ public class GestorAlumnos {
 		return alumno;
 	}
 
-	public Alumno buscarAlumno() {
+	public static Alumno buscarAlumno() {
 		// mandar nombre y apellido a datos , si me devuelve null me devuelvo null pa
 		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
 		// mi mismo
@@ -322,7 +322,7 @@ public class GestorAlumnos {
 		return alumno;
 	}
 
-	public Curso buscarCurso() {
+	public static Curso buscarCurso() {
 		// mandar nombre y apellido a datos , si me devuelve null me devuelvo null pa
 		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
 		// mi mismo
@@ -353,7 +353,7 @@ public class GestorAlumnos {
 		return curso;
 	}
 
-	public void mostrarAlumno() {
+	public static void mostrarAlumno() {
 		// buscar alumno y si no es null printear
 		Alumno alumno = buscarAlumno();
 		if (alumno != null) {
@@ -361,7 +361,7 @@ public class GestorAlumnos {
 		}
 	}
 
-	public void mostrarAlumnos() {
+	public static void mostrarAlumnos() {
 		// pedir lista alumnos printear lista alumnos
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 		for (HashMap.Entry<String, Alumno> entry : alumnos.entrySet()) {
