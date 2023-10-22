@@ -99,9 +99,9 @@ public class GestorAlumnos {
 								alumno = new Alumno(nombreAlum, apellidosAlum, direccionAlum, telefonoAlum,
 										fechaNacimientoAlum);
 								GestorDatos.escribirAlum(alumno);// falta confirmacion
-								if (5 == 5) {
-									System.out.println("El alumno ha sido creado exitosamente");
-								}
+								
+								System.out.println("El alumno ha sido creado exitosamente");
+								
 
 							}
 						}
@@ -265,6 +265,9 @@ public class GestorAlumnos {
 						alumnos.get(alumno.getNombre() + "_" + alumno.getFechaNacimiento())
 								.setNombre(alumno3.getFechaNacimiento());
 						GestorDatos.escribirTodosAlum(alumnos);
+					}else {
+						System.out.println(
+								"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
 					}
 				}
 			}
