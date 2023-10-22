@@ -1,6 +1,6 @@
 package principal;
 
-import java.util.Scanner;
+import gestores.*;
 
 public class Menu {
 
@@ -45,7 +45,7 @@ public class Menu {
 				GestorAlumnos.borrarAlumno();
 				break;
 			case "3":
-				GestorAlumnos.modificarAlumno
+				GestorAlumnos.modificarAlumno();
 				break;
 			case "4":
 				GestorAlumnos.matricularAlumno();
@@ -76,31 +76,31 @@ public class Menu {
 			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
-				// crear curso
+				GestorCursos.crearCurso();
 				break;
 			case "2":
-				// borrar curso
+				GestorCursos.borrarCurso();
 				break;
 			case "3":
-				// modificar curso
+				GestorCursos.modificarCurso();
 				break;
 			case "4":
-				// matricular alumno
+				GestorCursos.matricularAlumno();
 				break;
 			case "5":
-				// desmatricular alumno
+				GestorCursos.desmatricularAlumno();
 				break;
 			case "6":
-				// vincular profesor
+				GestorCursos.vincularProfesor();
 				break;
 			case "7":
-				// desvincular profesor
+				GestorCursos.desvincularProfesor();
 				break;
 			case "8":
-				// mostrar curso
+				GestorCursos.mostrarCurso();
 				break;
 			case "9":
-				// mostrar cursos
+				GestorCursos.mostrarCursos();
 				break;
 			case "0":
 				check = false;
@@ -118,25 +118,25 @@ public class Menu {
 			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
-				// crear profesor
+				GestorProfesores.crearProfesor();
 				break;
 			case "2":
-				// borrar profesor
+				GestorProfesores.borrarProfesor();
 				break;
 			case "3":
-				// modificar profesor
+				GestorProfesores.modificarProfesor();
 				break;
 			case "4":
-				// vincular curso
+				GestorProfesores.vincularProfesor();
 				break;
 			case "5":
-				// desvincular curso
+				GestorProfesores.desvincularProfesor();
 				break;
 			case "6":
-				// mostrar profesor
+				GestorProfesores.mostrarProfesor();
 				break;
 			case "7":
-				// mostrar profesores
+				GestorProfesores.mostrarProfesores();
 				break;
 			case "0":
 				check = false;
