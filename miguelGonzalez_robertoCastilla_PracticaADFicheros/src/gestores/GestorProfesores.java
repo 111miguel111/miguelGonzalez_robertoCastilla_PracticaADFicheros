@@ -8,7 +8,7 @@ import principal.*;
 import gestores.*;
 
 public class GestorProfesores {
-	public static void vinvularProfesor() {
+	public static void vincularProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -34,7 +34,7 @@ public class GestorProfesores {
 		}
 	}
 
-	public static void desvinvularProfesor() {
+	public static void desvincularProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());

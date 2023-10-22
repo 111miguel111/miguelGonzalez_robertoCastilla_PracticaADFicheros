@@ -6,7 +6,7 @@ import principal.*;
 
 public class GestorCursos {
 
-	public static void vinvularProfesor() {
+	public static void vincularProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -32,7 +32,7 @@ public class GestorCursos {
 		}
 	}
 
-	public static void desvinvularProfesor() {
+	public static void desvincularProfesor() {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -149,7 +149,9 @@ public class GestorCursos {
 	}
 
 	public static void borrarCurso() {
-		// jajaja luego lidio contigo
+		// busco curso if not null pido las tres listas , recorro alumnos y pido de cada alumno la lista de cursos 
+		//si tiene el curso, lo quito ,se recorren ambos cosos recorro profesores y si alguno tiene el curso, lo elimino
+		//
 		Alumno alumno = buscarAlumno();
 		if (alumno != null) {
 			System.out.println(alumno.toString());
