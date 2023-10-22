@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class Utiles {
 	static Scanner sc = new Scanner(System.in);
 
+	//Escanea sin restricciones
+	public static String scanLibre() {
+		return sc.nextLine();
+	}
+	
 	// Escanea frases sin numeros
 	static public String scanPalabras() {
 		// Declaracion de la string que se va a escanear

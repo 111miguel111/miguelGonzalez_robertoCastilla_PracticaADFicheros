@@ -23,16 +23,14 @@ import clases.Profesor;
 import principal.Utiles;
 
 public class GestorDatos {
-	// baja, modificar, relacionar fuera
-	// alta, buscar, mostrar todos
-	// cursos en txt
-	File archivoAlum = new File("alumnos.ser");
-	File archivoProf = new File("profesores.ser");
-	File archivoCurso = new File("cursos.txt");
+	static File archivoAlum = new File("alumnos.ser");
+	static File archivoProf = new File("profesores.ser");
+	static File archivoCurso = new File("cursos.txt");
 
 	// metodos para comprobar si el archivo existe y si no crearlos
+	
+	//Comprueba si existe el archivo de alumnos y si no existe lo crea
 	public static void alumFileCheck() {
-		File archivoAlum = new File("alumnos.ser");
 		if (!archivoAlum.exists()) {
 			try {
 				archivoAlum.createNewFile();
@@ -43,8 +41,8 @@ public class GestorDatos {
 		}
 	}
 
+	//Comprueba si existe el archivo de profesores y si no existe lo crea
 	public static void profFileCheck() {
-		File archivoProf = new File("profesor.ser");
 		if (!archivoProf.exists()) {
 			try {
 				archivoProf.createNewFile();
@@ -55,8 +53,8 @@ public class GestorDatos {
 		}
 	}
 
+	//Comprueba si existe el archivo de cursos y si no existe lo crea
 	public static void cursoFileCheck() {
-		File archivoCurso = new File("cursos.txt");
 		if (!archivoCurso.exists()) {
 			try {
 				archivoCurso.createNewFile();
@@ -69,73 +67,89 @@ public class GestorDatos {
 
 	// metodos para serializar todos los datos
 
+	//Metodo para escribir todos los alumnos
 	public static void escribirTodosAlum(HashMap<String, Alumno> listaAlum) {
+		//En un try se crea el file output y el object output
 		try {
-			FileOutputStream fileOut = new FileOutputStream("alumnos.ser");
+			FileOutputStream fileOut = new FileOutputStream(archivoAlum);
 			ObjectOutputStream salida = new ObjectOutputStream(fileOut);
+			//Se recorre la lista de alumnos y se escriben todos
 			for (Map.Entry<String, Alumno> i : listaAlum.entrySet()) {
 				salida.writeObject(i.getValue());
 			}
+			//Se escribe el contador de alumnos
 			salida.write(Alumno.getCont());
+			//Se cierran el fileOutput y el object output
 			salida.close();
+			fileOut.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error al escribir el archivo");
 		}
 	}
 
+	//Metodo para escribir todos los profesores
 	public static void escribirTodosProf(HashMap<String, Profesor> listaProf) {
+		//En un try se crea el file output y el object output
 		try {
-			FileOutputStream fileOut = new FileOutputStream("profesores.ser");
+			FileOutputStream fileOut = new FileOutputStream(archivoProf);
 			ObjectOutputStream salida = new ObjectOutputStream(fileOut);
+			//Se recorre la lista de alumnos y se escriben todos
 			for (Map.Entry<String, Profesor> i : listaProf.entrySet()) {
 				salida.writeObject(i.getValue());
 			}
+			//Se cierran el fileOutput y el object output
 			salida.close();
+			fileOut.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error al escribir el archivo");
 		}
 	}
 
-	// Los alumnos los devuelve como string cuidado
+	//Metodo para escribir todos los cursos 
 	public static void escribirTodosCursos(HashMap<String, Curso> listaCursos) {
+		//En un try se crean el printwriter y el bufferedwriter
 		try {
-			PrintWriter myWriter = new PrintWriter("archivo.txt");
+			PrintWriter myWriter = new PrintWriter(archivoCurso);
 			BufferedWriter bw = new BufferedWriter(myWriter);
+			//Se escribe el contador estatico de cursos
 			bw.write(Curso.getCont());
+			//Se recorre la lista de cursos escribiendo cada valor de forma individual
 			for (Map.Entry<String, Curso> i : listaCursos.entrySet()) {
-				bw.write(i.getValue().getCodigo());
-				bw.write(i.getValue().getNombre());
-				bw.write(i.getValue().getDescripcion());
-				for (Map.Entry<String, Alumno> j : i.getValue().getAlumnos().entrySet()) {
-					bw.write(j.getValue().toString());
-				}
-				bw.write(i.getValue().getProfesorString());
+				bw.write(i.getValue().toStringDatos());
 			}
+			//Se cierran el printWriter y el bufferedWriter
 			bw.close();
 			myWriter.close();
 			System.out.println("Se ha escrito en el archivo");
 		} catch (IOException e) {
-			System.out.println("Error");
-			e.printStackTrace();
+			System.out.println("Error al escribir el archivo");
+			//e.printStackTrace();
 		}
 	}
 
 	// metodos para serializar un dato
+	
+	//Metodo para escribir un alumno
 	public static void escribirAlum(Alumno alumno) {
+		//Se trae la lista y se le agrega el alumno nuevo para enviarlo a escribir la lista entera
 		HashMap<String, Alumno> listaAlum = getListaAlum();
 		listaAlum.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 		escribirTodosAlum(listaAlum);
 	}
 
+	//Metodo para escribir un profesor
 	public static void escribirProf(Profesor profesor) {
+		//Se trae la lista y se le agrega el profesor nuevo para enviarlo a escribir la lista entera
 		HashMap<String, Profesor> listaProf = getListaProf();
 		listaProf.put(profesor.getDni(), profesor);
 		escribirTodosProf(listaProf);
 	}
 
+	//Metodo para escribir un curso
 	public static void escribirCurso(Curso curso) {
+		//Se trae la lista y se le agrega el cursos nuevo para enviarlo a escribir la lista entera
 		HashMap<String, Curso> listaCursos = getListaCursos();
 		listaCursos.put(curso.getNombre(), curso);
 		escribirTodosCursos(listaCursos);
@@ -143,16 +157,23 @@ public class GestorDatos {
 
 	// metodos para buscar un dato
 
-	// No se que hace el cuarto catch pero me da cosa quitarlo sin probarlo
+	// Metodo que busca un alumno
+	// ------------------------No se que hace el cuarto catch pero me da cosa quitarlo sin probarlo
 	public static Alumno buscarAlum(String nombre, String apellidos) {
+		//Se define un alumno en el que guardaremos el alumno deseado
 		Alumno alumno = null;
+		//Se comprueba si el archivo existe
 		alumFileCheck();
+		//Se crea el object input stream y se abre un try para trabajar con el
 		ObjectInputStream entrada = null;
 		try {
-			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
+			//Se define el object input stream
+			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
 			try {
+				//Se busca en el archivo el alumno hasta que lo encuentre o hasta que no queden mas
 				while (true) {
 					Alumno alumnoAux = (Alumno) entrada.readObject();
+					//Se comprueba si el alumno coincide y si coincide se guarda en la variable creada anteriormente
 					if (nombre.equalsIgnoreCase(alumnoAux.getNombre())
 							&& apellidos.equalsIgnoreCase(alumnoAux.getApellidos())) {
 						alumno = alumnoAux;
@@ -179,18 +200,26 @@ public class GestorDatos {
 				e.printStackTrace();
 			}
 		}
+		//Si no se encuentra al alumno se devuelve un null
 		return alumno;
 	}
 
+	// Metodo que busca un profesor
 	public static Profesor buscarProf(String dni) {
+		//Se crea una variable para guardar el profesor
 		Profesor profesor = null;
+		//Se comprueba que el archivo existe
 		profFileCheck();
+		//Se crea el object input stream y se abre un try para trabajar con el
 		ObjectInputStream entrada = null;
 		try {
-			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
+			//Se define el object input stream
+			entrada = new ObjectInputStream(new FileInputStream(archivoProf));
 			try {
+				//Se busca en el archivo el profesor hasta que lo encuentre o hasta que no queden mas
 				while (true) {
 					Profesor profesorAux = (Profesor) entrada.readObject();
+					//Se comprueba si el profesor coincide y si coincide se guarda en la variable creada anteriormente
 					if (dni.equalsIgnoreCase(profesorAux.getDni())) {
 						profesor = profesorAux;
 					}
@@ -216,15 +245,17 @@ public class GestorDatos {
 				e.printStackTrace();
 			}
 		}
+		//Si no se encuentra al profesor se devuelve un null
 		return profesor;
 	}
 
+	//Metodo que busca un curso
 	public static Curso buscarCurso(String nombre) {
 		Curso curso = null;
 		FileReader fr;
 		try {
-			fr = new FileReader("cursos.txt");
-			Scanner sc = new Scanner("cursos.txt");
+			fr = new FileReader(archivoCurso);
+			Scanner sc = new Scanner(archivoCurso);
 			while (sc.hasNextLine()) {
 				String cursoTexto = sc.nextLine();
 				String cursoAlum = sc.nextLine();
@@ -261,7 +292,7 @@ public class GestorDatos {
 		alumFileCheck();
 		ObjectInputStream entrada = null;
 		try {
-			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
+			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
 			try {
 				Alumno.setCont(entrada.readInt());
 				while (true) {
@@ -297,7 +328,7 @@ public class GestorDatos {
 		profFileCheck();
 		ObjectInputStream entrada = null;
 		try {
-			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
+			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
 			try {
 				while (true) {
 					Profesor profesor = (Profesor) entrada.readObject();
@@ -331,8 +362,8 @@ public class GestorDatos {
 		HashMap<String, Curso> listaCurso = new HashMap<String,Curso>();
 		FileReader fr;
 		try {
-			fr = new FileReader("cursos.txt");
-			Scanner sc = new Scanner("cursos.txt");
+			fr = new FileReader(archivoCurso);
+			Scanner sc = new Scanner(archivoCurso);
 			if (sc.hasNextLine()) {
 				String contador = sc.nextLine();
 				if (Utiles.esDigito(contador)) {

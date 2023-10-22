@@ -4,15 +4,13 @@ import java.util.Scanner;
 
 public class Menu {
 
-	static Scanner sc = new Scanner(System.in);
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Inicio del programa.");
 		boolean check = true;
 		do {
 			System.out.println("Seleccione con que desea trabajar:\n1.Alumnos\n2.Profesores\n3.Cursos\n0.Salir");
-			String opcion = sc.nextLine();
+			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
 				menuAlumno();
@@ -38,28 +36,28 @@ public class Menu {
 		do {
 			System.out.println("Seleccione con que opcion de alumnos desea trabajar:\n1.Crear Alumno\n2.Borrar Alumno\n3.Modificar Alumno\n4.Matricular Alumno"
 					+ "\n5.Desmatricular Alumno\n6.Mostrar Alumno\n7.Mostrar Alumnos\n0.Salir");
-			String opcion = sc.nextLine();
+			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
-				// crear alumno
+				GestorAlumnos.crearAlumno();
 				break;
 			case "2":
-				// borrar alumno
+				GestorAlumnos.borrarAlumno();
 				break;
 			case "3":
-				// modificar alumno
+				GestorAlumnos.modificarAlumno
 				break;
 			case "4":
-				//matricular alumno
+				GestorAlumnos.matricularAlumno();
 				break;
 			case "5":
-				//desmatricular alumno
+				GestorAlumnos.desmatricularAlumno();
 				break;
 			case "6":
-				//mostrar alumno
+				GestorAlumnos.mostrarAlumno();
 				break;
 			case "7":
-				//mostrar alumnos
+				GestorAlumnos.mostrarAlumnos();
 				break;
 			case "0":
 				check = false;
@@ -75,7 +73,7 @@ public class Menu {
 		do {
 			System.out.println("Seleccione con que opcion de cursos desea trabajar:\n1.Crear Curso\n2.Borrar Curso\n3.Modificar Curso\n4.Matricular Alumno"
 					+ "\n5.Desmatricular Alumno\n6.Vincular Profesor\n7.Desvincular Profesor\n8.Mostrar Curso\n9.Mostrar Cursos\n0.Salir");
-			String opcion = sc.nextLine();
+			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
 				// crear curso
@@ -117,7 +115,7 @@ public class Menu {
 		do {
 			System.out.println("Seleccione con que opcion de profesores desea trabajar:\n1.Crear Profesor\n2.Borrar Profesor\n3.Modificar Profesor\n4.Vincular Curso"
 					+ "\n5.Desvincular Curso\n6.Mostrar Profesor\n7.Mostrar Profesores\n0.Salir");
-			String opcion = sc.nextLine();
+			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
 				// crear profesor
