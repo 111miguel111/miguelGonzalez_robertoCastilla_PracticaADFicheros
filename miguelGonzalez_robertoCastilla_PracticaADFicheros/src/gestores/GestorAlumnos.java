@@ -93,7 +93,7 @@ public class GestorAlumnos {
 					String direccionAlum = Utiles.scanTodoTrim();
 					if (direccionAlum != null) {
 						System.out.println("Introduzca el telefono del alumno");
-						String telefonoAlum = Utiles.scanNumero();
+						String telefonoAlum = Utiles.scanTelefono();
 						if (telefonoAlum != null) {
 							System.out.println("Introduzca la fecha de nacimiento del alumno");
 							String fechaNacimientoAlum = Utiles.scanFecha();
@@ -148,16 +148,16 @@ public class GestorAlumnos {
 		String fechaNacimientoAlum = null;
 		Alumno alumno = buscarAlumno();
 		Alumno alumno2 = null;
-		Alumno alumno3 = alumno;
+		Alumno alumno3 = new Alumno(alumno.getNombre(),alumno.getApellidos(),alumno.getDireccion(),alumno.getTelefono(),alumno.getFechaNacimiento());
 		if (alumno != null) {
 			HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
-			for (HashMap.Entry<String, Alumno> entry : alumnos.entrySet()) {
-				if (entry.getValue().equals(alumno)) {
+//			for (HashMap.Entry<String, Alumno> entry : alumnos.entrySet()) {
+//				if (entry.getValue().equals(alumno)) {
 					boolean check = true;
 					System.out.println("Se ha encontrado el alumno: " + alumno.toString());
 					do {
 						System.out.println(
-								"Que desea modificar?\nNombre 1\nApellidos 2\nDireccion 3\nTelefono 4\nFecha de nacimiento 5\n Todo 6\n Salir 0");
+								"Que desea modificar?\n1.Nombre \n2.Apellidos \n3.Direccion \n4.Telefono \n5.Fecha de nacimiento \n6.Todo \n0.Salir ");
 						String opcion = Utiles.scanNumero();
 						switch (opcion) {
 						case "1":
@@ -203,7 +203,7 @@ public class GestorAlumnos {
 							break;
 						case "4":
 							System.out.println("Introduzca el telefono del alumno");
-							telefonoAlum = Utiles.scanNumero();
+							telefonoAlum = Utiles.scanTelefono();
 							if (telefonoAlum != null) {
 								alumno3.setTelefono(telefonoAlum);
 							}
@@ -228,7 +228,7 @@ public class GestorAlumnos {
 										direccionAlum = Utiles.scanTodoTrim();
 										if (direccionAlum != null) {
 											System.out.println("Introduzca el telefono del alumno");
-											telefonoAlum = Utiles.scanNumero();
+											telefonoAlum = Utiles.scanTelefono();
 											if (telefonoAlum != null) {
 												System.out.println("Introduzca la fecha de nacimiento del alumno");
 												fechaNacimientoAlum = Utiles.scanFecha();
@@ -256,26 +256,22 @@ public class GestorAlumnos {
 							System.out.println("Valor no valido.");
 						}
 					} while (check);
-					if (!(alumno.getNombre().equals(alumno3.getNombre())
-							&& alumno.getApellidos().equals(alumno3.getApellidos()))) {
-						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setNombre(alumno3.getNombre());
-						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos())
-								.setApellidos(alumno3.getApellidos());
-						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos())
-								.setDireccion(alumno3.getDireccion());
-						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos())
-								.setTelefono(alumno3.getTelefono());
-						alumnos.get(alumno.getNombre() + "_" + alumno.getFechaNacimiento())
-								.setNombre(alumno3.getFechaNacimiento());
+//					if (!(alumno.getNombre().equals(alumno3.getNombre())&& alumno.getApellidos().equals(alumno3.getApellidos()))) {
+						
 						if (Utiles.confirmarAccion() == null) {
+							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setNombre(alumno3.getNombre());
+							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setApellidos(alumno3.getApellidos());
+							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setDireccion(alumno3.getDireccion());
+							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setTelefono(alumno3.getTelefono());
+							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setFechaNacimiento(alumno3.getFechaNacimiento());
 							GestorDatos.escribirTodosAlum(alumnos);
 						}
-					} else {
-						System.out.println(
-								"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
-					}
-				}
-			}
+//					} else {
+//						System.out.println(
+//								"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
+//					}
+//				}
+//			}
 		}
 
 	}
@@ -284,7 +280,7 @@ public class GestorAlumnos {
 		// busco alumno y si no existe devuelve null
 		Alumno alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 		if (alumno == null) {
-			System.out.println("El alumno no existe siga introcuciendo datos");
+			System.out.println("El alumno no existe, siga introcuciendo datos");
 		} else {
 			System.out.println("Se ha encontrado un alumno con el mismo nombre y apellido");
 		}
@@ -311,7 +307,7 @@ public class GestorAlumnos {
 					if (apellidosAlum != null) {
 						alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 						if (alumno == null) {
-							System.out.println("No se ha encontrado el alumno vuelva a introducir los datos");
+							System.out.println("No se ha encontrado el alumno, vuelva a introducir los datos");
 							check = false;
 						} else {
 							System.out.println("Se ha encontrado el alumno");

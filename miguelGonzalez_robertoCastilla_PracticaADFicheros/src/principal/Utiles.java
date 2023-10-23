@@ -14,13 +14,15 @@ public class Utiles {
 
 	static public String confirmarAccion() {
 		System.out.println("Seguro que quiere realizar la accion?\nSi o No");
-		String respuesta = scanPalabras();
+		String respuesta = scanPalabras().trim();
+		System.out.println(respuesta);
 		if (respuesta.equalsIgnoreCase("si")) {
 			respuesta = null;
 			System.out.println("Confirmacion aceptada , la accion se realizara");
 		} else {
 			System.out.println("Confirmacion denegada , la accion no se realizara");
 		}
+		System.out.println(respuesta);
 		return respuesta;
 	}
 
@@ -39,7 +41,7 @@ public class Utiles {
 			// comprobacion del numero de ciclos del bucle
 			if (errorCont < 5) {
 				// Input del usuario
-				nombre = sc.nextLine().trim();
+				nombre = sc.nextLine();
 				// Se comprueba si la cadena esta vacia
 				if (!nombre.isBlank()) {
 					// Split de la cadena en cada espacio para despues reducir el numero de espacios
@@ -47,7 +49,7 @@ public class Utiles {
 					String palabras[] = nombre.split(" ");
 					String aux = "";
 					for (int i = 0; i < palabras.length; i++) {
-						if (i == palabras.length) {
+						if (i == palabras.length-1) {
 							aux += palabras[i].trim();
 						} else {
 							aux += palabras[i].trim() + " ";
@@ -185,7 +187,7 @@ public class Utiles {
 					String palabras[] = nombre.split(" ");
 					String aux = "";
 					for (int i = 0; i < palabras.length; i++) {
-						if (i == palabras.length) {
+						if (i == palabras.length-1) {
 							aux += palabras[i].trim();
 						} else {
 							aux += palabras[i].trim() + " ";
