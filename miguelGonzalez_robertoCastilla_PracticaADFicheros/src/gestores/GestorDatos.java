@@ -27,19 +27,23 @@ public class GestorDatos {
 	static File archivoProf = new File("profesores.ser");
 	static File archivoCurso = new File("cursos.txt");
 
-	// metodos para comprobar si el archivo existe y si no crearlos
+	//Metodos de alumno
 	
 	//Comprueba si existe el archivo de alumnos y si no existe lo crea
-	public static void alumFileCheck() {
-		if (!archivoAlum.exists()) {
-			try {
-				archivoAlum.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Error al crear el archivo");
+		public static void alumFileCheck() {
+			if (!archivoAlum.exists()) {
+				try {
+					archivoAlum.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Error al crear el archivo");
+				}
 			}
 		}
-	}
+		
+	// metodos para comprobar si el archivo existe y si no crearlos
+	
+	
 
 	//Comprueba si existe el archivo de profesores y si no existe lo crea
 	public static void profFileCheck() {
@@ -74,7 +78,7 @@ public class GestorDatos {
 			FileOutputStream fileOut = new FileOutputStream(archivoAlum);
 			ObjectOutputStream salida = new ObjectOutputStream(fileOut);
 			//Se escribe el contador de alumnos
-			salida.write(Alumno.getCont());
+			salida.writeInt(Alumno.getCont());
 			//Se recorre la lista de alumnos y se escriben todos
 			for (Map.Entry<String, Alumno> i : listaAlum.entrySet()) {
 				salida.writeObject(i.getValue());
@@ -113,8 +117,10 @@ public class GestorDatos {
 		try {
 			PrintWriter myWriter = new PrintWriter(archivoCurso);
 			BufferedWriter bw = new BufferedWriter(myWriter);
+			
 			//Se escribe el contador estatico de cursos
-			bw.write(Curso.getCont());
+			//bw.write(Curso.getCont());
+			
 			//Se recorre la lista de cursos escribiendo cada valor de forma individual
 			for (Map.Entry<String, Curso> i : listaCursos.entrySet()) {
 				bw.write(i.getValue().toStringDatos());
@@ -170,6 +176,9 @@ public class GestorDatos {
 			//Se define el object input stream
 			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
 			try {
+				
+				Alumno.setCont((int)entrada.readInt());
+				
 				//Se busca en el archivo el alumno hasta que lo encuentre o hasta que no queden mas
 				while (true) {
 					Alumno alumnoAux = (Alumno) entrada.readObject();
@@ -294,9 +303,9 @@ public class GestorDatos {
 		alumFileCheck();
 		ObjectInputStream entrada = null;
 		try {
-			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
+			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
 			try {
-				Alumno.setCont(entrada.readInt());
+				Alumno.setCont((int)entrada.readInt());
 				while (true) {
 					Alumno alumno = (Alumno) entrada.readObject();
 					listaAlum.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
@@ -304,6 +313,7 @@ public class GestorDatos {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				System.out.println("Fin de lectura");
+				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");

@@ -36,15 +36,10 @@ public class Alumno implements Serializable{
 		cursos = new HashMap<String,Curso>();
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
-		return Objects.hash(apellidos, cursos, direccion, fechaNacimiento, nombre, telefono);
+		return Objects.hash(apellidos, nombre);
 	}
-
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -54,13 +49,8 @@ public class Alumno implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Alumno other = (Alumno) obj;
-		return Objects.equals(apellidos, other.apellidos) && Objects.equals(cursos, other.cursos)
-				&& Objects.equals(direccion, other.direccion) && Objects.equals(fechaNacimiento, other.fechaNacimiento)
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(telefono, other.telefono);
+		return Objects.equals(apellidos, other.apellidos) && Objects.equals(nombre, other.nombre);
 	}
-
-
-
 	public String getNumExpediente() {
 		return numExpediente;
 	}

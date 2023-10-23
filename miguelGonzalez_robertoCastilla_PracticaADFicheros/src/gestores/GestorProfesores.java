@@ -117,7 +117,7 @@ public class GestorProfesores {
 		if (profesor != null) {
 			HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 			for (HashMap.Entry<String, Profesor> entry : profesores.entrySet()) {
-				if (entry.equals(profesor)) {
+				if (entry.getValue().equals(profesor)) {
 					boolean check = true;
 					System.out.println("Se ha encontrado el profesor: " + profesor.toString());
 					do {

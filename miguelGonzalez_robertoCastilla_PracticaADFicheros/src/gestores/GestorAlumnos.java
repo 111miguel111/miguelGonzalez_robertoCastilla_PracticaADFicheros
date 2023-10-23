@@ -152,7 +152,7 @@ public class GestorAlumnos {
 		if (alumno != null) {
 			HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 			for (HashMap.Entry<String, Alumno> entry : alumnos.entrySet()) {
-				if (entry.equals(alumno)) {
+				if (entry.getValue().equals(alumno)) {
 					boolean check = true;
 					System.out.println("Se ha encontrado el alumno: " + alumno.toString());
 					do {
