@@ -7,6 +7,7 @@ public class Menu {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Inicio del programa.");
+		GestorDatos.setContadores();
 		boolean check = true;
 		do {
 			System.out.println("Seleccione con que desea trabajar:\n1.Alumnos\n2.Profesores\n3.Cursos\n0.Salir");
