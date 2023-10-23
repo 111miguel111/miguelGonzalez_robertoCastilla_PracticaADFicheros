@@ -130,13 +130,13 @@ public class Curso implements Serializable{
 	}
 	public String toStringDatos() {
 		if(!(this.alumnos.isEmpty()&&this.profesor==null)) {
-			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+ getAlumnosStringDatos() +"\n"+ getProfesorStringDatos() ;
+			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+ getAlumnosStringDatos() +"\n"+ getProfesorStringDatos() + "\n";
 		}else if(this.alumnos.isEmpty()&&this.profesor!=null) {
-			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+"\n"+ getProfesorStringDatos() ;
+			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+"\n"+ getProfesorStringDatos() + "\n";
 		}else if(!this.alumnos.isEmpty()&&this.profesor==null) {
-			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+ getAlumnosStringDatos() + "\n";
+			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+ getAlumnosStringDatos() + "\n" + "\n";
 		}else{
-			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+"\n";
+			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+"\n"+"\n";
 		}
 	}
 	

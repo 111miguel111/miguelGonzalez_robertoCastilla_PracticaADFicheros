@@ -83,7 +83,7 @@ public class GestorDatos {
 			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
 			try {
 
-				//Alumno.setCont((int) entrada.readInt());
+				// Alumno.setCont((int) entrada.readInt());
 				entrada.readInt();
 				// Se busca en el archivo el alumno hasta que lo encuentre o hasta que no queden
 				// mas
@@ -240,15 +240,15 @@ public class GestorDatos {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			System.out.println("Fichero vacio");
-			//e2.printStackTrace();
+			// e2.printStackTrace();
 		} finally {
 			try {
-				if(entrada!=null) {
+				if (entrada != null) {
 					entrada.close();
-				}				
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				// e.printStackTrace();
 				System.out.println("No se pudo cerrar el ObjectInputStream");
 			}
 		}
@@ -280,10 +280,10 @@ public class GestorDatos {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			System.out.println("Fichero vacio");
-			//e2.printStackTrace();
+			// e2.printStackTrace();
 		} finally {
 			try {
-				if (entrada!=null) {
+				if (entrada != null) {
 					entrada.close();
 				}
 			} catch (Exception e) {
@@ -316,7 +316,7 @@ public class GestorDatos {
 			BufferedWriter bw = new BufferedWriter(myWriter);
 
 			// Se escribe el contador estatico de cursos
-			// bw.write(Curso.getCont());
+			bw.write(Curso.getCont()+"\n");
 
 			// Se recorre la lista de cursos escribiendo cada valor de forma individual
 			for (Map.Entry<String, Curso> i : listaCursos.entrySet()) {
@@ -344,10 +344,12 @@ public class GestorDatos {
 	// Metodo que busca un curso
 	public static Curso buscarCurso(String nombre) {
 		Curso curso = null;
-		FileReader fr;
 		try {
-			fr = new FileReader(archivoCurso);
 			Scanner sc = new Scanner(archivoCurso);
+			//Saltar contador
+			if (sc.hasNextLine()) {
+				sc.nextLine();
+			}
 			while (sc.hasNextLine()) {
 				String cursoTexto = sc.nextLine();
 				String cursoAlum = sc.nextLine();
@@ -355,15 +357,19 @@ public class GestorDatos {
 				if (cursoTexto.split("¬")[1].equals(nombre)) {
 					curso = new Curso(cursoTexto.split("¬")[1], cursoTexto.split("¬")[2]);
 					curso.setCodigo(cursoTexto.split("¬")[0]);
-					curso.setProfesor(new Profesor(cursoProf.split("¬")[0], cursoProf.split("¬")[1],
-							cursoProf.split("¬")[2], cursoProf.split("¬")[3]));
+					if (cursoProf != "") {
+						curso.setProfesor(new Profesor(cursoProf.split("¬")[0], cursoProf.split("¬")[1],
+								cursoProf.split("¬")[2], cursoProf.split("¬")[3]));
+					}
 					HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
-					for (int i = 0; i < cursoAlum.split("¬").length; i++) {
-						listaAlum.put(cursoAlum.split("¬")[i] + "_" + cursoAlum.split("¬")[i + 1],
-								new Alumno(cursoAlum.split("¬")[i], cursoAlum.split("¬")[i + 1],
-										cursoAlum.split("¬")[i + 2], cursoAlum.split("¬")[i + 3],
-										cursoAlum.split("¬")[+4]));
-						i += 5;
+					if (cursoAlum != "") {
+						for (int i = 0; i < cursoAlum.split("¬").length; i++) {
+							listaAlum.put(cursoAlum.split("¬")[i] + "_" + cursoAlum.split("¬")[i + 1],
+									new Alumno(cursoAlum.split("¬")[i], cursoAlum.split("¬")[i + 1],
+											cursoAlum.split("¬")[i + 2], cursoAlum.split("¬")[i + 3],
+											cursoAlum.split("¬")[+4]));
+							i += 5;
+						}
 					}
 					curso.setAlumnos(listaAlum);
 					sc.close();
@@ -381,36 +387,38 @@ public class GestorDatos {
 
 	public static HashMap<String, Curso> getListaCursos() {
 		HashMap<String, Curso> listaCurso = new HashMap<String, Curso>();
-		FileReader fr;
 		try {
-			fr = new FileReader(archivoCurso);
 			Scanner sc = new Scanner(archivoCurso);
+			//Saltar contador
 			if (sc.hasNextLine()) {
-				String contador = sc.nextLine();
-				if (Utiles.esDigito(contador)) {
-					Curso.setCont(Integer.parseInt(contador));
-				} else {
-					Curso.setCont(0);
-				}
+				sc.nextLine();
 			}
+			// Aqui estaba sumando contador
 			while (sc.hasNextLine()) {
 				String cursoTexto = sc.nextLine();
 				String cursoAlum = sc.nextLine();
 				String cursoProf = sc.nextLine();
-				Curso curso = new Curso(cursoTexto.split("¬")[1], cursoTexto.split("¬")[2]);
-				curso.setCodigo(cursoTexto.split("¬")[0]);
-				curso.setProfesor(new Profesor(cursoProf.split("¬")[0], cursoProf.split("¬")[1],
-						cursoProf.split("¬")[2], cursoProf.split("¬")[3]));
-				HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
-				for (int i = 0; i < cursoAlum.split("¬").length; i++) {
-					listaAlum.put(cursoAlum.split("¬")[i] + "_" + cursoAlum.split("¬")[i + 1],
-							new Alumno(cursoAlum.split("¬")[i], cursoAlum.split("¬")[i + 1],
-									cursoAlum.split("¬")[i + 2], cursoAlum.split("¬")[i + 3],
-									cursoAlum.split("¬")[+4]));
-					i += 5;
+				if (cursoTexto != "") {
+					Curso curso = new Curso(cursoTexto.split("¬")[1], cursoTexto.split("¬")[2]);
+					curso.setCodigo(cursoTexto.split("¬")[0]);
+					if (cursoProf != "") {
+						curso.setProfesor(new Profesor(cursoProf.split("¬")[0], cursoProf.split("¬")[1],
+								cursoProf.split("¬")[2], cursoProf.split("¬")[3]));
+					}
+					HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
+					if (cursoAlum != "") {
+						for (int i = 0; i < cursoAlum.split("¬").length; i++) {
+							listaAlum.put(cursoAlum.split("¬")[i] + "_" + cursoAlum.split("¬")[i + 1],
+									new Alumno(cursoAlum.split("¬")[i], cursoAlum.split("¬")[i + 1],
+											cursoAlum.split("¬")[i + 2], cursoAlum.split("¬")[i + 3],
+											cursoAlum.split("¬")[+4]));
+							i += 5;
+						}
+					}
+
+					curso.setAlumnos(listaAlum);
+					listaCurso.put(curso.getNombre(), curso);
 				}
-				curso.setAlumnos(listaAlum);
-				listaCurso.put(curso.getNombre(), curso);
 			}
 			sc.close();
 		} catch (FileNotFoundException e1) {
@@ -425,18 +433,39 @@ public class GestorDatos {
 		alumFileCheck();
 		cursoFileCheck();
 		ObjectInputStream entrada = null;
+		Scanner sc = null;
 		try {
-			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
-			Alumno.setCont((int) entrada.readInt());
+			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
+			Alumno.setCont((int) entrada.readInt());			
 		} catch (IOException e) {
 			System.out.println("No se han podido cargar los contadores");
-		}finally {
-			if (entrada!=null) {
+		} finally {
+			if (entrada != null) {
 				try {
 					entrada.close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					//e.printStackTrace();
+					// e.printStackTrace();
+					System.out.println("Error al cerrar object input stream");
+				}
+			}
+		}
+		try {
+			sc = new Scanner(archivoCurso);
+			String contador = sc.nextLine();
+			if (Utiles.esDigito(contador)) {
+				Curso.setCont(Integer.parseInt(contador));
+			}
+			
+		} catch (IOException e) {
+			System.out.println("No se han podido cargar los contadores");
+		} finally {
+			if (entrada != null) {
+				try {
+					entrada.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					// e.printStackTrace();
 					System.out.println("Error al cerrar object input stream");
 				}
 			}
