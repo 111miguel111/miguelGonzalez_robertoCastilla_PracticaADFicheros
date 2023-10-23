@@ -116,7 +116,7 @@ public class GestorDatos {
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Esta en null el Object imput stream");
+				System.out.println("Esta en null el ObjectInputStream");
 			}
 		}
 		// Si no se encuentra al alumno se devuelve un null
@@ -239,13 +239,17 @@ public class GestorDatos {
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			System.out.println("Fichero vacio");
+			//e2.printStackTrace();
 		} finally {
 			try {
-				entrada.close();
-			} catch (IOException e) {
+				if(entrada!=null) {
+					entrada.close();
+				}				
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("No se pudo cerrar el ObjectInputStream");
 			}
 		}
 		// Si no se encuentra al profesor se devuelve un null
@@ -257,7 +261,7 @@ public class GestorDatos {
 		profFileCheck();
 		ObjectInputStream entrada = null;
 		try {
-			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
+			entrada = new ObjectInputStream(new FileInputStream(archivoProf));
 			try {
 				while (true) {
 					Profesor profesor = (Profesor) entrada.readObject();
@@ -275,13 +279,16 @@ public class GestorDatos {
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			System.out.println("Fichero vacio");
+			//e2.printStackTrace();
 		} finally {
 			try {
-				entrada.close();
-			} catch (IOException e) {
+				if (entrada!=null) {
+					entrada.close();
+				}
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("No se pudo cerrar el ObjectInputStream");
 			}
 		}
 		return listaProf;
