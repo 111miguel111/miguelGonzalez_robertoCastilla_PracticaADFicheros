@@ -113,16 +113,15 @@ public class GestorProfesores {
 		String telefonoProfesor = null;
 		Profesor profesor = buscarProfesor();
 		Profesor profesor2 = null;
-		Profesor profesor3 = profesor;
+		Profesor profesor3 = new Profesor(profesor.getNombre(),profesor.getDni(),profesor.getDireccion(),profesor.getTelefono());
 		if (profesor != null) {
 			HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
-			for (HashMap.Entry<String, Profesor> entry : profesores.entrySet()) {
-				if (entry.getValue().equals(profesor)) {
+			
 					boolean check = true;
 					System.out.println("Se ha encontrado el profesor: " + profesor.toString());
 					do {
 						System.out.println(
-								"Que desea modificar?\nNombre 1\nDNI 2\nDireccion 3\nTelefono 4\nTodo 5\n Salir 0");
+								"Que desea modificar?\n1.Nombre \n2.DNI \n3.Direccion \n4.Telefono \n5.Todo \n0.Salir ");
 						String opcion = Utiles.scanNumero();
 						switch (opcion) {
 						case "1":
@@ -154,7 +153,7 @@ public class GestorProfesores {
 							break;
 						case "4":
 							System.out.println("Introduzca el telefono del profesor");
-							telefonoProfesor = Utiles.scanNumero();
+							telefonoProfesor = Utiles.scanTelefono();
 							if (telefonoProfesor != null) {
 								profesor3.setTelefono(telefonoProfesor);
 							}
@@ -172,7 +171,7 @@ public class GestorProfesores {
 										direccionProfesor = Utiles.scanTodoTrim();
 										if (direccionProfesor != null) {
 											System.out.println("Introduzca el telefono del profesor");
-											telefonoProfesor = Utiles.scanNumero();
+											telefonoProfesor = Utiles.scanTelefono();
 											if (telefonoProfesor != null) {
 												profesor3.setNombre(nombreProfesor);
 												profesor3.setDni(dniProfesor);
@@ -194,19 +193,14 @@ public class GestorProfesores {
 							System.out.println("Valor no valido.");
 						}
 					} while (check);
-					if (!(profesor.getDni().equals(profesor3.getDni()))) {
-						profesores.get(profesor.getDni()).setNombre(profesor3.getNombre());
-						profesores.get(profesor.getDni()).setDni(profesor3.getDni());
-						profesores.get(profesor.getDni()).setDireccion(profesor3.getDireccion());
-						profesores.get(profesor.getDni()).setTelefono(profesor3.getTelefono());
+						
 						if (Utiles.confirmarAccion() == null) {
+							profesores.get(profesor.getDni()).setNombre(profesor3.getNombre());
+							profesores.get(profesor.getDni()).setDni(profesor3.getDni());
+							profesores.get(profesor.getDni()).setDireccion(profesor3.getDireccion());
+							profesores.get(profesor.getDni()).setTelefono(profesor3.getTelefono());
 							GestorDatos.escribirTodosProf(profesores);
 						}
-					} else {
-						System.out.println("El DNI coincide con el de otro profesor, porfavor cambie el DNI");
-					}
-				}
-			}
 		}
 	}
 
@@ -214,7 +208,7 @@ public class GestorProfesores {
 		// busco alumno y si no existe devuelve null
 		Profesor profesor = GestorDatos.buscarProf(dniProfesor);
 		if (profesor == null) {
-			System.out.println("El profesor no existe siga introcuciendo datos");
+			System.out.println("El profesor no existe, siga introcuciendo datos");
 		} else {
 			System.out.println("Se ha encontrado un profesor con el mismo dni");
 		}
@@ -233,7 +227,7 @@ public class GestorProfesores {
 				if (dniProfesro != null) {
 					profesor = GestorDatos.buscarProf(dniProfesro);
 					if (profesor == null) {
-						System.out.println("No se ha encontrado el profesor vuelva a introducir los datos");
+						System.out.println("No se ha encontrado el profesor, vuelva a introducir los datos");
 						check = false;
 					} else {
 						System.out.println("Se ha encontrado el profesor");
@@ -263,7 +257,7 @@ public class GestorProfesores {
 				if (nombreCurso != null) {
 					curso = GestorDatos.buscarCurso(nombreCurso);
 					if (curso == null) {
-						System.out.println("No se ha encontrado el curso vuelva a introducir los datos");
+						System.out.println("No se ha encontrado el curso, vuelva a introducir los datos");
 						check = false;
 					} else {
 						System.out.println("Se ha encontrado el curso");

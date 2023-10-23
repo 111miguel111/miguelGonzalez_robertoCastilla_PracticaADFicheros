@@ -151,8 +151,6 @@ public class GestorAlumnos {
 		Alumno alumno3 = new Alumno(alumno.getNombre(),alumno.getApellidos(),alumno.getDireccion(),alumno.getTelefono(),alumno.getFechaNacimiento());
 		if (alumno != null) {
 			HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
-//			for (HashMap.Entry<String, Alumno> entry : alumnos.entrySet()) {
-//				if (entry.getValue().equals(alumno)) {
 					boolean check = true;
 					System.out.println("Se ha encontrado el alumno: " + alumno.toString());
 					do {
@@ -256,7 +254,6 @@ public class GestorAlumnos {
 							System.out.println("Valor no valido.");
 						}
 					} while (check);
-//					if (!(alumno.getNombre().equals(alumno3.getNombre())&& alumno.getApellidos().equals(alumno3.getApellidos()))) {
 						
 						if (Utiles.confirmarAccion() == null) {
 							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setNombre(alumno3.getNombre());
@@ -266,12 +263,6 @@ public class GestorAlumnos {
 							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setFechaNacimiento(alumno3.getFechaNacimiento());
 							GestorDatos.escribirTodosAlum(alumnos);
 						}
-//					} else {
-//						System.out.println(
-//								"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
-//					}
-//				}
-//			}
 		}
 
 	}
