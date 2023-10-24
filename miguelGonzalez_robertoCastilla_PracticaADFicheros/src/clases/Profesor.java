@@ -18,16 +18,12 @@ public class Profesor implements Serializable{
 		this.telefono=telefono;
 		this.cursos=new HashMap<String,Curso>();
 	}
-
-	
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(direccion, dni, nombre, telefono);
+		return Objects.hash(dni);
 	}
-
-
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -37,11 +33,8 @@ public class Profesor implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Profesor other = (Profesor) obj;
-		return Objects.equals(direccion, other.direccion) && Objects.equals(dni, other.dni)
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(telefono, other.telefono);
+		return Objects.equals(dni, other.dni);
 	}
-
-
 
 	public String getNombre() {
 		return nombre;

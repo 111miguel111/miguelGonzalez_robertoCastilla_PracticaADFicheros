@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import clases.Alumno;
@@ -459,6 +460,8 @@ public class GestorDatos {
 			
 		} catch (IOException e) {
 			System.out.println("No se han podido cargar los contadores");
+		} catch (NoSuchElementException e) {
+			System.out.println("Contador vacio");
 		} finally {
 			if (entrada != null) {
 				try {

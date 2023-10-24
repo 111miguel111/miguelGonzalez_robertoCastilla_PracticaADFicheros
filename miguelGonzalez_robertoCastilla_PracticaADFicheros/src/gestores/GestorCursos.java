@@ -43,7 +43,7 @@ public class GestorCursos {
 					HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 					HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
 					HashMap<String, Curso> cursosProfesor = profesor.getCursos();
-					if (cursosProfesor.containsValue(curso) && curso.getProfesor() == profesor) {
+					if (cursosProfesor.containsValue(curso) && curso.getProfesor().equals(profesor)) {
 						cursos.get(curso.getNombre()).setProfesor(null);
 						cursosProfesor.remove(curso.getNombre(), curso);
 						profesores.get(profesor.getDni()).setCursos(cursosProfesor);

@@ -111,7 +111,7 @@ public class Utiles {
 				}
 				// Print de confirmacion de error en la introduccion de datos
 				if (!check) {
-					System.out.println("Valor incorrecto, introduzca letras o espacios");
+					System.out.println("Valor incorrecto, introduzca solo numeros");
 				}
 				// Suma de contador de errores al final del bucle
 				errorCont++;
@@ -150,7 +150,7 @@ public class Utiles {
 				}
 				// Print de confirmacion de error en la introduccion de datos
 				if (!check) {
-					System.out.println("Valor incorrecto, introduzca letras o espacios");
+					System.out.println("Valor incorrecto, introduzca un numero de telefono");
 				}
 				// Suma de contador de errores al final del bucle
 				errorCont++;
@@ -200,7 +200,7 @@ public class Utiles {
 				}
 				// Print de confirmacion de error en la introduccion de datos
 				if (!check) {
-					System.out.println("Valor incorrecto, introduzca letras o espacios");
+					System.out.println("Valor incorrecto");
 				}
 				// Suma de contador de errores al final del bucle
 				errorCont++;
@@ -298,7 +298,7 @@ public class Utiles {
 				}
 				// Print de confirmacion de error en la introduccion de datos
 				if (!check) {
-					System.out.println("Valor incorrecto, introduzca letras o espacios");
+					System.out.println("Valor incorrecto, introduzca un dni");
 				}
 				// Suma de contador de errores al final del bucle
 				errorCont++;

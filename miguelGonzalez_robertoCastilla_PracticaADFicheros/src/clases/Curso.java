@@ -27,15 +27,11 @@ public class Curso implements Serializable{
 		alumnos=new HashMap<String,Alumno>();
 	}
 	
-	
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(alumnos, descripcion, nombre, profesor);
+		return Objects.hash(nombre);
 	}
-
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -45,12 +41,8 @@ public class Curso implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Curso other = (Curso) obj;
-		return Objects.equals(alumnos, other.alumnos) && Objects.equals(descripcion, other.descripcion)
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(profesor, other.profesor);
+		return Objects.equals(nombre, other.nombre);
 	}
-
-
-
 	public String getCodigo() {
 		return this.codigo;
 	}
@@ -118,7 +110,7 @@ public class Curso implements Serializable{
 	}
 	@Override
 	public String toString() {
-		if(!(this.alumnos.isEmpty()&&this.profesor==null)) {
+		if(!this.alumnos.isEmpty()&&this.profesor!=null) {
 			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + getProfesorString() + " ]";
 		}else if(this.alumnos.isEmpty()&&this.profesor!=null) {
 			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getProfesorString() + " ]";
@@ -129,7 +121,7 @@ public class Curso implements Serializable{
 		}
 	}
 	public String toStringDatos() {
-		if(!(this.alumnos.isEmpty()&&this.profesor==null)) {
+		if(!this.alumnos.isEmpty()&&this.profesor!=null) {
 			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+ getAlumnosStringDatos() +"\n"+ getProfesorStringDatos() + "\n";
 		}else if(this.alumnos.isEmpty()&&this.profesor!=null) {
 			return codigo+ "¬" + nombre + "¬" + descripcion +"\n"+"\n"+ getProfesorStringDatos() + "\n";
