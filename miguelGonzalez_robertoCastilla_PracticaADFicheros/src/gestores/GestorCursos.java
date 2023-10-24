@@ -191,9 +191,10 @@ public class GestorCursos {
 		String nombreCurso = null;
 		String descripcionCurso = null;
 		Curso curso = buscarCurso();
-		Curso curso2 = null;
-		Curso curso3 = curso;
 		if (curso != null) {
+		Curso curso2 = null;
+		Curso curso3 = new Curso(curso.getNombre(),curso.getDescripcion());
+		
 			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
 			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
 				if (entry.getValue().equals(curso)) {

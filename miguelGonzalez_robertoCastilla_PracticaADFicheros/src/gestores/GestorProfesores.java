@@ -112,9 +112,10 @@ public class GestorProfesores {
 		String direccionProfesor = null;
 		String telefonoProfesor = null;
 		Profesor profesor = buscarProfesor();
+		if (profesor != null) {
 		Profesor profesor2 = null;
 		Profesor profesor3 = new Profesor(profesor.getNombre(),profesor.getDni(),profesor.getDireccion(),profesor.getTelefono());
-		if (profesor != null) {
+		
 			HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 			
 					boolean check = true;

@@ -147,122 +147,126 @@ public class GestorAlumnos {
 		String telefonoAlum = null;
 		String fechaNacimientoAlum = null;
 		Alumno alumno = buscarAlumno();
-		Alumno alumno2 = null;
-		Alumno alumno3 = new Alumno(alumno.getNombre(),alumno.getApellidos(),alumno.getDireccion(),alumno.getTelefono(),alumno.getFechaNacimiento());
 		if (alumno != null) {
-			HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
-					boolean check = true;
-					System.out.println("Se ha encontrado el alumno: " + alumno.toString());
-					do {
-						System.out.println(
-								"Que desea modificar?\n1.Nombre \n2.Apellidos \n3.Direccion \n4.Telefono \n5.Fecha de nacimiento \n6.Todo \n0.Salir ");
-						String opcion = Utiles.scanNumero();
-						switch (opcion) {
-						case "1":
-							System.out.println("Introduzca el nombre del alumno");
-							nombreAlum = Utiles.scanPalabras();
-							if (nombreAlum != null) {
-								if (apellidosAlum != null) {
-									alumno2 = confirmarInexistenciaAlumno(nombreAlum, apellidosAlum);
-								} else {
-									alumno2 = confirmarInexistenciaAlumno(nombreAlum, alumno3.getApellidos());
-								}
-								if (alumno2 == null) {
-									alumno3.setNombre(nombreAlum);
-								} else {
-									System.out.println(
-											"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
-								}
+			Alumno alumno2 = null;
+			Alumno alumno3 = new Alumno(alumno.getNombre(), alumno.getApellidos(), alumno.getDireccion(),
+					alumno.getTelefono(), alumno.getFechaNacimiento());
+			
+				HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
+				boolean check = true;
+				System.out.println("Se ha encontrado el alumno: " + alumno.toString());
+				do {
+					System.out.println(
+							"Que desea modificar?\n1.Nombre \n2.Apellidos \n3.Direccion \n4.Telefono \n5.Fecha de nacimiento \n6.Todo \n0.Salir ");
+					String opcion = Utiles.scanNumero();
+					switch (opcion) {
+					case "1":
+						System.out.println("Introduzca el nombre del alumno");
+						nombreAlum = Utiles.scanPalabras();
+						if (nombreAlum != null) {
+							if (apellidosAlum != null) {
+								alumno2 = confirmarInexistenciaAlumno(nombreAlum, apellidosAlum);
+							} else {
+								alumno2 = confirmarInexistenciaAlumno(nombreAlum, alumno3.getApellidos());
 							}
-							break;
-						case "2":
+							if (alumno2 == null) {
+								alumno3.setNombre(nombreAlum);
+							} else {
+								System.out.println(
+										"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
+							}
+						}
+						break;
+					case "2":
+						System.out.println("Introduzca los apellidos del alumno");
+						apellidosAlum = Utiles.scanPalabras();
+						if (apellidosAlum != null) {
+							if (nombreAlum != null) {
+								alumno2 = confirmarInexistenciaAlumno(nombreAlum, apellidosAlum);
+							} else {
+								alumno2 = confirmarInexistenciaAlumno(alumno3.getNombre(), apellidosAlum);
+							}
+							if (alumno2 == null) {
+								alumno3.setApellidos(apellidosAlum);
+							} else {
+								System.out.println(
+										"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
+							}
+						}
+						break;
+					case "3":
+						System.out.println("Introduzca la direccion del alumno");
+						direccionAlum = Utiles.scanTodoTrim();
+						if (direccionAlum != null) {
+							alumno3.setDireccion(direccionAlum);
+						}
+						break;
+					case "4":
+						System.out.println("Introduzca el telefono del alumno");
+						telefonoAlum = Utiles.scanTelefono();
+						if (telefonoAlum != null) {
+							alumno3.setTelefono(telefonoAlum);
+						}
+						break;
+					case "5":
+						System.out.println("Introduzca la fecha de nacimiento del alumno");
+						fechaNacimientoAlum = Utiles.scanFecha();
+						if (fechaNacimientoAlum != null) {
+							alumno3.setFechaNacimiento(fechaNacimientoAlum);
+						}
+						break;
+					case "6":
+						System.out.println("Introduzca el nombre del alumno");
+						nombreAlum = Utiles.scanPalabras();
+						if (nombreAlum != null) {
 							System.out.println("Introduzca los apellidos del alumno");
 							apellidosAlum = Utiles.scanPalabras();
 							if (apellidosAlum != null) {
-								if (nombreAlum != null) {
-									alumno2 = confirmarInexistenciaAlumno(nombreAlum, apellidosAlum);
-								} else {
-									alumno2 = confirmarInexistenciaAlumno(alumno3.getNombre(), apellidosAlum);
-								}
+								alumno2 = confirmarInexistenciaAlumno(nombreAlum, apellidosAlum);
 								if (alumno2 == null) {
-									alumno3.setApellidos(apellidosAlum);
+									System.out.println("Introduzca la direccion del alumno");
+									direccionAlum = Utiles.scanTodoTrim();
+									if (direccionAlum != null) {
+										System.out.println("Introduzca el telefono del alumno");
+										telefonoAlum = Utiles.scanTelefono();
+										if (telefonoAlum != null) {
+											System.out.println("Introduzca la fecha de nacimiento del alumno");
+											fechaNacimientoAlum = Utiles.scanFecha();
+											if (fechaNacimientoAlum != null) {
+												alumno3.setNombre(nombreAlum);
+												alumno3.setApellidos(apellidosAlum);
+												alumno3.setDireccion(direccionAlum);
+												alumno3.setTelefono(telefonoAlum);
+												alumno3.setFechaNacimiento(fechaNacimientoAlum);
+
+											}
+										}
+									}
 								} else {
 									System.out.println(
 											"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
 								}
 							}
-							break;
-						case "3":
-							System.out.println("Introduzca la direccion del alumno");
-							direccionAlum = Utiles.scanTodoTrim();
-							if (direccionAlum != null) {
-								alumno3.setDireccion(direccionAlum);
-							}
-							break;
-						case "4":
-							System.out.println("Introduzca el telefono del alumno");
-							telefonoAlum = Utiles.scanTelefono();
-							if (telefonoAlum != null) {
-								alumno3.setTelefono(telefonoAlum);
-							}
-							break;
-						case "5":
-							System.out.println("Introduzca la fecha de nacimiento del alumno");
-							fechaNacimientoAlum = Utiles.scanFecha();
-							if (fechaNacimientoAlum != null) {
-								alumno3.setFechaNacimiento(fechaNacimientoAlum);
-							}
-							break;
-						case "6":
-							System.out.println("Introduzca el nombre del alumno");
-							nombreAlum = Utiles.scanPalabras();
-							if (nombreAlum != null) {
-								System.out.println("Introduzca los apellidos del alumno");
-								apellidosAlum = Utiles.scanPalabras();
-								if (apellidosAlum != null) {
-									alumno2 = confirmarInexistenciaAlumno(nombreAlum, apellidosAlum);
-									if (alumno2 == null) {
-										System.out.println("Introduzca la direccion del alumno");
-										direccionAlum = Utiles.scanTodoTrim();
-										if (direccionAlum != null) {
-											System.out.println("Introduzca el telefono del alumno");
-											telefonoAlum = Utiles.scanTelefono();
-											if (telefonoAlum != null) {
-												System.out.println("Introduzca la fecha de nacimiento del alumno");
-												fechaNacimientoAlum = Utiles.scanFecha();
-												if (fechaNacimientoAlum != null) {
-													alumno3.setNombre(nombreAlum);
-													alumno3.setApellidos(apellidosAlum);
-													alumno3.setDireccion(direccionAlum);
-													alumno3.setTelefono(telefonoAlum);
-													alumno3.setFechaNacimiento(fechaNacimientoAlum);
+						}
+						break;
+					case "0":
+						check = false;
+						break;
+					default:
+						System.out.println("Valor no valido.");
+					}
+				} while (check);
 
-												}
-											}
-										}
-									} else {
-										System.out.println(
-												"El nombre y apellido del alumno coinciden con los de otro alumno, porfavor cambie el apellido o el nombre");
-									}
-								}
-							}
-							break;
-						case "0":
-							check = false;
-							break;
-						default:
-							System.out.println("Valor no valido.");
-						}
-					} while (check);
-						
-						if (Utiles.confirmarAccion() == null) {
-							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setNombre(alumno3.getNombre());
-							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setApellidos(alumno3.getApellidos());
-							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setDireccion(alumno3.getDireccion());
-							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setTelefono(alumno3.getTelefono());
-							alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setFechaNacimiento(alumno3.getFechaNacimiento());
-							GestorDatos.escribirTodosAlum(alumnos);
-						}
+				if (Utiles.confirmarAccion() == null) {
+					alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setNombre(alumno3.getNombre());
+					alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setApellidos(alumno3.getApellidos());
+					alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setDireccion(alumno3.getDireccion());
+					alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setTelefono(alumno3.getTelefono());
+					alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos())
+							.setFechaNacimiento(alumno3.getFechaNacimiento());
+					GestorDatos.escribirTodosAlum(alumnos);
+				}
+			
 		}
 
 	}
