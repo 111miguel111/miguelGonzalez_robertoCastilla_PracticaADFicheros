@@ -1,0 +1,2 @@
+No permitir en vinculaciones y matriculaciones seguir si una de las listas esta vacia
+Al principio de vincular profesor te pide que metas profesor y curso
