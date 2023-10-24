@@ -256,6 +256,10 @@ public class Utiles {
 				try {
 					DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 					LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
+					if (fecha.isAfter(LocalDate.now())) {
+						check = false;
+						System.out.println("Esa fecha es el futuro por lo que no puede ser una fecha de nacimiento. Intentelo con otra fecha mas antigua.");
+					}
 				} catch (Exception e) {
 					// Print de confirmacion de error en la introduccion de datos
 					System.out.println("La fecha introducida no existe, intentelo otra vez");
