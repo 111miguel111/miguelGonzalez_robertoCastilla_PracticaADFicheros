@@ -279,7 +279,7 @@ public class Utiles {
 		return nombre;
 	}
 
-	// Escaneo de dni (9 numeros y letra)
+	// Escaneo de dni (8 numeros y letra)
 	static public String scanDni() {
 		String nombre;
 		boolean check = true;
@@ -287,13 +287,13 @@ public class Utiles {
 		do {
 			check = true;
 			if (errorCont < 5) {
-				System.out.println("Introduzca el dni (9 numeros y una letra)");
+				System.out.println("Introduzca el dni (8 numeros y una letra)");
 				nombre = sc.nextLine().trim().toUpperCase();
-				if (!nombre.isBlank() && nombre.length() == 10) {
+				if (!nombre.isBlank() && nombre.length() == 9) {
 					for (int i = 0; i < nombre.length(); i++) {
-						if (i <= 8 && !Character.isDigit(nombre.charAt(i))) {
+						if (i <= 7 && !Character.isDigit(nombre.charAt(i))) {
 							check = false;
-						} else if (i == 9 && !Character.isAlphabetic(nombre.charAt(i))) {
+						} else if (i == 8 && !Character.isAlphabetic(nombre.charAt(i))) {
 							check = false;
 						}
 					}
