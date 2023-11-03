@@ -223,7 +223,7 @@ public class GestorProfesores {
 		do {
 			check = true;
 			if (errorCont < 5) {
-				System.out.println("Introduzca el nombre del curso");
+				System.out.println("Introduzca el DNI del profesor");
 				String dniProfesro = Utiles.scanDni();
 				if (dniProfesro != null) {
 					profesor = GestorDatos.buscarProf(dniProfesro);
