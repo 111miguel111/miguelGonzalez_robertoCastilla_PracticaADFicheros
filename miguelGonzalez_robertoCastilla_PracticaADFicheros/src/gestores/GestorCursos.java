@@ -200,10 +200,12 @@ public class GestorCursos {
 		// si tiene el curso, lo quito ,se recorren ambos cosos recorro profesores y si
 		// alguno tiene el curso, lo elimino
 		// despues de eso elimino el curso
+		HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+		if(!cursos.isEmpty()) {
 		Curso curso = buscarCurso();
 		if (curso != null) {
 			System.out.println(curso.toString());
-			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+			cursos = GestorDatos.getListaCursos();
 
 			HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 			for (HashMap.Entry<String, Alumno> entry : alumnos.entrySet()) {
@@ -232,9 +234,15 @@ public class GestorCursos {
 				GestorDatos.escribirTodosCursos(cursos);
 			}
 		}
+		}else {
+			System.out.println("No hay cursos, porfavor crea alguno");
+		}
 	}
 
 	public static void modificarCurso() {
+		HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+		if(!cursos.isEmpty()) {
+	
 		String nombreCurso = null;
 		String descripcionCurso = null;
 		Curso curso = buscarCurso();
@@ -242,7 +250,7 @@ public class GestorCursos {
 		Curso curso2 = null;
 		Curso curso3 = new Curso(curso.getNombre(),curso.getDescripcion());
 		
-			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+			cursos = GestorDatos.getListaCursos();
 			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
 				if (entry.getValue().equals(curso)) {
 					boolean check = true;
@@ -308,6 +316,9 @@ public class GestorCursos {
 					}
 				}
 			}
+		}
+		}else {
+			System.out.println("No hay cursos, porfavor crea alguno");
 		}
 	}
 
@@ -433,9 +444,14 @@ public class GestorCursos {
 	}
 
 	public static void mostrarCurso() {
+		HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+		if(!cursos.isEmpty()) {
 		Curso curso = buscarCurso();
 		if (curso != null) {
 			System.out.println(curso.toString());
+		}
+		}else {
+			System.out.println("No hay cursos, porfavor crea alguno");
 		}
 	}
 

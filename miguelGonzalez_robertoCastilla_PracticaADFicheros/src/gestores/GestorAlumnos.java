@@ -138,10 +138,13 @@ public class GestorAlumnos {
 		// buscar alumno if not null pedir lista pedir lista cursos , borrar de cursos y
 		// borrar de la lista y mandar a
 		// escribir Alumnosssss y cursossss
+		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
+		if(!alumnos.isEmpty()) {
+		
 		Alumno alumno = buscarAlumno();
 		if (alumno != null) {
 			System.out.println(alumno.toString());
-			HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
+			alumnos = GestorDatos.getListaAlum();
 			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
 			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
 				HashMap<String, Alumno> alumnosCurso = cursos.get(entry.getKey()).getAlumnos();
@@ -158,12 +161,18 @@ public class GestorAlumnos {
 				GestorDatos.escribirTodosCursos(cursos);
 			}
 		}
+		}else {
+			System.out.println("No hay alumnos, crea algun alumno antes");
+		}
 
 	}
 
 	public static void modificarAlumno() {
 		// buscar alumno if not null pedir lista y modificar alumno de la lista y mandar
 		// a escribir Alumnosssss
+		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
+		if(!alumnos.isEmpty()) {
+		
 		String nombreAlum = null;
 		String apellidosAlum = null;
 		String direccionAlum = null;
@@ -175,7 +184,7 @@ public class GestorAlumnos {
 			Alumno alumno3 = new Alumno(alumno.getNombre(), alumno.getApellidos(), alumno.getDireccion(),
 					alumno.getTelefono(), alumno.getFechaNacimiento());
 			
-				HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
+				alumnos = GestorDatos.getListaAlum();
 				boolean check = true;
 				System.out.println("Se ha encontrado el alumno: " + alumno.toString());
 				do {
@@ -291,7 +300,9 @@ public class GestorAlumnos {
 				}
 			
 		}
-
+		}else {
+			System.out.println("No hay alumnos, crea algun alumno antes");
+		}
 	}
 
 	public static Alumno confirmarInexistenciaAlumno(String nombreAlum, String apellidosAlum) {
@@ -311,6 +322,7 @@ public class GestorAlumnos {
 		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
 		// mi mismo
 		// si no encuentra el alumno en 5 intentos te saca
+		
 		Alumno alumno = null;
 		boolean check = true;
 		int errorCont = 0;
@@ -374,9 +386,15 @@ public class GestorAlumnos {
 
 	public static void mostrarAlumno() {
 		// buscar alumno y si no es null printear
+		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
+		if(!alumnos.isEmpty()) {
+		
 		Alumno alumno = buscarAlumno();
 		if (alumno != null) {
 			System.out.println(alumno.toString());
+		}
+		}else {
+			System.out.println("No hay alumnos, crea algun alumno antes");
 		}
 	}
 

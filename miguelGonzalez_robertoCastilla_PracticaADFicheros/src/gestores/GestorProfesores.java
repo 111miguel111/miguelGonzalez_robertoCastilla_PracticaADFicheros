@@ -111,10 +111,12 @@ public class GestorProfesores {
 	}
 
 	public static void borrarProfesor() {
+		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
+		if(!profesores.isEmpty()) {
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
-			HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
+			profesores = GestorDatos.getListaProf();
 			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
 			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
 				Profesor profesorAux = entry.getValue().getProfesor();
@@ -128,9 +130,14 @@ public class GestorProfesores {
 				GestorDatos.escribirTodosCursos(cursos);
 			}
 		}
+		}else {
+			System.out.println("No hay profesores, porfavor crea alguno");
+		}
 	}
 
 	public static void modificarProfesor() {
+		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
+		if(!profesores.isEmpty()) {
 		String nombreProfesor = null;
 		String dniProfesor = null;
 		String direccionProfesor = null;
@@ -140,7 +147,7 @@ public class GestorProfesores {
 		Profesor profesor2 = null;
 		Profesor profesor3 = new Profesor(profesor.getNombre(),profesor.getDni(),profesor.getDireccion(),profesor.getTelefono());
 		
-			HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
+			profesores = GestorDatos.getListaProf();
 			
 					boolean check = true;
 					System.out.println("Se ha encontrado el profesor: " + profesor.toString());
@@ -227,6 +234,9 @@ public class GestorProfesores {
 							GestorDatos.escribirTodosProf(profesores);
 						}
 		}
+		}else {
+			System.out.println("No hay profesores, porfavor crea alguno");
+		}
 	}
 
 	public static Profesor confirmarInexistenciaProfesor(String dniProfesor) {
@@ -297,9 +307,15 @@ public class GestorProfesores {
 	}
 
 	public static void mostrarProfesor() {
+		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
+		if(!profesores.isEmpty()) {
+	
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
+		}
+		}else {
+			System.out.println("No hay profesores, porfavor crea alguno");
 		}
 	}
 
