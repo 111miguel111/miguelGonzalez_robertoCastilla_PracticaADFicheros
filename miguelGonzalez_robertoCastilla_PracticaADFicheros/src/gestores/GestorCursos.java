@@ -166,7 +166,8 @@ public class GestorCursos {
 				if (cursoAux != null) {
 					cursosAlum.remove(curso.getNombre(), curso);
 				}
-				alumnos.get(entry.getValue()).setCursos(cursosAlum);
+					alumnos.get(entry.getKey()).setCursos(cursosAlum);
+				
 			}
 
 			HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
@@ -176,7 +177,7 @@ public class GestorCursos {
 				if (cursoAux != null) {
 					cursosProfesor.remove(curso.getNombre(), curso);
 				}
-				profesores.get(entry.getValue()).setCursos(cursosProfesor);
+				profesores.get(entry.getKey()).setCursos(cursosProfesor);
 			}
 			if (Utiles.confirmarAccion() == null) {
 				cursos.remove(curso.getNombre());
