@@ -22,6 +22,9 @@ public class Menu {
 			case "3":
 				menuCurso();
 				break;
+			case "A":
+				String a = Utiles.scanTodoTrim();
+				System.out.println(a);
 			case "0":
 				check = false;
 				break;

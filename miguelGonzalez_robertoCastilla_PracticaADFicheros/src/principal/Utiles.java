@@ -15,7 +15,6 @@ public class Utiles {
 	static public String confirmarAccion() {
 		System.out.println("Seguro que quiere realizar la accion?\nSi o No");
 		String respuesta = scanPalabras().trim();
-		System.out.println(respuesta);
 		if (respuesta.equalsIgnoreCase("si")) {
 			respuesta = null;
 			System.out.println("Confirmacion aceptada , la accion se realizara");
@@ -43,7 +42,7 @@ public class Utiles {
 				// Input del usuario
 				nombre = sc.nextLine();
 				// Se comprueba si la cadena esta vacia
-				if (!nombre.isBlank()) {
+				if (!nombre.isBlank()&&!nombre.contains("¬")) {
 					// Split de la cadena en cada espacio para despues reducir el numero de espacios
 					// entre palabras a 1
 					String palabras[] = nombre.split(" ");
@@ -181,7 +180,7 @@ public class Utiles {
 				// Imput del usuario
 				nombre = sc.nextLine().trim();
 				// Se comprueba si la cadena esta vacia
-				if (!nombre.isBlank()) {
+				if (!nombre.isBlank()&&!nombre.contains("¬")) {
 					// Split de la cadena en cada espacio para despues reducir el numero de espacios
 					// entre palabras a 1
 					String palabras[] = nombre.split(" ");
