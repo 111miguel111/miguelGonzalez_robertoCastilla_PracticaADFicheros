@@ -21,7 +21,6 @@ public class Utiles {
 		} else {
 			System.out.println("Confirmacion denegada , la accion no se realizara");
 		}
-		System.out.println(respuesta);
 		return respuesta;
 	}
 
