@@ -9,6 +9,12 @@ import gestores.*;
 
 public class GestorProfesores {
 	public static void vincularProfesor() {
+		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
+		if(!profesores.isEmpty()) {
+			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+			if(!cursos.isEmpty()) {
+				
+			
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -16,8 +22,8 @@ public class GestorProfesores {
 			if (curso != null) {
 				System.out.println(curso.toString());
 				if (profesor != null && curso != null) {
-					HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
-					HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+					profesores = GestorDatos.getListaProf();
+					cursos = GestorDatos.getListaCursos();
 					HashMap<String, Curso> cursosProfesor = profesor.getCursos();
 					if (!(cursosProfesor.containsValue(curso) && curso.getProfesor() == profesor)) {
 						cursos.get(curso.getNombre()).setProfesor(profesor);
@@ -32,9 +38,21 @@ public class GestorProfesores {
 				}
 			}
 		}
+			}else {
+				System.out.println("No hay cursos, porfavor crea alguno");
+			}
+		}else {
+			System.out.println("No hay profesores, porfavor crea alguno");
+		}
 	}
 
 	public static void desvincularProfesor() {
+		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
+		if(!profesores.isEmpty()) {
+			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+			if(!cursos.isEmpty()) {
+				
+			
 		Profesor profesor = buscarProfesor();
 		if (profesor != null) {
 			System.out.println(profesor.toString());
@@ -42,8 +60,8 @@ public class GestorProfesores {
 			if (curso != null) {
 				System.out.println(curso.toString());
 				if (profesor != null && curso != null) {
-					HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
-					HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+					profesores = GestorDatos.getListaProf();
+					cursos = GestorDatos.getListaCursos();
 					HashMap<String, Curso> cursosProfesor = profesor.getCursos();
 					if (cursosProfesor.containsValue(curso) && curso.getProfesor().equals(profesor)) {
 						cursos.get(curso.getNombre()).setProfesor(null);
@@ -57,6 +75,12 @@ public class GestorProfesores {
 					}
 				}
 			}
+		}
+			}else {
+				System.out.println("No hay cursos, por lo que no hay nada que desvincular");
+			}
+		}else {
+			System.out.println("No hay profesores, por lo que no hay nadie vinculado");
 		}
 	}
 
