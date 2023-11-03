@@ -42,13 +42,13 @@ public class Utiles {
 				// Input del usuario
 				nombre = sc.nextLine();
 				// Se comprueba si la cadena esta vacia
-				if (!nombre.isBlank()&&!nombre.contains("¬")) {
+				if (!nombre.isBlank() && !nombre.contains("¬")) {
 					// Split de la cadena en cada espacio para despues reducir el numero de espacios
 					// entre palabras a 1
 					String palabras[] = nombre.split(" ");
 					String aux = "";
 					for (int i = 0; i < palabras.length; i++) {
-						if (i == palabras.length-1) {
+						if (i == palabras.length - 1) {
 							aux += palabras[i].trim();
 						} else {
 							aux += palabras[i].trim() + " ";
@@ -180,19 +180,16 @@ public class Utiles {
 				// Imput del usuario
 				nombre = sc.nextLine().trim();
 				// Se comprueba si la cadena esta vacia
-				if (!nombre.isBlank()&&!nombre.contains("¬")) {
-					// Split de la cadena en cada espacio para despues reducir el numero de espacios
-					// entre palabras a 1
-					String palabras[] = nombre.split(" ");
-					String aux = "";
-					for (int i = 0; i < palabras.length; i++) {
-						if (i == palabras.length-1) {
-							aux += palabras[i].trim();
-						} else {
-							aux += palabras[i].trim() + " ";
+				if (!nombre.isBlank() && !nombre.contains("¬")) {
+					// Replace en la cadena en cada doble espacio para reducir el numero de espacios entre palabras a 1
+					boolean space = true;
+					while (space) {
+						if (nombre.contains("  ")) {
+							nombre = nombre.replaceAll("  ", " ");
+						}else {
+							space = false;
 						}
 					}
-					nombre = aux;
 				} else {
 					// cambio por cadena vacia
 					check = false;
@@ -257,7 +254,8 @@ public class Utiles {
 					LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
 					if (fecha.isAfter(LocalDate.now())) {
 						check = false;
-						System.out.println("Esa fecha es el futuro por lo que no puede ser una fecha de nacimiento. Intentelo con otra fecha mas antigua.");
+						System.out.println(
+								"Esa fecha es el futuro por lo que no puede ser una fecha de nacimiento. Intentelo con otra fecha mas antigua.");
 					}
 				} catch (Exception e) {
 					// Print de confirmacion de error en la introduccion de datos

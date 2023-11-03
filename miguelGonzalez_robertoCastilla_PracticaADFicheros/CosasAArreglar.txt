@@ -1,7 +1,4 @@
 No permitir en vinculaciones y matriculaciones seguir si una de las listas esta vacia
-Al principio de vincular profesor te pide que metas profesor y curso quitar el print de curso
-Trim no fufa en utiles scanTodo y no esta limitado para que no meta ¬
-Comprobar contadores
-despues de confirmar la modificacion de un alumno printea null, mirar, no es algo malo
-al matricular y vincular que te informe de ello
+Trim no fufa en utiles scanTodo
+Comprobar contadores despues de confirmar la modificacion de un alumno printea null, mirar, no es algo malo al matricular y vincular que te informe de ello
 peta gestor cursos al eliminar un curso que esta con alumnos y profesores----------------------
