@@ -1,3 +1,1 @@
-No permitir en vinculaciones y matriculaciones seguir si una de las listas esta vacia---------comprobar
-Trim no fufa en utiles scanTodo
-peta gestor cursos al eliminar un curso que esta con alumnos y profesores----------------------comprobar
+informar que un curso a sido matriculado / vinculado
