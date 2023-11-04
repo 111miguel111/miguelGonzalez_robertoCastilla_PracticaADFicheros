@@ -42,18 +42,15 @@ public class Utiles {
 				nombre = sc.nextLine();
 				// Se comprueba si la cadena esta vacia
 				if (!nombre.isBlank() && !nombre.contains("¬")) {
-					// Split de la cadena en cada espacio para despues reducir el numero de espacios
-					// entre palabras a 1
-					String palabras[] = nombre.split(" ");
-					String aux = "";
-					for (int i = 0; i < palabras.length; i++) {
-						if (i == palabras.length - 1) {
-							aux += palabras[i].trim();
-						} else {
-							aux += palabras[i].trim() + " ";
+					// Replace en la cadena en cada doble espacio para reducir el numero de espacios entre palabras a 1
+					boolean space = true;
+					while (space) {
+						if (nombre.contains("  ")) {
+							nombre = nombre.replaceAll("  ", " ");
+						}else {
+							space = false;
 						}
 					}
-					nombre = aux;
 					// Se comprueba que la frase no tenga numeros
 					check = !esDigito(nombre);
 				} else {
