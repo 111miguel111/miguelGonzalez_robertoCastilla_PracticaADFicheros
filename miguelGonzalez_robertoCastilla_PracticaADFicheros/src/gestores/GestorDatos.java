@@ -84,7 +84,6 @@ public class GestorDatos {
 			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
 			try {
 
-				// Alumno.setCont((int) entrada.readInt());
 				entrada.readInt();
 				// Se busca en el archivo el alumno hasta que lo encuentre o hasta que no queden
 				// mas
