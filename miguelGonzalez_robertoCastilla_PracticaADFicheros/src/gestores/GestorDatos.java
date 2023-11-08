@@ -56,6 +56,7 @@ public class GestorDatos {
 		try {
 			FileOutputStream fileOut = new FileOutputStream(archivoAlum);
 			ObjectOutputStream salida = new ObjectOutputStream(fileOut);
+			
 			// Se escribe el contador de alumnos
 			salida.writeInt(Alumno.getCont());
 			// Se recorre la lista de alumnos y se escriben todos
@@ -65,6 +66,7 @@ public class GestorDatos {
 			// Se cierran el fileOutput y el object output
 			salida.close();
 			fileOut.close();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error al escribir el archivo");
@@ -123,6 +125,7 @@ public class GestorDatos {
 		return alumno;
 	}
 
+	//Metodo que devuelve una lista de alumnos
 	public static HashMap<String, Alumno> getListaAlum() {
 		HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
 		alumFileCheck();
@@ -130,7 +133,6 @@ public class GestorDatos {
 		try {
 			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
 			try {
-				// Alumno.setCont((int)entrada.readInt());
 				entrada.readInt();
 				while (true) {
 					Alumno alumno = (Alumno) entrada.readObject();
