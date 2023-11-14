@@ -29,7 +29,9 @@ public class GestorDatos {
 
 	// Metodos de alumno -------------------------------------------------
 
-	// Comprueba si existe el archivo de alumnos y si no existe lo crea
+	/**
+	 * Metodo que comprueba si existe el archivo de alumnos y si no existe lo crea
+	 */
 	public static void alumFileCheck() {
 		if (!archivoAlum.exists()) {
 			try {
@@ -41,7 +43,10 @@ public class GestorDatos {
 		}
 	}
 
-	// Metodo para escribir un alumno
+	/**
+	 * Metodo para escribir un alumno
+	 * @param alumno Alumno a escribir
+	 */
 	public static void escribirAlum(Alumno alumno) {
 		// Se trae la lista y se le agrega el alumno nuevo para enviarlo a escribir la
 		// lista entera
@@ -50,7 +55,10 @@ public class GestorDatos {
 		escribirTodosAlum(listaAlum);
 	}
 
-	// Metodo para escribir todos los alumnos
+	/**
+	 * Metodo para escribir todos los alumnos
+	 * @param listaAlum HashMap con todos los alumnos
+	 */
 	public static void escribirTodosAlum(HashMap<String, Alumno> listaAlum) {
 		// En un try se crea el file output y el object output
 		try {
@@ -73,7 +81,12 @@ public class GestorDatos {
 		}
 	}
 
-	// Metodo que busca un alumno
+	/**
+	 * Metodo que busca un alumno
+	 * @param nombre String del nombre del alumno
+	 * @param apellidos String de los apellidos del alumno
+	 * @return Alumno deseado o null si no lo encuentra
+	 */
 	public static Alumno buscarAlum(String nombre, String apellidos) {
 		// Se define un alumno en el que guardaremos el alumno deseado
 		Alumno alumno = null;
@@ -125,7 +138,10 @@ public class GestorDatos {
 		return alumno;
 	}
 
-	//Metodo que devuelve una lista de alumnos
+	/**
+	 * Metodo que devuelve una lista de alumnos
+	 * @return Hashmap con todos los alumnos
+	 */
 	public static HashMap<String, Alumno> getListaAlum() {
 		HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
 		alumFileCheck();
@@ -167,7 +183,9 @@ public class GestorDatos {
 
 	// Metodos profesores ------------------------------------------------
 
-	// Comprueba si existe el archivo de profesores y si no existe lo crea
+	/**
+	 * Metodo que comprueba si existe el archivo de profesores y si no existe lo crea
+	 */
 	public static void profFileCheck() {
 		if (!archivoProf.exists()) {
 			try {
@@ -179,7 +197,10 @@ public class GestorDatos {
 		}
 	}
 
-	// Metodo para escribir todos los profesores
+	/**
+	 * Metodo para escribir todos los profesores
+	 * @param listaProf HashMap con todos los profesores
+	 */
 	public static void escribirTodosProf(HashMap<String, Profesor> listaProf) {
 		// En un try se crea el file output y el object output
 		try {
@@ -198,7 +219,10 @@ public class GestorDatos {
 		}
 	}
 
-	// Metodo para escribir un profesor
+	/**
+	 * Metodo para escribir un profesor
+	 * @param profesor Profesor a escribir
+	 */
 	public static void escribirProf(Profesor profesor) {
 		// Se trae la lista y se le agrega el profesor nuevo para enviarlo a escribir la
 		// lista entera
@@ -207,7 +231,11 @@ public class GestorDatos {
 		escribirTodosProf(listaProf);
 	}
 
-	// Metodo que busca un profesor
+	/**
+	 * Metodo que busca un profesor
+	 * @param dni DNI del profesor a buscar
+	 * @return Profesor deseado o null si no lo encuentra
+	 */
 	public static Profesor buscarProf(String dni) {
 		// Se crea una variable para guardar el profesor
 		Profesor profesor = null;
@@ -258,6 +286,7 @@ public class GestorDatos {
 		return profesor;
 	}
 
+	//Metodo que busca todos los profesores
 	public static HashMap<String, Profesor> getListaProf() {
 		HashMap<String, Profesor> listaProf = new HashMap<String, Profesor>();
 		profFileCheck();
@@ -298,7 +327,9 @@ public class GestorDatos {
 
 	// Metodos cursos-----------------------------------------------------
 
-	// Comprueba si existe el archivo de cursos y si no existe lo crea
+	/**
+	 * Metodo que comprueba si existe el archivo de cursos y si no existe lo crea
+	 */
 	public static void cursoFileCheck() {
 		if (!archivoCurso.exists()) {
 			try {
@@ -310,7 +341,10 @@ public class GestorDatos {
 		}
 	}
 
-	// Metodo para escribir todos los cursos
+	/**
+	 * Metodo para escribir todos los cursos
+	 * @param listaCursos HashMap con todos los cursos
+	 */
 	public static void escribirTodosCursos(HashMap<String, Curso> listaCursos) {
 		// En un try se crean el printwriter y el bufferedwriter
 		try {
@@ -334,7 +368,10 @@ public class GestorDatos {
 		}
 	}
 
-	// Metodo para escribir un curso
+	/**
+	 * Metodo para escribir un curso
+	 * @param curso Curso a escribir
+	 */
 	public static void escribirCurso(Curso curso) {
 		// Se trae la lista y se le agrega el cursos nuevo para enviarlo a escribir la
 		// lista entera
@@ -343,7 +380,11 @@ public class GestorDatos {
 		escribirTodosCursos(listaCursos);
 	}
 
-	// Metodo que busca un curso
+	/**
+	 * Metodo que busca un curso
+	 * @param nombre String del nombre del curso
+	 * @return Curso deseado o null si no lo encuentra
+	 */
 	public static Curso buscarCurso(String nombre) {
 		Curso curso = null;
 		try {
@@ -386,7 +427,11 @@ public class GestorDatos {
 		return curso;
 
 	}
-
+	
+	/**
+	 * Metodo que devuelve un HashMap con todos los cursos
+	 * @return HashMap con todos los cursos
+	 */
 	public static HashMap<String, Curso> getListaCursos() {
 		HashMap<String, Curso> listaCurso = new HashMap<String, Curso>();
 		try {
@@ -431,6 +476,9 @@ public class GestorDatos {
 	}
 
 	// Otros-------------------------------------------
+	/**
+	 * Metodo para cargar los contadores de Alumno y Curso para numero de expediente y codigo respectivamente
+	 */
 	public static void setContadores() {
 		alumFileCheck();
 		cursoFileCheck();
