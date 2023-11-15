@@ -34,7 +34,6 @@ public class GestorDatos {
 			try {
 				archivoAlum.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Error al crear el archivo");
 			}
 		}
@@ -75,7 +74,6 @@ public class GestorDatos {
 			fileOut.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Error al escribir el archivo");
 		}
 	}
@@ -113,10 +111,7 @@ public class GestorDatos {
 
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Fin de lectura");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
@@ -124,7 +119,6 @@ public class GestorDatos {
 					entrada.close();
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Esta en null el ObjectInputStream");
 			}
 		}
@@ -154,13 +148,10 @@ public class GestorDatos {
 				listaAlum.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
-			// TODO Auto-generated catch block
 			System.out.println("Fichero vacio");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
@@ -168,7 +159,6 @@ public class GestorDatos {
 					entrada.close();
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				// e.printStackTrace();
 			}
 		}
@@ -186,7 +176,6 @@ public class GestorDatos {
 			try {
 				archivoProf.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Error al crear el archivo");
 			}
 		}
@@ -210,7 +199,6 @@ public class GestorDatos {
 			salida.close();
 			fileOut.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Error al escribir el archivo");
 		}
 	}
@@ -255,14 +243,11 @@ public class GestorDatos {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
-			// TODO Auto-generated catch block
 			System.out.println("Fichero vacio");
 			// e2.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
@@ -270,7 +255,6 @@ public class GestorDatos {
 					entrada.close();
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				// e.printStackTrace();
 				System.out.println("No se pudo cerrar el ObjectInputStream");
 			}
@@ -279,7 +263,10 @@ public class GestorDatos {
 		return profesor;
 	}
 
-	// Metodo que busca todos los profesores
+	/**
+	 *  Metodo que busca todos los profesores
+	 * @return HashMap con todos los profesores en el archivo
+	 */
 	public static HashMap<String, Profesor> getListaProf() {
 		HashMap<String, Profesor> listaProf = new HashMap<String, Profesor>();
 		profFileCheck();
@@ -292,14 +279,11 @@ public class GestorDatos {
 				listaProf.put(profesor.getDni(), profesor);
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
-			// TODO Auto-generated catch block
 			System.out.println("Fichero vacio");
 			// e2.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
@@ -307,7 +291,6 @@ public class GestorDatos {
 					entrada.close();
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				System.out.println("No se pudo cerrar el ObjectInputStream");
 			}
 		}
@@ -324,7 +307,6 @@ public class GestorDatos {
 			try {
 				archivoCurso.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Error al crear el archivo");
 			}
 		}
@@ -421,8 +403,8 @@ public class GestorDatos {
 			}
 			sc.close();
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println("No se ha encontrado el archivo");
+			//e1.printStackTrace();
 		}
 		return curso;
 
@@ -476,7 +458,6 @@ public class GestorDatos {
 			}
 			sc.close();
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			//e1.printStackTrace();
 			System.out.println("No se ha encontrado el archivo");
 		}
@@ -484,6 +465,7 @@ public class GestorDatos {
 	}
 
 	// Otros-------------------------------------------
+	
 	/**
 	 * Metodo para cargar los contadores de Alumno y Curso para numero de expediente
 	 * y codigo respectivamente
@@ -506,7 +488,6 @@ public class GestorDatos {
 				try {
 					entrada.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					// e.printStackTrace();
 					System.out.println("Error al cerrar object input stream");
 				}
@@ -530,7 +511,6 @@ public class GestorDatos {
 				try {
 					entrada.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					// e.printStackTrace();
 					System.out.println("Error al cerrar object input stream");
 				}

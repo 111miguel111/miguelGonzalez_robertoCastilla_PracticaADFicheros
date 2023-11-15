@@ -32,7 +32,7 @@ public class Menu {
 		System.out.println("Fin del programa");
 	}
 
-	public static void menuAlumno() {
+	private static void menuAlumno() {
 		boolean check = true;
 		do {
 			System.out.println("Seleccione con que opcion de alumnos desea trabajar:\n1.Crear Alumno\n2.Borrar Alumno\n3.Modificar Alumno\n4.Matricular Alumno"
@@ -69,7 +69,7 @@ public class Menu {
 		} while (check);
 	}
 	
-	public static void menuCurso() {
+	private static void menuCurso() {
 		boolean check = true;
 		do {
 			System.out.println("Seleccione con que opcion de cursos desea trabajar:\n1.Crear Curso\n2.Borrar Curso\n3.Modificar Curso\n4.Matricular Alumno"
@@ -111,7 +111,7 @@ public class Menu {
 			}
 		} while (check);
 	}
-	public static void menuProfesor() {
+	private static void menuProfesor() {
 		boolean check = true;
 		do {
 			System.out.println("Seleccione con que opcion de profesores desea trabajar:\n1.Crear Profesor\n2.Borrar Profesor\n3.Modificar Profesor\n4.Vincular Curso"
