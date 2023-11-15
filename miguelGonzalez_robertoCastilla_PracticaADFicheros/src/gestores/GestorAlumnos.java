@@ -6,12 +6,10 @@ import principal.*;
 import gestores.*;
 
 public class GestorAlumnos {
-
+	/**
+	 * Este metodo se encarga de matricular un alumno a un curso y viceversa
+	 */
 	public static void matricularAlumno() {
-		// buscar alumno , buscar curso , if ambos not null pido lista alumnos ,lista
-		// cursos ,elimino el alumno de la lista de alumnos de los cursos, mopdifico
-		// ambas listas y las mando a sus metodos de datos pa
-		// serializar
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 		if(!alumnos.isEmpty()) {
 			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
@@ -34,7 +32,7 @@ public class GestorAlumnos {
 						cursosAlum.put(curso.getNombre(), curso);
 						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 						GestorDatos.escribirTodosAlum(alumnos);
-
+						System.out.println("El alumno: "+alumno.getNombre()+" ha sido matriculado en el curso: "+curso.getNombre());
 						alumnosCurso.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 						cursos.get(curso.getNombre()).setAlumnos(alumnosCurso);
 						GestorDatos.escribirTodosCursos(cursos);
@@ -52,11 +50,10 @@ public class GestorAlumnos {
 			System.out.println("No hay alumnos, crea algun alumno antes");
 		}
 	}
-
+	/**
+	 * Este metodo se encarga de desmatricular un alumno a un curso y viceversa
+	 */
 	public static void desmatricularAlumno() {
-		// buscar alumno, buscar curso if not null pedir lista y desmatricular de las
-		// listas y mandar a
-		// escribir Alumnosssss y cursosssss
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 		if(!alumnos.isEmpty()) {
 			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
@@ -81,7 +78,7 @@ public class GestorAlumnos {
 
 						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 						GestorDatos.escribirTodosAlum(alumnos);
-
+						System.out.println("El alumno: "+alumno.getNombre()+" ha sido desmatriculado del curso: "+curso.getNombre());
 						alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 						cursos.get(curso.getNombre()).setAlumnos(alumnosCurso);
 						GestorDatos.escribirTodosCursos(cursos);
@@ -99,10 +96,10 @@ public class GestorAlumnos {
 			System.out.println("No hay alumnos, por lo que no hay nada que desmatricular");
 		}
 	}
-
+	/**
+	 * Este metodo se encarga de crear y confirmar que no existe un alumno
+	 */
 	public static void crearAlumno() {
-		// busco alumno if null pido el resto de datos y mando alumno a datos para que
-		// se añada
 		Alumno alumno = null;
 		System.out.println("Introduzca el nombre del alumno");
 		String nombreAlum = Utiles.scanPalabras();
@@ -133,11 +130,10 @@ public class GestorAlumnos {
 			}
 		}
 	}
-
+	/**
+	 * Este metodo se encarga de borrar un alumno y todas sus relaciones
+	 */
 	public static void borrarAlumno() {
-		// buscar alumno if not null pedir lista pedir lista cursos , borrar de cursos y
-		// borrar de la lista y mandar a
-		// escribir Alumnosssss y cursossss
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 		if(!alumnos.isEmpty()) {
 		
@@ -166,10 +162,10 @@ public class GestorAlumnos {
 		}
 
 	}
-
+	/**
+	 * Este metodo se encarga de buscar un alumno y te permite modificar todos los datos que quieras hasta que desees salir
+	 */
 	public static void modificarAlumno() {
-		// buscar alumno if not null pedir lista y modificar alumno de la lista y mandar
-		// a escribir Alumnosssss
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 		if(!alumnos.isEmpty()) {
 		
@@ -304,7 +300,12 @@ public class GestorAlumnos {
 			System.out.println("No hay alumnos, crea algun alumno antes");
 		}
 	}
-
+	/**
+	 * Este metodo se encarga de confirmar que un alumno no existe, para poder crearlo
+	 * @param nombreAlum Es la clave que va a comprobar si esta en la lista de alumnos
+	 *@param apellidosAlum Es la otra parte de la clave que va a comprobar si esta en la lista de alumnos
+	 * @return En el caso de encontrar un alumno con la misma clave lo devuelve y si no existe devuelve null
+	 */
 	public static Alumno confirmarInexistenciaAlumno(String nombreAlum, String apellidosAlum) {
 		// busco alumno y si no existe devuelve null
 		Alumno alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
@@ -316,12 +317,11 @@ public class GestorAlumnos {
 
 		return alumno;
 	}
-
+	/**
+	 * Este metodo se encarga de buscar un alumno y si este existe lo devuelve si no devuelve null
+	 * @return Devuelve un alumno si lo encuentra y si no null
+	 */
 	public static Alumno buscarAlumno() {
-		// mandar nombre y apellido a datos , si me devuelve null me devuelvo null pa
-		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
-		// mi mismo
-		// si no encuentra el alumno en 5 intentos te saca
 		
 		Alumno alumno = null;
 		boolean check = true;
@@ -352,12 +352,11 @@ public class GestorAlumnos {
 
 		return alumno;
 	}
-
+	/**
+	 * Este metodo se encarga de buscar un curso y si este existe lo devuelve si no devuelve null
+	 * @return Devuelve un curso si lo encuentra y si no null
+	 */
 	public static Curso buscarCurso() {
-		// mandar nombre y apellido a datos , si me devuelve null me devuelvo null pa
-		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
-		// mi mismo
-		// si no encuentra el curso en 5 intentos te saca
 		Curso curso = null;
 
 		boolean check = true;
@@ -383,9 +382,10 @@ public class GestorAlumnos {
 		} while (!check);
 		return curso;
 	}
-
+	/**
+	 * Muestra los datos de un alumno que es buscado
+	 */
 	public static void mostrarAlumno() {
-		// buscar alumno y si no es null printear
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 		if(!alumnos.isEmpty()) {
 		
@@ -397,9 +397,10 @@ public class GestorAlumnos {
 			System.out.println("No hay alumnos, crea algun alumno antes");
 		}
 	}
-
+	/**
+	 * Muestra los datos de todos los alumnos
+	 */
 	public static void mostrarAlumnos() {
-		// pedir lista alumnos printear lista alumnos
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 		for (HashMap.Entry<String, Alumno> entry : alumnos.entrySet()) {
 			System.out.println(entry.getValue().toString());

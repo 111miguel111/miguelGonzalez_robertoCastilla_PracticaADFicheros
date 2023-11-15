@@ -8,6 +8,9 @@ import principal.*;
 import gestores.*;
 
 public class GestorProfesores {
+	/**
+	 * Este metodo se encarga de vincular un profesor a un curso y viceversa
+	 */
 	public static void vincularProfesor() {
 		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 		if(!profesores.isEmpty()) {
@@ -29,6 +32,7 @@ public class GestorProfesores {
 						cursos.get(curso.getNombre()).setProfesor(profesor);
 						cursosProfesor.put(curso.getNombre(), curso);
 						profesores.get(profesor.getDni()).setCursos(cursosProfesor);
+						System.out.println("El profesor: "+profesor.getDni()+" ha sido vinculado al curso: "+curso.getNombre());
 						GestorDatos.escribirTodosProf(profesores);
 						GestorDatos.escribirTodosCursos(cursos);
 					} else {
@@ -45,7 +49,9 @@ public class GestorProfesores {
 			System.out.println("No hay profesores, porfavor crea alguno");
 		}
 	}
-
+	/**
+	 * Este metodo se encarga de desvincular un profesor de un curso y viceversa
+	 */
 	public static void desvincularProfesor() {
 		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 		if(!profesores.isEmpty()) {
@@ -67,6 +73,7 @@ public class GestorProfesores {
 						cursos.get(curso.getNombre()).setProfesor(null);
 						cursosProfesor.remove(curso.getNombre(), curso);
 						profesores.get(profesor.getDni()).setCursos(cursosProfesor);
+						System.out.println("El profesor: "+profesor.getDni()+" ha sido desvinculado al curso: "+curso.getNombre());
 						GestorDatos.escribirTodosProf(profesores);
 						GestorDatos.escribirTodosCursos(cursos);
 					} else {
@@ -83,7 +90,9 @@ public class GestorProfesores {
 			System.out.println("No hay profesores, por lo que no hay nadie vinculado");
 		}
 	}
-
+	/**
+	 * Este metodo se encarga de crear y confirmar que no existe un profesor
+	 */
 	public static void crearProfesor() {
 		Profesor profesor = null;
 		System.out.println("Introduzca el DNI del profesor");
@@ -109,7 +118,9 @@ public class GestorProfesores {
 			}
 		}
 	}
-
+	/**
+	 * Este metodo se encarga de borrar un profesor y todas sus relaciones
+	 */
 	public static void borrarProfesor() {
 		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 		if(!profesores.isEmpty()) {
@@ -134,7 +145,9 @@ public class GestorProfesores {
 			System.out.println("No hay profesores, porfavor crea alguno");
 		}
 	}
-
+	/**
+	 * Este metodo se encarga de buscar un profesor y te permite modificar todos los datos que quieras hasta que desees salir
+	 */
 	public static void modificarProfesor() {
 		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 		if(!profesores.isEmpty()) {
@@ -238,9 +251,12 @@ public class GestorProfesores {
 			System.out.println("No hay profesores, porfavor crea alguno");
 		}
 	}
-
+	/**
+	 * Este metodo se encarga de confirmar que un profesor no existe, para poder crearlo
+	 * @param dniProfesor Es la clave que va a comprobar si esta en la lista de profesores
+	 * @return En el caso de encontrar un profesor con el mismo dni lo devuelve y si no existe devuelve null
+	 */
 	public static Profesor confirmarInexistenciaProfesor(String dniProfesor) {
-		// busco alumno y si no existe devuelve null
 		Profesor profesor = GestorDatos.buscarProf(dniProfesor);
 		if (profesor == null) {
 			System.out.println("El profesor no existe, siga introcuciendo datos");
@@ -249,7 +265,10 @@ public class GestorProfesores {
 		}
 		return profesor;
 	}
-
+	/**
+	 * Este metodo se encarga de buscar un profesor y si este existe lo devuelve si no devuelve null
+	 * @return Devuelve un profesor si lo encuentra y si no null
+	 */
 	public static Profesor buscarProfesor() {
 		Profesor profesor = null;
 		boolean check = true;
@@ -275,12 +294,11 @@ public class GestorProfesores {
 		} while (!check);
 		return profesor;
 	}
-
+	/**
+	 * Este metodo se encarga de buscar un curso y si este existe lo devuelve si no devuelve null
+	 * @return Devuelve un curso si lo encuentra y si no null
+	 */
 	public static Curso buscarCurso() {
-		// mandar nombre y apellido a datos , si me devuelve null me devuelvo null pa
-		// saber que no existe si no me tendria que devolver un alumno que me devuelvo a
-		// mi mismo
-		// si no encuentra el curso en 5 intentos te saca
 		Curso curso = null;
 		boolean check = true;
 		int errorCont = 0;
@@ -305,7 +323,9 @@ public class GestorProfesores {
 		} while (!check);
 		return curso;
 	}
-
+	/**
+	 * Muestra los datos de un profesor que es buscado
+	 */
 	public static void mostrarProfesor() {
 		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 		if(!profesores.isEmpty()) {
@@ -318,7 +338,9 @@ public class GestorProfesores {
 			System.out.println("No hay profesores, porfavor crea alguno");
 		}
 	}
-
+	/**
+	 * Muestra los datos de todos los profesores
+	 */
 	public static void mostrarProfesores() {
 		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 		for (HashMap.Entry<String, Profesor> entry : profesores.entrySet()) {
