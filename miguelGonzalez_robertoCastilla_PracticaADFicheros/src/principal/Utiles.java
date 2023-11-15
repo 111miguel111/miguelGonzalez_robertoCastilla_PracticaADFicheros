@@ -11,7 +11,10 @@ public class Utiles {
 	public static String scanLibre() {
 		return sc.nextLine();
 	}
-
+	/**
+	 * Este metodo se encarga confirmar si se quiere hacer una accion
+	 * @return Si se escribe si devuelve null, en cualquier otro caso contara como que no se ha aceptado el cambio
+	 */
 	static public String confirmarAccion() {
 		System.out.println("Seguro que quiere realizar la accion?\nSi o No");
 		String respuesta = scanPalabras().trim();
