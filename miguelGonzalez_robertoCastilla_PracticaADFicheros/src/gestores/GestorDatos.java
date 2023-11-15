@@ -1,13 +1,10 @@
 package gestores;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -100,33 +97,27 @@ public class GestorDatos {
 		try {
 			// Se define el object input stream
 			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
-			try {
-				//Se salta la linea del contador de alumnos del archivo
-				entrada.readInt();
-				// Se busca en el archivo el alumno hasta que lo encuentre o hasta que no queden
-				// mas
-				while (true) {
-					Alumno alumnoAux = (Alumno) entrada.readObject();
-					// Se comprueba si el alumno coincide y si coincide se guarda en la variable
-					// creada anteriormente
-					if (nombre.equalsIgnoreCase(alumnoAux.getNombre())
-							&& apellidos.equalsIgnoreCase(alumnoAux.getApellidos())) {
-						alumno = alumnoAux;
-					}
+
+			// Se salta la linea del contador de alumnos del archivo
+			entrada.readInt();
+			// Se busca en el archivo el alumno hasta que lo encuentre o hasta que no queden
+			// mas
+			while (true) {
+				Alumno alumnoAux = (Alumno) entrada.readObject();
+				// Se comprueba si el alumno coincide y si coincide se guarda en la variable
+				// creada anteriormente
+				if (nombre.equalsIgnoreCase(alumnoAux.getNombre())
+						&& apellidos.equalsIgnoreCase(alumnoAux.getApellidos())) {
+					alumno = alumnoAux;
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Fin de lectura");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
+
 			}
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("No se ha encontrado el archivo");
-		} catch (IOException e2) {
+			System.out.println("Fin de lectura");
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Fichero vacio");
+			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
 				if (entrada != null) {
@@ -155,21 +146,12 @@ public class GestorDatos {
 		try {
 			// Se define el object input stream
 			entrada = new ObjectInputStream(new FileInputStream("alumnos.ser"));
-			try {
-				//Se salta la linea del contador de alumnos del archivo
-				entrada.readInt();
-				//Se leen todos los alumnos y se meten en un hashmap
-				while (true) {
-					Alumno alumno = (Alumno) entrada.readObject();
-					listaAlum.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Fin de lectura");
-				// e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
+			// Se salta la linea del contador de alumnos del archivo
+			entrada.readInt();
+			// Se leen todos los alumnos y se meten en un hashmap
+			while (true) {
+				Alumno alumno = (Alumno) entrada.readObject();
+				listaAlum.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -177,6 +159,9 @@ public class GestorDatos {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			System.out.println("Fichero vacio");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
 				if (entrada != null) {
@@ -259,23 +244,15 @@ public class GestorDatos {
 		try {
 			// Se define el object input stream
 			entrada = new ObjectInputStream(new FileInputStream(archivoProf));
-			try {
-				// Se busca en el archivo el profesor hasta que lo encuentre o hasta que no
-				// queden mas
-				while (true) {
-					Profesor profesorAux = (Profesor) entrada.readObject();
-					// Se comprueba si el profesor coincide y si coincide se guarda en la variable
-					// creada anteriormente
-					if (dni.equalsIgnoreCase(profesorAux.getDni())) {
-						profesor = profesorAux;
-					}
+			// Se busca en el archivo el profesor hasta que lo encuentre o hasta que no
+			// queden mas
+			while (true) {
+				Profesor profesorAux = (Profesor) entrada.readObject();
+				// Se comprueba si el profesor coincide y si coincide se guarda en la variable
+				// creada anteriormente
+				if (dni.equalsIgnoreCase(profesorAux.getDni())) {
+					profesor = profesorAux;
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Fin de lectura");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -284,6 +261,9 @@ public class GestorDatos {
 			// TODO Auto-generated catch block
 			System.out.println("Fichero vacio");
 			// e2.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
 				if (entrada != null) {
@@ -306,18 +286,10 @@ public class GestorDatos {
 		ObjectInputStream entrada = null;
 		try {
 			entrada = new ObjectInputStream(new FileInputStream(archivoProf));
-			try {
-				// Se leen profesores y se meten en la lista
-				while (true) {
-					Profesor profesor = (Profesor) entrada.readObject();
-					listaProf.put(profesor.getDni(), profesor);
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Fin de lectura");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
+			// Se leen profesores y se meten en la lista
+			while (true) {
+				Profesor profesor = (Profesor) entrada.readObject();
+				listaProf.put(profesor.getDni(), profesor);
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -326,6 +298,9 @@ public class GestorDatos {
 			// TODO Auto-generated catch block
 			System.out.println("Fichero vacio");
 			// e2.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
 				if (entrada != null) {
@@ -410,7 +385,8 @@ public class GestorDatos {
 			if (sc.hasNextLine()) {
 				sc.nextLine();
 			}
-			// Se va leyendo el archivo de 3 en 3, ya que el contenido de cada curso se ha escrito en 3 lineas
+			// Se va leyendo el archivo de 3 en 3, ya que el contenido de cada curso se ha
+			// escrito en 3 lineas
 			while (sc.hasNextLine()) {
 				String cursoTexto = sc.nextLine();
 				String cursoAlum = sc.nextLine();
@@ -465,22 +441,25 @@ public class GestorDatos {
 			if (sc.hasNextLine()) {
 				sc.nextLine();
 			}
-			// Se va leyendo el archivo de 3 en 3, ya que el contenido de cada curso se ha escrito en 3 lineas
+			// Se va leyendo el archivo de 3 en 3, ya que el contenido de cada curso se ha
+			// escrito en 3 lineas
 			while (sc.hasNextLine()) {
 				String cursoTexto = sc.nextLine();
 				String cursoAlum = sc.nextLine();
 				String cursoProf = sc.nextLine();
-				//Se comprueba si curso esta vacio y si no lo esta se crea el curso
+				// Se comprueba si curso esta vacio y si no lo esta se crea el curso
 				if (cursoTexto != "") {
 					Curso curso = new Curso(cursoTexto.split("¬")[1], cursoTexto.split("¬")[2]);
 					curso.setCodigo(cursoTexto.split("¬")[0]);
-					//Se comprueba si la linea del profesor esta vacio y si no lo crea y agrega al curso
+					// Se comprueba si la linea del profesor esta vacio y si no lo crea y agrega al
+					// curso
 					if (cursoProf != "") {
 						curso.setProfesor(new Profesor(cursoProf.split("¬")[0], cursoProf.split("¬")[1],
 								cursoProf.split("¬")[2], cursoProf.split("¬")[3]));
 					}
 					HashMap<String, Alumno> listaAlum = new HashMap<String, Alumno>();
-					//Se comprueba si la linea de alumno esta vacio y si no lo crea y agrega todos los alumnos a un hasmap, que posteriormente se agregaga al curso
+					// Se comprueba si la linea de alumno esta vacio y si no lo crea y agrega todos
+					// los alumnos a un hasmap, que posteriormente se agregaga al curso
 					if (cursoAlum != "") {
 						// En las lineas de texto los alumnos ocupan 5 campos asi que se suman de 5 en 5
 						for (int i = 0; i < cursoAlum.split("¬").length; i++) {
@@ -498,7 +477,8 @@ public class GestorDatos {
 			sc.close();
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			//e1.printStackTrace();
+			System.out.println("No se ha encontrado el archivo");
 		}
 		return listaCurso;
 	}
@@ -509,13 +489,14 @@ public class GestorDatos {
 	 * y codigo respectivamente
 	 */
 	public static void setContadores() {
-		//Se comprueba que existatn los archivos de alumno y curso
+		// Se comprueba que existatn los archivos de alumno y curso
 		alumFileCheck();
 		cursoFileCheck();
 		ObjectInputStream entrada = null;
 		Scanner sc = null;
 		try {
-			//Se lee el primer y unico int del fichero de alumno que es el contador y se guarda
+			// Se lee el primer y unico int del fichero de alumno que es el contador y se
+			// guarda
 			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
 			Alumno.setCont((int) entrada.readInt());
 		} catch (IOException e) {
@@ -532,7 +513,8 @@ public class GestorDatos {
 			}
 		}
 		try {
-			//Se lee la primera linea del archivo que es el contador y se comprueba que sea digito antes de guardarlo
+			// Se lee la primera linea del archivo que es el contador y se comprueba que sea
+			// digito antes de guardarlo
 			sc = new Scanner(archivoCurso);
 			String contador = sc.nextLine();
 			if (Utiles.esDigito(contador)) {
