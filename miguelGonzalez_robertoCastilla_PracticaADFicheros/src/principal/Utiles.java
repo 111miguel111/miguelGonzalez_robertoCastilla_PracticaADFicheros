@@ -27,7 +27,10 @@ public class Utiles {
 		return respuesta;
 	}
 
-	// Escanea frases sin numeros
+	/**
+	 *  Escanea frases sin numeros
+	 * @return String de frase o null si no se introduce bien 5 veces
+	 */
 	static public String scanPalabras() {
 		// Declaracion de la string que se va a escanear
 		String nombre;
@@ -77,7 +80,10 @@ public class Utiles {
 		return nombre;
 	}
 
-	// Escanea numeros sin espacios
+	/**
+	 *  Escanea numeros sin espacios
+	 * @return String de numero o null si no se introduce bien 5 veces
+	 */
 	static public String scanNumero() {
 		// Declaracion de la string que se va a escanear
 		String nombre;
@@ -123,7 +129,10 @@ public class Utiles {
 		return nombre;
 	}
 
-	// Escanea numeros de telefono
+	/**
+	 *  Escanea numeros de telefono
+	 * @return String de numero de telefono o null si no se introduce bien 5 veces
+	 */
 	static public String scanTelefono() {
 		// Declaracion de la string que se va a escanear
 		String nombre;
@@ -162,7 +171,10 @@ public class Utiles {
 		return nombre;
 	}
 
-	// Escaneo de frase sin distincion
+	/**
+	 *  Escaneo de frase sin distincion
+	 * @return String de frase o null si no se introduce bien 5 veces
+	 */
 	static public String scanTodoTrim() {
 		// Declaracion de la string que se va a escanear
 		String nombre;
@@ -209,7 +221,10 @@ public class Utiles {
 		return nombre;
 	}
 
-	// Escaneo de fecha
+	/**
+	 *  Escaneo de fecha
+	 * @return String de fecha o null si no se introduce bien 5 veces
+	 */
 	static public String scanFecha() {
 		// Declaracion de la variable que contendra el dia
 		String dia = null;
@@ -275,7 +290,10 @@ public class Utiles {
 		return nombre;
 	}
 
-	// Escaneo de dni (8 numeros y letra)
+	/**
+	 *  Escaneo de dni (8 numeros y letra)
+	 * @return String de DNI o null si no se introduce bien 5 veces
+	 */
 	static public String scanDni() {
 		String nombre;
 		boolean check = true;
@@ -312,6 +330,11 @@ public class Utiles {
 		return nombre;
 	}
 
+	/**
+	 * Comprueba que una String contenga solo digitos
+	 * @param nombre String a comprobar
+	 * @return Boolean que sera true si todos los caracteres son digitos y false si no
+	 */
 	public static boolean esDigito(String nombre) {
 		boolean check = true;
 		// Se recorre la string y si encuentra algo que no sea digito devuelve false
@@ -322,10 +345,15 @@ public class Utiles {
 		}
 		return check;
 	}
-
+	
+	/**
+	 * Comprueba que una string no tenga digitos
+	 * @param nombre String a comprobar
+	 * @return Boolean que sera true si no hay digitos y false si hay
+	 */
 	public static boolean esLetra(String nombre) {
 		boolean check = true;
-		// Se recorre la string y si encuentra algo que no sea digito devuelve true
+		// Se recorre la string y si encuentra algo que sea digito devuelve false
 		for (int i = 0; i < nombre.length(); i++) {
 			if (Character.isDigit(nombre.charAt(i))) {
 				check = false;
