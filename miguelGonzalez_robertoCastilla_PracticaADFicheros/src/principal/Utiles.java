@@ -2,6 +2,7 @@ package principal;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Scanner;
 
 public class Utiles {
@@ -264,18 +265,23 @@ public class Utiles {
 				// Se comprueba si la fecha existe creando un objeto LocalDate. Si da error la
 				// fecha no es valida
 				try {
-					DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-					LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
-					if (fecha.isAfter(LocalDate.now())) {
-						check = false;
-						System.out.println(
-								"Esa fecha es el futuro por lo que no puede ser una fecha de nacimiento. Intentelo con otra fecha mas antigua.");
-					}
-				} catch (Exception e) {
-					// Print de confirmacion de error en la introduccion de datos
-					System.out.println("La fecha introducida no existe, intentelo otra vez");
-					check = false;
-				}
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
+                    LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
+                    if (fecha.isAfter(LocalDate.now())) {
+                        check = false;
+                        System.out.println(
+                                "Esa fecha es el futuro por lo que no puede ser una fecha de nacimiento. Intentelo con otra fecha mas antigua.");
+                    }
+                    if(fecha.getYear()<1900) {
+                        check = false;
+                        System.out.println(
+                                "Esa fecha es demasiado antigua. Intentelo con otra fecha mas moderna.");
+                    }
+                } catch (Exception e) {
+                    // Print de confirmacion de error en la introduccion de datos
+                    System.out.println("La fecha introducida no existe, intentelo otra vez");
+                    check = false;
+                }
 				// Suma de contador de errores al final del bucle
 				errorCont++;
 				// Tras 5 errores se manda mensaje de fin de intentos

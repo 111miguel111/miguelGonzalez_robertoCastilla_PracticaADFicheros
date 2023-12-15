@@ -33,7 +33,10 @@ public class GestorCursos {
 							cursos.get(curso.getNombre()).setProfesor(profesor);
 							cursosProfesor.put(curso.getNombre(), curso);
 							profesores.get(profesor.getDni()).setCursos(cursosProfesor);
-							
+							if(curso.getProfesor()!=null) {
+								cursosProfesor.remove(curso.getNombre(), curso);
+								profesores.get(curso.getProfesor().getDni()).setCursos(cursosProfesor);
+							}
 							System.out.println("El profesor: "+profesor.getDni()+" ha sido vinculado al curso: "+curso.getNombre());
 							GestorDatos.escribirTodosProf(profesores);
 							GestorDatos.escribirTodosCursos(cursos);
@@ -317,6 +320,11 @@ public class GestorCursos {
 					} while (check);
 					//AHORA SI TENDRIA QUE MODIFICAR EN CONDICIONES EL CURSO
 					if (Utiles.confirmarAccion() == null) {
+						
+						HashMap<String, Profesor> Profesores = GestorDatos.getListaProf();
+						HashMap<String, Alumno> Alumnos = GestorDatos.getListaAlum();
+						
+						
 						cursos.get(curso.getNombre()).setNombre(curso3.getNombre());
 						cursos.get(curso.getNombre()).setDescripcion(curso3.getDescripcion());
 						GestorDatos.escribirTodosCursos(cursos);
