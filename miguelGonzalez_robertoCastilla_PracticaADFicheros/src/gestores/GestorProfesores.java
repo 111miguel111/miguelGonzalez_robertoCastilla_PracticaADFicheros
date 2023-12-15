@@ -121,6 +121,7 @@ public class GestorProfesores {
 	/**
 	 * Este metodo se encarga de borrar un profesor y todas sus relaciones
 	 */
+	//SE HA TOCADO EL COMPARAR EL PROFESOR BORRADO CON EL PROFESOR DEL CURSO AHORA DEBERIA FUNCIONAR 
 	public static void borrarProfesor() {
 		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 		if(!profesores.isEmpty()) {
@@ -128,15 +129,15 @@ public class GestorProfesores {
 		if (profesor != null) {
 			System.out.println(profesor.toString());
 			profesores = GestorDatos.getListaProf();
-			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
-			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
-				Profesor profesorAux = entry.getValue().getProfesor();
-				if (profesorAux != null) {
-					entry.getValue().setProfesor(null);
-				}
-			}
 			if (Utiles.confirmarAccion() == null) {
-				profesores.remove(profesor);
+				HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
+				for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
+					Profesor profesorAux = entry.getValue().getProfesor();
+					if (profesorAux != null && profesorAux.equals(profesor)) {
+						entry.getValue().setProfesor(null);
+					}
+				}
+				profesores.remove(profesor.getDni(),profesor);
 				GestorDatos.escribirTodosProf(profesores);
 				GestorDatos.escribirTodosCursos(cursos);
 			}

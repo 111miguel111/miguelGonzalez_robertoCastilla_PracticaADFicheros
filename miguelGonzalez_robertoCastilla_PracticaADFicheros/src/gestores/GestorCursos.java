@@ -145,13 +145,12 @@ public class GestorCursos {
 			System.out.println(alumno.toString());
 			Curso curso = buscarCurso();
 			if (curso != null) {
-
 				System.out.println(curso.toString());
+				
 				if (alumno != null && curso != null) {
 					alumnos = GestorDatos.getListaAlum();
 					cursos = GestorDatos.getListaCursos();
-					HashMap<String, Curso> cursosAlum = alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos())
-							.getCursos();
+					HashMap<String, Curso> cursosAlum = alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
 					HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
 					if (cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno)) {
 						cursosAlum.remove(curso.getNombre(), curso);
@@ -159,6 +158,7 @@ public class GestorCursos {
 						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 						GestorDatos.escribirTodosAlum(alumnos);
 						System.out.println("El alumno: "+alumno.getNombre()+" ha sido desmatriculado del curso: "+curso.getNombre());
+						
 						alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 						cursos.get(curso.getNombre()).setAlumnos(alumnosCurso);
 						GestorDatos.escribirTodosCursos(cursos);
@@ -243,6 +243,7 @@ public class GestorCursos {
 	/**
 	 * Este metodo se encarga de buscar un curso y te permite modificar todos los datos que quieras hasta que desees salir
 	 */
+	//LOS PRINTS ESTABAN MUY MAL, AHORA TENDRIAN QUE ESTAR BIEN
 	public static void modificarCurso() {
 		HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
 		if(!cursos.isEmpty()) {
@@ -258,13 +259,13 @@ public class GestorCursos {
 			for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
 				if (entry.getValue().equals(curso)) {
 					boolean check = true;
-					System.out.println("Se ha encontrado el profesor: " + curso.toString());
+					System.out.println("Se ha encontrado el curso: " + curso.toString());
 					do {
 						System.out.println("Que desea modificar?\nNombre 1\nDescripcion 2\nTodo 3\n Salir 0");
 						String opcion = Utiles.scanNumero();
 						switch (opcion) {
 						case "1":
-							System.out.println("Introduzca el DNI del profesor");
+							System.out.println("Introduzca el nombre del curso");
 							nombreCurso = Utiles.scanPalabras();
 							if (nombreCurso != null) {
 								curso2 = confirmarInexistenciaCurso(nombreCurso);
@@ -277,7 +278,7 @@ public class GestorCursos {
 							}
 							break;
 						case "2":
-							System.out.println("Introduzca el nombre del curso");
+							System.out.println("Introduzca la descripcion del curso");
 							descripcionCurso = Utiles.scanTodoTrim();
 							if (descripcionCurso != null) {
 								curso3.setDescripcion(descripcionCurso);
@@ -308,15 +309,11 @@ public class GestorCursos {
 							System.out.println("Valor no valido.");
 						}
 					} while (check);
-					if (!(curso.getNombre().equals(curso3.getNombre()))) {
+					//AHORA SI TENDRIA QUE MODIFICAR EN CONDICIONES EL CURSO
+					if (Utiles.confirmarAccion() == null) {
 						cursos.get(curso.getNombre()).setNombre(curso3.getNombre());
 						cursos.get(curso.getNombre()).setDescripcion(curso3.getDescripcion());
-						if (Utiles.confirmarAccion() == null) {
-							GestorDatos.escribirTodosCursos(cursos);
-						}
-					} else {
-						System.out.println(
-								"El nombre del curso coincide con el de otro curso, porfavor cambie el nombre");
+						GestorDatos.escribirTodosCursos(cursos);
 					}
 				}
 			}
