@@ -321,31 +321,33 @@ public class GestorCursos {
 					//AHORA SI TENDRIA QUE MODIFICAR EN CONDICIONES EL CURSO
 					if (Utiles.confirmarAccion() == null) {
 						
-						HashMap<String, Profesor> Profesores = GestorDatos.getListaProf();
-						for(HashMap.Entry<String, Profesor> entryAux : Profesores.entrySet()) {
+						HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
+						for(HashMap.Entry<String, Profesor> entryAux : profesores.entrySet()) {
 							Profesor profesorAux=entryAux.getValue();
 							HashMap<String, Curso> cursosProfesor=profesorAux.getCursos();
 							for(HashMap.Entry<String, Curso> entryAuxCursoProfesor :cursosProfesor.entrySet()) {
 								if(entryAuxCursoProfesor.getValue()==cursos.get(curso.getNombre())) {
-									entryAuxCursoProfesor.getValue().setNombre(curso3.getNombre());
-									entryAuxCursoProfesor.getValue().setDescripcion(curso3.getDescripcion());
+									profesores.get(entryAux.getKey()).getCursos().get(entryAuxCursoProfesor.getKey()).setNombre(curso3.getNombre());
+									profesores.get(entryAux.getKey()).getCursos().get(entryAuxCursoProfesor.getKey()).setDescripcion(curso3.getDescripcion());
 								}
 							}
 						}
-						HashMap<String, Alumno> Alumnos = GestorDatos.getListaAlum();
-						for(HashMap.Entry<String, Alumno> entryAux : Alumnos.entrySet()) {
+						HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
+						for(HashMap.Entry<String, Alumno> entryAux : alumnos.entrySet()) {
 							Alumno alumnoAux=entryAux.getValue();
 							HashMap<String, Curso> cursosAlumno=alumnoAux.getCursos();
 							for(HashMap.Entry<String, Curso> entryAuxCursoAlumno :cursosAlumno.entrySet()) {
 								if(entryAuxCursoAlumno.getValue()==cursos.get(curso.getNombre())) {
-									entryAuxCursoAlumno.getValue().setNombre(curso3.getNombre());
-									entryAuxCursoAlumno.getValue().setDescripcion(curso3.getDescripcion());
+									alumnos.get(entryAux.getKey()).getCursos().get(entryAuxCursoAlumno.getKey()).setNombre(curso3.getNombre());
+									alumnos.get(entryAux.getKey()).getCursos().get(entryAuxCursoAlumno.getKey()).setDescripcion(curso3.getDescripcion());
 								}
 							}
 						}
 						cursos.get(curso.getNombre()).setNombre(curso3.getNombre());
 						cursos.get(curso.getNombre()).setDescripcion(curso3.getDescripcion());
 						GestorDatos.escribirTodosCursos(cursos);
+						GestorDatos.escribirTodosProf(profesores);
+						GestorDatos.escribirTodosAlum(alumnos);
 					}
 				}
 			}
