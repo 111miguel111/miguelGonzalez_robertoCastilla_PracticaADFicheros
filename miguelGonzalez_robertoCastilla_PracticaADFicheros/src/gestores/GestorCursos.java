@@ -25,10 +25,11 @@ public class GestorCursos {
 					profesores = GestorDatos.getListaProf();
 					cursos = GestorDatos.getListaCursos();
 					HashMap<String, Curso> cursosProfesor = profesor.getCursos();
-					if (!(cursosProfesor.containsValue(curso) && curso.getProfesor() == profesor)) {
+					if (!(cursosProfesor.containsValue(curso) && curso.getProfesor().equals(profesor))) {
 						cursos.get(curso.getNombre()).setProfesor(profesor);
 						cursosProfesor.put(curso.getNombre(), curso);
 						profesores.get(profesor.getDni()).setCursos(cursosProfesor);
+						
 						System.out.println("El profesor: "+profesor.getDni()+" ha sido vinculado al curso: "+curso.getNombre());
 						GestorDatos.escribirTodosProf(profesores);
 						GestorDatos.escribirTodosCursos(cursos);
@@ -243,7 +244,7 @@ public class GestorCursos {
 	/**
 	 * Este metodo se encarga de buscar un curso y te permite modificar todos los datos que quieras hasta que desees salir
 	 */
-	//LOS PRINTS ESTABAN MUY MAL, AHORA TENDRIAN QUE ESTAR BIEN
+	//LOS PRINTS ESTABAN MUY MAL, AHORA TENDRIAN QUE ESTAR BIEN Y LA COMPARACION FINAL FUNCIONA EN PREINCIPIO
 	public static void modificarCurso() {
 		HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
 		if(!cursos.isEmpty()) {
