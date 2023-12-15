@@ -36,7 +36,7 @@ public class Menu {
 		boolean check = true;
 		do {
 			System.out.println("Seleccione con que opcion de alumnos desea trabajar:\n1.Crear Alumno\n2.Borrar Alumno\n3.Modificar Alumno\n4.Matricular Alumno"
-					+ "\n5.Desmatricular Alumno\n6.Mostrar Alumno\n7.Mostrar Alumnos\n0.Salir");
+					+ "\n5.Desmatricular Alumno\n6.Buscar Alumno\n7.Mostrar Todos Alumnos\n0.Salir");
 			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
@@ -73,7 +73,7 @@ public class Menu {
 		boolean check = true;
 		do {
 			System.out.println("Seleccione con que opcion de cursos desea trabajar:\n1.Crear Curso\n2.Borrar Curso\n3.Modificar Curso\n4.Matricular Alumno"
-					+ "\n5.Desmatricular Alumno\n6.Vincular Profesor\n7.Desvincular Profesor\n8.Mostrar Curso\n9.Mostrar Cursos\n0.Salir");
+					+ "\n5.Desmatricular Alumno\n6.Vincular Profesor\n7.Desvincular Profesor\n8.Buscar Curso\n9.Mostrar Todos Cursos\n0.Salir");
 			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
@@ -115,7 +115,7 @@ public class Menu {
 		boolean check = true;
 		do {
 			System.out.println("Seleccione con que opcion de profesores desea trabajar:\n1.Crear Profesor\n2.Borrar Profesor\n3.Modificar Profesor\n4.Vincular Curso"
-					+ "\n5.Desvincular Curso\n6.Mostrar Profesor\n7.Mostrar Profesores\n0.Salir");
+					+ "\n5.Desvincular Curso\n6.Buscar Profesor\n7.Mostrar Todos Profesores\n0.Salir");
 			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":

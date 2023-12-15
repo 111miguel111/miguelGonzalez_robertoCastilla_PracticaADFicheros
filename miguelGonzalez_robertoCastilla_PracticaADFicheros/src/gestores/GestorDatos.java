@@ -150,7 +150,7 @@ public class GestorDatos {
 		} catch (FileNotFoundException e) {
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
-			System.out.println("Fichero vacio");
+			//System.out.println("Fichero vacio");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
@@ -245,7 +245,7 @@ public class GestorDatos {
 		} catch (FileNotFoundException e) {
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
-			System.out.println("Fichero vacio");
+			//System.out.println("Fichero vacio");
 			// e2.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
@@ -281,7 +281,7 @@ public class GestorDatos {
 		} catch (FileNotFoundException e) {
 			System.out.println("No se ha encontrado el archivo");
 		} catch (IOException e2) {
-			System.out.println("Fichero vacio");
+			//System.out.println("Fichero vacio");
 			// e2.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
