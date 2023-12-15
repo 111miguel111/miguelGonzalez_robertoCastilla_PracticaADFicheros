@@ -26,13 +26,18 @@ public class GestorCursos {
 					cursos = GestorDatos.getListaCursos();
 					HashMap<String, Curso> cursosProfesor = profesor.getCursos();
 					if (!(cursosProfesor.containsValue(curso) && curso.getProfesor().equals(profesor))) {
-						cursos.get(curso.getNombre()).setProfesor(profesor);
-						cursosProfesor.put(curso.getNombre(), curso);
-						profesores.get(profesor.getDni()).setCursos(cursosProfesor);
-						
-						System.out.println("El profesor: "+profesor.getDni()+" ha sido vinculado al curso: "+curso.getNombre());
-						GestorDatos.escribirTodosProf(profesores);
-						GestorDatos.escribirTodosCursos(cursos);
+						if(curso.getProfesor()!=null) {
+							System.out.println("El profesor: "+curso.getProfesor().getNombre()+" ya esta vinculado al curso: "+curso.getNombre());
+						}
+						if(Utiles.confirmarAccion()==null) {
+							cursos.get(curso.getNombre()).setProfesor(profesor);
+							cursosProfesor.put(curso.getNombre(), curso);
+							profesores.get(profesor.getDni()).setCursos(cursosProfesor);
+							
+							System.out.println("El profesor: "+profesor.getDni()+" ha sido vinculado al curso: "+curso.getNombre());
+							GestorDatos.escribirTodosProf(profesores);
+							GestorDatos.escribirTodosCursos(cursos);
+						}
 					} else {
 						System.out.println("Lo sentimos pero: " + profesor.getNombre() + " ya esta vinculado en: "
 								+ curso.getNombre());
