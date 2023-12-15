@@ -12,9 +12,12 @@ public class Utiles {
 	public static String scanLibre() {
 		return sc.nextLine();
 	}
+
 	/**
 	 * Este metodo se encarga confirmar si se quiere hacer una accion
-	 * @return Si se escribe si devuelve null, en cualquier otro caso contara como que no se ha aceptado el cambio
+	 * 
+	 * @return Si se escribe si devuelve null, en cualquier otro caso contara como
+	 *         que no se ha aceptado el cambio
 	 */
 	static public String confirmarAccion() {
 		System.out.println("Seguro que quiere realizar la accion?\nSi o No");
@@ -29,7 +32,8 @@ public class Utiles {
 	}
 
 	/**
-	 *  Escanea frases sin numeros
+	 * Escanea frases sin numeros
+	 * 
 	 * @return String de frase o null si no se introduce bien 5 veces
 	 */
 	static public String scanPalabras() {
@@ -49,12 +53,13 @@ public class Utiles {
 				nombre = sc.nextLine();
 				// Se comprueba si la cadena esta vacia
 				if (!nombre.isBlank() && !nombre.contains("¬")) {
-					// Replace en la cadena en cada doble espacio para reducir el numero de espacios entre palabras a 1
+					// Replace en la cadena en cada doble espacio para reducir el numero de espacios
+					// entre palabras a 1
 					boolean space = true;
 					while (space) {
 						if (nombre.contains("  ")) {
 							nombre = nombre.replaceAll("  ", " ");
-						}else {
+						} else {
 							space = false;
 						}
 					}
@@ -82,7 +87,8 @@ public class Utiles {
 	}
 
 	/**
-	 *  Escanea numeros sin espacios
+	 * Escanea numeros sin espacios
+	 * 
 	 * @return String de numero o null si no se introduce bien 5 veces
 	 */
 	static public String scanNumero() {
@@ -131,7 +137,8 @@ public class Utiles {
 	}
 
 	/**
-	 *  Escanea numeros de telefono
+	 * Escanea numeros de telefono
+	 * 
 	 * @return String de numero de telefono o null si no se introduce bien 5 veces
 	 */
 	static public String scanTelefono() {
@@ -173,7 +180,8 @@ public class Utiles {
 	}
 
 	/**
-	 *  Escaneo de frase sin distincion
+	 * Escaneo de frase sin distincion
+	 * 
 	 * @return String de frase o null si no se introduce bien 5 veces
 	 */
 	static public String scanTodoTrim() {
@@ -193,12 +201,13 @@ public class Utiles {
 				nombre = sc.nextLine().trim();
 				// Se comprueba si la cadena esta vacia
 				if (!nombre.isBlank() && !nombre.contains("¬")) {
-					// Replace en la cadena en cada doble espacio para reducir el numero de espacios entre palabras a 1
+					// Replace en la cadena en cada doble espacio para reducir el numero de espacios
+					// entre palabras a 1
 					boolean space = true;
 					while (space) {
 						if (nombre.contains("  ")) {
 							nombre = nombre.replaceAll("  ", " ");
-						}else {
+						} else {
 							space = false;
 						}
 					}
@@ -223,7 +232,8 @@ public class Utiles {
 	}
 
 	/**
-	 *  Escaneo de fecha
+	 * Escaneo de fecha
+	 * 
 	 * @return String de fecha o null si no se introduce bien 5 veces
 	 */
 	static public String scanFecha() {
@@ -237,67 +247,90 @@ public class Utiles {
 		String nombre = null;
 		// Declaracion del boolean que refleja si la cadena tiene el formato adecuado
 		boolean check = true;
+		// Declaracion del boolean que comprueba que no se hayan excedido los intentos en ningun campo
+		boolean checkError = true;
 		// Declaracion del contador de errores
 		int errorCont = 0;
 		// Bucle que permitira introducir una cadena hasta 5 veces
 		do {
 			// Reset del boolean en cada ciclo del bucle
 			check = true;
+			checkError = true;
 			// comprobacion del numero de ciclos del bucle
 			if (errorCont < 5) {
 				// Input de dia del usuario
 				System.out.println("Introduzca el dia");
 				dia = scanNumero();
-				// Si el valor de dia es solo un numero se le pone un cero delante
-				if (dia.length() == 1) {
-					dia = "0" + dia;
+				if (dia == null) {
+					checkError = false;
+				} else {
+					// Si el valor de dia es solo un numero se le pone un cero delante
+					if (dia.length() == 1) {
+						dia = "0" + dia;
+					}
 				}
-				// Input de mes del usuario
-				System.out.println("Introduzca el mes (numero)");
-				mes = scanNumero();
-				// Si el valor de dia es solo un numero se le pone un cero delante
-				if (mes.length() == 1) {
-					mes = "0" + mes;
+
+				if (checkError) {
+					// Input de mes del usuario
+					System.out.println("Introduzca el mes (numero)");
+					mes = scanNumero();
+					if (mes == null) {
+						checkError = false;
+					} else {
+						// Si el valor de dia es solo un numero se le pone un cero delante
+						if (mes.length() == 1) {
+							mes = "0" + mes;
+						}
+					}
 				}
-				// Input de anyo del usuario
-				System.out.println("Introduzca el anyo");
-				year = scanNumero();
-				// Se comprueba si la fecha existe creando un objeto LocalDate. Si da error la
-				// fecha no es valida
-				try {
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
-                    LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
-                    if (fecha.isAfter(LocalDate.now())) {
-                        check = false;
-                        System.out.println(
-                                "Esa fecha es el futuro por lo que no puede ser una fecha de nacimiento. Intentelo con otra fecha mas antigua.");
-                    }
-                    if(fecha.getYear()<1900) {
-                        check = false;
-                        System.out.println(
-                                "Esa fecha es demasiado antigua. Intentelo con otra fecha mas moderna.");
-                    }
-                } catch (Exception e) {
-                    // Print de confirmacion de error en la introduccion de datos
-                    System.out.println("La fecha introducida no existe, intentelo otra vez");
-                    check = false;
-                }
+
+				if (checkError) {
+					// Input de anyo del usuario
+					System.out.println("Introduzca el anyo");
+					year = scanNumero();
+					if (year == null) {
+						checkError = false;
+					}
+				}
+				if (checkError) {
+					// Se comprueba si la fecha existe creando un objeto LocalDate. Si da error la
+					// fecha no es valida
+					try {
+						DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+								.withResolverStyle(ResolverStyle.STRICT);
+						LocalDate fecha = LocalDate.parse(dia + "-" + mes + "-" + year, format);
+						if (fecha.isAfter(LocalDate.now())) {
+							check = false;
+							System.out.println(
+									"Esa fecha es el futuro por lo que no puede ser una fecha de nacimiento. Intentelo con otra fecha mas antigua.");
+						}
+						if (fecha.getYear() < 1900) {
+							check = false;
+							System.out.println("Esa fecha es demasiado antigua. Intentelo con otra fecha mas moderna.");
+						}
+					} catch (Exception e) {
+						// Print de confirmacion de error en la introduccion de datos
+						System.out.println("La fecha introducida no existe, intentelo otra vez");
+						check = false;
+					}
+				}
 				// Suma de contador de errores al final del bucle
 				errorCont++;
 				// Tras 5 errores se manda mensaje de fin de intentos
 			} else {
 				System.out.println("Excedido numero de intentos (" + errorCont + ")");
 			}
-		} while (!check);
+		} while (!check&&checkError);
 		// Si el contador de errores es menor a 5 se guarda el la fecha en la string
-		if (errorCont < 5) {
+		if (errorCont < 5&&checkError) {
 			nombre = dia + "-" + mes + "-" + year;
 		}
 		return nombre;
 	}
 
 	/**
-	 *  Escaneo de dni (8 numeros y letra)
+	 * Escaneo de dni (8 numeros y letra)
+	 * 
 	 * @return String de DNI o null si no se introduce bien 5 veces
 	 */
 	static public String scanDni() {
@@ -338,8 +371,10 @@ public class Utiles {
 
 	/**
 	 * Comprueba que una String contenga solo digitos
+	 * 
 	 * @param nombre String a comprobar
-	 * @return Boolean que sera true si todos los caracteres son digitos y false si no
+	 * @return Boolean que sera true si todos los caracteres son digitos y false si
+	 *         no
 	 */
 	public static boolean esDigito(String nombre) {
 		boolean check = true;
@@ -351,9 +386,10 @@ public class Utiles {
 		}
 		return check;
 	}
-	
+
 	/**
 	 * Comprueba que una string no tenga digitos
+	 * 
 	 * @param nombre String a comprobar
 	 * @return Boolean que sera true si no hay digitos y false si hay
 	 */
