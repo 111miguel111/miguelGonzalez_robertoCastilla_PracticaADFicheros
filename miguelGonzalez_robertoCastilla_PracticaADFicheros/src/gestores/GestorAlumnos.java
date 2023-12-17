@@ -11,42 +11,47 @@ public class GestorAlumnos {
 	 */
 	public static void matricularAlumno() {
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
-		if(!alumnos.isEmpty()) {
+		if (!alumnos.isEmpty()) {
 			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
-			if(!cursos.isEmpty()) {
-				
-			
-		Alumno alumno = buscarAlumno();
-		if (alumno != null) {
-			System.out.println(alumno.toString());
-			Curso curso = buscarCurso();
-			if (curso != null) {
-				System.out.println(curso.toString());
-				if (alumno != null && curso != null) {
-					alumnos = GestorDatos.getListaAlum();
-					cursos = GestorDatos.getListaCursos();
-					HashMap<String, Curso> cursosAlum = alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos())
-							.getCursos();
-					HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
-					if (!(cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno))) {
-						cursosAlum.put(curso.getNombre(), curso);
-						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
-						GestorDatos.escribirTodosAlum(alumnos);
-						System.out.println("El alumno: "+alumno.getNombre()+" ha sido matriculado en el curso: "+curso.getNombre());
-						alumnosCurso.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
-						cursos.get(curso.getNombre()).setAlumnos(alumnosCurso);
-						GestorDatos.escribirTodosCursos(cursos);
-					} else {
-						System.out.println("Lo sentimos pero: " + alumno.getNombre() + " ya esta matriculado en: "
-								+ curso.getNombre());
+			if (!cursos.isEmpty()) {
+
+				Alumno alumno = buscarAlumno();
+				if (alumno != null) {
+					System.out.println(alumno.toString());
+					Curso curso = buscarCurso();
+					if (curso != null) {
+
+						System.out.println(curso.toString());
+						if (alumno != null && curso != null) {
+							alumnos = GestorDatos.getListaAlum();
+							cursos = GestorDatos.getListaCursos();
+							HashMap<String, Curso> cursosAlum = alumnos
+									.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
+							HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
+							if (!(cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno))) {
+								if(Utiles.confirmarAccion()==null) {
+									
+								
+									cursosAlum.put(curso.getNombre(), curso);
+									alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
+									GestorDatos.escribirTodosAlum(alumnos);
+									System.out.println("El alumno: " + alumno.getNombre()
+											+ " ha sido matriculado en el curso: " + curso.getNombre());
+									alumnosCurso.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
+									cursos.get(curso.getNombre()).setAlumnos(alumnosCurso);
+									GestorDatos.escribirTodosCursos(cursos);
+								}
+							} else {
+								System.out.println("Lo sentimos pero: " + alumno.getNombre()
+										+ " ya esta matriculado en: " + curso.getNombre());
+							}
+						}
 					}
 				}
-			}
-		}
-			}else {
+			} else {
 				System.out.println("No hay cursos, crea algun curso antes");
 			}
-		}else {
+		} else {
 			System.out.println("No hay alumnos, crea algun alumno antes");
 		}
 	}
@@ -55,44 +60,47 @@ public class GestorAlumnos {
 	 */
 	public static void desmatricularAlumno() {
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
-		if(!alumnos.isEmpty()) {
+		if (!alumnos.isEmpty()) {
 			HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
-			if(!cursos.isEmpty()) {
-				
-			
-		Alumno alumno = buscarAlumno();
-		if (alumno != null) {
-			System.out.println(alumno.toString());
-			Curso curso = buscarCurso();
-			if (curso != null) {
+			if (!cursos.isEmpty()) {
 
-				System.out.println(curso.toString());
-				if (alumno != null && curso != null) {
-					alumnos = GestorDatos.getListaAlum();
-					cursos = GestorDatos.getListaCursos();
-					HashMap<String, Curso> cursosAlum = alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos())
-							.getCursos();
-					HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
-					if (cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno)) {
-						cursosAlum.remove(curso.getNombre(), curso);
+				Alumno alumno = buscarAlumno();
+				if (alumno != null) {
+					System.out.println(alumno.toString());
+					Curso curso = buscarCurso();
+					if (curso != null) {
+						System.out.println(curso.toString());
 
-						alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
-						GestorDatos.escribirTodosAlum(alumnos);
-						System.out.println("El alumno: "+alumno.getNombre()+" ha sido desmatriculado del curso: "+curso.getNombre());
-						alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
-						cursos.get(curso.getNombre()).setAlumnos(alumnosCurso);
-						GestorDatos.escribirTodosCursos(cursos);
-					} else {
-						System.out.println("Lo sentimos pero: " + alumno.getNombre() + " no esta matriculado en: "
-								+ curso.getNombre());
+						if (alumno != null && curso != null) {
+							alumnos = GestorDatos.getListaAlum();
+							cursos = GestorDatos.getListaCursos();
+							HashMap<String, Curso> cursosAlum = alumnos
+									.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
+							HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
+							if (cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno)) {
+								if(Utiles.confirmarAccion()==null) {
+									cursosAlum.remove(curso.getNombre(), curso);
+	
+									alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
+									GestorDatos.escribirTodosAlum(alumnos);
+									System.out.println("El alumno: " + alumno.getNombre()
+											+ " ha sido desmatriculado del curso: " + curso.getNombre());
+	
+									alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
+									cursos.get(curso.getNombre()).setAlumnos(alumnosCurso);
+									GestorDatos.escribirTodosCursos(cursos);
+								}
+							} else {
+								System.out.println("Lo sentimos pero: " + alumno.getNombre()
+										+ " no esta matriculado en: " + curso.getNombre());
+							}
+						}
 					}
 				}
-			}
-		}
-			}else {
+			} else {
 				System.out.println("No hay cursos, por lo que nadie esta matriculado");
 			}
-		}else {
+		} else {
 			System.out.println("No hay alumnos, por lo que no hay nada que desmatricular");
 		}
 	}
