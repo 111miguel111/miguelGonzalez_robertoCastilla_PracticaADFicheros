@@ -74,13 +74,12 @@ public class GestorAlumnos {
 						if (alumno != null && curso != null) {
 							alumnos = GestorDatos.getListaAlum();
 							cursos = GestorDatos.getListaCursos();
-							HashMap<String, Curso> cursosAlum = alumnos
-									.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
+							HashMap<String, Curso> cursosAlum = alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
 							HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
 							if (cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno)) {
 								if(Utiles.confirmarAccion()==null) {
-									cursosAlum.remove(curso.getNombre(), curso);
-	
+									
+									cursosAlum.remove(curso.getNombre(),curso);
 									alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 									GestorDatos.escribirTodosAlum(alumnos);
 									System.out.println("El alumno: " + alumno.getNombre()
@@ -294,6 +293,23 @@ public class GestorAlumnos {
 				} while (check);
 
 				if (Utiles.confirmarAccion() == null) {
+					if(alumno.getCursos()!=null) {
+						HashMap<String, Curso> cursos=GestorDatos.getListaCursos();
+						HashMap<String, Curso> cursosAlumn=alumno.getCursos();
+						
+						for(HashMap.Entry<String, Curso> entryCursosAlumn : cursosAlumn.entrySet()) {
+							
+							HashMap<String, Alumno> alumnCurso =entryCursosAlumn.getValue().getAlumnos();
+							for(HashMap.Entry<String, Alumno> entryAlumnCurso : alumnCurso.entrySet()) {
+								if(entryAlumnCurso.getValue().getNombre().equalsIgnoreCase(alumno.getNombre())&&entryAlumnCurso.getValue().getApellidos().equalsIgnoreCase(alumno.getApellidos())) {
+									cursos.get(entryCursosAlumn.getValue().getNombre()).getAlumnos().remove(alumno.getNombre());
+									cursos.get(entryCursosAlumn.getValue().getNombre()).getAlumnos().put(alumno3.getNombre()+"_"+alumno3.getApellidos(), alumno3);
+								}
+							}
+							
+						}
+						GestorDatos.escribirTodosCursos(cursos);
+					}
 					alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setNombre(alumno3.getNombre());
 					alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setApellidos(alumno3.getApellidos());
 					alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setDireccion(alumno3.getDireccion());
@@ -315,12 +331,12 @@ public class GestorAlumnos {
 	 * @return En el caso de encontrar un alumno con la misma clave lo devuelve y si no existe devuelve null
 	 */
 	public static Alumno confirmarInexistenciaAlumno(String nombreAlum, String apellidosAlum) {
-		// busco alumno y si no existe devuelve null
 		Alumno alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 		if (alumno == null) {
-			System.out.println("El alumno no existe, siga introcuciendo datos");
+			
 		} else {
-			System.out.println("Se ha encontrado un alumno con el mismo nombre y apellido");
+			System.out.println("Se ha encontrado un alumno con el mismo nombre y apellidos");
+			System.out.println("");
 		}
 
 		return alumno;
@@ -330,7 +346,6 @@ public class GestorAlumnos {
 	 * @return Devuelve un alumno si lo encuentra y si no null
 	 */
 	public static Alumno buscarAlumno() {
-		
 		Alumno alumno = null;
 		boolean check = true;
 		int errorCont = 0;
@@ -345,7 +360,8 @@ public class GestorAlumnos {
 					if (apellidosAlum != null) {
 						alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 						if (alumno == null) {
-							System.out.println("No se ha encontrado el alumno, vuelva a introducir los datos");
+							System.out.println("No se ha encontrado el alumno vuelva a introducir los datos");
+							System.out.println("");
 							check = false;
 						} else {
 							System.out.println("Se ha encontrado el alumno");
@@ -355,6 +371,7 @@ public class GestorAlumnos {
 				errorCont++;
 			} else {
 				System.out.println("Excedido numero de intentos (" + errorCont + ")");
+				System.out.println("");
 			}
 		} while (!check);
 
@@ -366,7 +383,6 @@ public class GestorAlumnos {
 	 */
 	public static Curso buscarCurso() {
 		Curso curso = null;
-
 		boolean check = true;
 		int errorCont = 0;
 		do {
@@ -378,6 +394,7 @@ public class GestorAlumnos {
 					curso = GestorDatos.buscarCurso(nombreCurso);
 					if (curso == null) {
 						System.out.println("No se ha encontrado el curso vuelva a introducir los datos");
+						System.out.println("");
 						check = false;
 					} else {
 						System.out.println("Se ha encontrado el curso");
@@ -403,6 +420,7 @@ public class GestorAlumnos {
 		}
 		}else {
 			System.out.println("No hay alumnos, crea algun alumno antes");
+			System.out.println("");
 		}
 	}
 	/**

@@ -169,13 +169,12 @@ public class GestorCursos {
 						if (alumno != null && curso != null) {
 							alumnos = GestorDatos.getListaAlum();
 							cursos = GestorDatos.getListaCursos();
-							HashMap<String, Curso> cursosAlum = alumnos
-									.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
+							HashMap<String, Curso> cursosAlum = alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
 							HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
 							if (cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno)) {
 								if(Utiles.confirmarAccion()==null) {
-									cursosAlum.remove(curso.getNombre(), curso);
-	
+									
+									cursosAlum.remove(curso.getNombre(),curso);
 									alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 									GestorDatos.escribirTodosAlum(alumnos);
 									System.out.println("El alumno: " + alumno.getNombre()
@@ -289,7 +288,7 @@ public class GestorCursos {
 						boolean check = true;
 						System.out.println("Se ha encontrado el curso: " + curso.toString());
 						do {
-							System.out.println("Que desea modificar?\nNombre 1\nDescripcion 2\nTodo 3\n Salir 0");
+							System.out.println("¿Que desea modificar?\n1.Nombre\n2.Descripcion \n3.Todo \0.Salir");
 							String opcion = Utiles.scanNumero();
 							switch (opcion) {
 							case "1":
@@ -299,9 +298,6 @@ public class GestorCursos {
 									curso2 = confirmarInexistenciaCurso(nombreCurso);
 									if (curso2 == null) {
 										curso3.setNombre(nombreCurso);
-									} else {
-										System.out.println(
-												"El nombre del curso coincide con el de otro curso, porfavor cambie el nombre");
 									}
 								}
 								break;
@@ -324,9 +320,6 @@ public class GestorCursos {
 											curso3.setNombre(nombreCurso);
 											curso3.setDescripcion(descripcionCurso);
 										}
-									} else {
-										System.out.println(
-												"El nombre del curso coincide con el de otro curso, porfavor cambie el nombre");
 									}
 								}
 								break;
@@ -336,6 +329,7 @@ public class GestorCursos {
 							default:
 								System.out.println("Valor no valido.");
 							}
+							System.out.println("");
 						} while (check);
 						// AHORA SI TENDRIA QUE MODIFICAR EN CONDICIONES EL CURSO
 						if (Utiles.confirmarAccion() == null) {
@@ -347,14 +341,9 @@ public class GestorCursos {
 										HashMap<String, Curso> cursosProfesor = profesorAux.getCursos();
 										for (HashMap.Entry<String, Curso> entryAuxCursoProfesor : cursosProfesor
 												.entrySet()) {
-											if (entryAuxCursoProfesor.getValue().getNombre()
-													.equalsIgnoreCase(curso.getNombre())) {
-												profesores.get(entryAux.getKey()).getCursos()
-														.get(entryAuxCursoProfesor.getKey())
-														.setNombre(curso3.getNombre());
-												profesores.get(entryAux.getKey()).getCursos()
-														.get(entryAuxCursoProfesor.getKey())
-														.setDescripcion(curso3.getDescripcion());
+											if (entryAuxCursoProfesor.getValue().getNombre().equalsIgnoreCase(curso.getNombre())) {
+												profesores.get(entryAux.getKey()).getCursos().remove(entryAuxCursoProfesor.getKey(), entryAuxCursoProfesor.getValue());
+												profesores.get(entryAux.getKey()).getCursos().put(curso3.getNombre(), curso3);
 											}
 										}
 									}
@@ -369,8 +358,10 @@ public class GestorCursos {
 									HashMap<String, Curso> cursosAlumno = alumnoAux.getCursos();
 									for (HashMap.Entry<String, Curso> entryAuxCursoAlumno : cursosAlumno.entrySet()) {
 										if (entryAuxCursoAlumno.getValue().getNombre().equalsIgnoreCase(curso.getNombre())) {
-											alumnos.get(entryAux.getKey()).getCursos().get(entryAuxCursoAlumno.getKey()).setNombre(curso3.getNombre());
-											alumnos.get(entryAux.getKey()).getCursos().get(entryAuxCursoAlumno.getKey()).setDescripcion(curso3.getDescripcion());
+											
+											alumnos.get(entryAux.getKey()).getCursos().remove(entryAuxCursoAlumno.getKey(),entryAuxCursoAlumno.getValue());
+											alumnos.get(entryAux.getKey()).getCursos().put(curso3.getNombre(), curso3);
+											
 										}
 									}
 								}
@@ -401,7 +392,6 @@ public class GestorCursos {
 	public static Curso confirmarInexistenciaCurso(String nombreCurso) {
 		Curso curso = GestorDatos.buscarCurso(nombreCurso);
 		if (curso == null) {
-			System.out.println("El curso no existe siga introcuciendo datos");
 		} else {
 			System.out.println("Se ha encontrado un curso con el mismo nombre");
 		}
@@ -428,6 +418,7 @@ public class GestorCursos {
 					curso = GestorDatos.buscarCurso(nombreCurso);
 					if (curso == null) {
 						System.out.println("No se ha encontrado el curso vuelva a introducir los datos");
+						System.out.println("");
 						check = false;
 					} else {
 						System.out.println("Se ha encontrado el curso");
@@ -453,9 +444,9 @@ public class GestorCursos {
 	public static Profesor confirmarInexistenciaProfesor(String dniProfesor) {
 		Profesor profesor = GestorDatos.buscarProf(dniProfesor);
 		if (profesor == null) {
-			System.out.println("El profesor no existe siga introcuciendo datos");
 		} else {
 			System.out.println("Se ha encontrado un profesor con el mismo dni");
+			System.out.println("");
 		}
 		return profesor;
 	}
@@ -479,6 +470,7 @@ public class GestorCursos {
 					profesor = GestorDatos.buscarProf(dniProfesro);
 					if (profesor == null) {
 						System.out.println("No se ha encontrado el profesor vuelva a introducir los datos");
+						System.out.println("");
 						check = false;
 					} else {
 						System.out.println("Se ha encontrado el profesor");
@@ -506,9 +498,10 @@ public class GestorCursos {
 	public static Alumno confirmarInexistenciaAlumno(String nombreAlum, String apellidosAlum) {
 		Alumno alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 		if (alumno == null) {
-			System.out.println("El alumno no existe siga introcuciendo datos");
+			
 		} else {
-			System.out.println("Se ha encontrado un alumno con el mismo nombre y apellido");
+			System.out.println("Se ha encontrado un alumno con el mismo nombre y apellidos");
+			System.out.println("");
 		}
 
 		return alumno;
@@ -536,6 +529,7 @@ public class GestorCursos {
 						alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 						if (alumno == null) {
 							System.out.println("No se ha encontrado el alumno vuelva a introducir los datos");
+							System.out.println("");
 							check = false;
 						} else {
 							System.out.println("Se ha encontrado el alumno");
@@ -545,6 +539,7 @@ public class GestorCursos {
 				errorCont++;
 			} else {
 				System.out.println("Excedido numero de intentos (" + errorCont + ")");
+				System.out.println("");
 			}
 		} while (!check);
 
@@ -563,6 +558,7 @@ public class GestorCursos {
 			}
 		} else {
 			System.out.println("No hay cursos, porfavor crea alguno");
+			System.out.println("");
 		}
 	}
 

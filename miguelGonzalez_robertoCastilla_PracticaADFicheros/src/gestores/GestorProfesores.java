@@ -252,6 +252,17 @@ public class GestorProfesores {
 					} while (check);
 						
 						if (Utiles.confirmarAccion() == null) {
+							if(profesor.getCursos()!=null) {
+								HashMap<String, Curso> cursos=GestorDatos.getListaCursos();
+								HashMap<String, Curso> cursosProf=profesor.getCursos();
+								for(HashMap.Entry<String, Curso> entryCursosProf : cursosProf.entrySet()) {
+									Profesor profesorCurso=entryCursosProf.getValue().getProfesor();
+									if(profesorCurso.getDni().equalsIgnoreCase(profesor.getDni())) {
+										cursos.get(entryCursosProf.getValue().getNombre()).setProfesor(profesor3);
+									}
+								}
+								GestorDatos.escribirTodosCursos(cursos);
+							}
 							profesores.get(profesor.getDni()).setNombre(profesor3.getNombre());
 							profesores.get(profesor.getDni()).setDni(profesor3.getDni());
 							profesores.get(profesor.getDni()).setDireccion(profesor3.getDireccion());
@@ -271,9 +282,9 @@ public class GestorProfesores {
 	public static Profesor confirmarInexistenciaProfesor(String dniProfesor) {
 		Profesor profesor = GestorDatos.buscarProf(dniProfesor);
 		if (profesor == null) {
-			System.out.println("El profesor no existe, siga introcuciendo datos");
 		} else {
 			System.out.println("Se ha encontrado un profesor con el mismo dni");
+			System.out.println("");
 		}
 		return profesor;
 	}
@@ -293,7 +304,8 @@ public class GestorProfesores {
 				if (dniProfesro != null) {
 					profesor = GestorDatos.buscarProf(dniProfesro);
 					if (profesor == null) {
-						System.out.println("No se ha encontrado el profesor, vuelva a introducir los datos");
+						System.out.println("No se ha encontrado el profesor vuelva a introducir los datos");
+						System.out.println("");
 						check = false;
 					} else {
 						System.out.println("Se ha encontrado el profesor");
@@ -322,7 +334,8 @@ public class GestorProfesores {
 				if (nombreCurso != null) {
 					curso = GestorDatos.buscarCurso(nombreCurso);
 					if (curso == null) {
-						System.out.println("No se ha encontrado el curso, vuelva a introducir los datos");
+						System.out.println("No se ha encontrado el curso vuelva a introducir los datos");
+						System.out.println("");
 						check = false;
 					} else {
 						System.out.println("Se ha encontrado el curso");
@@ -348,6 +361,7 @@ public class GestorProfesores {
 		}
 		}else {
 			System.out.println("No hay profesores, porfavor crea alguno");
+			System.out.println("");
 		}
 	}
 	/**
