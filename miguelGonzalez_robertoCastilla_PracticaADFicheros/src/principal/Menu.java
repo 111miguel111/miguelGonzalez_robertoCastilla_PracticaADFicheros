@@ -1,5 +1,6 @@
 package principal;
 
+import clases.Curso;
 import gestores.*;
 
 public class Menu {
@@ -35,8 +36,8 @@ public class Menu {
 	private static void menuAlumno() {
 		boolean check = true;
 		do {
-			System.out.println("Seleccione con que opcion de alumnos desea trabajar:\n1.Crear Alumno\n2.Borrar Alumno\n3.Modificar Alumno\n4.Matricular Alumno"
-					+ "\n5.Desmatricular Alumno\n6.Buscar Alumno\n7.Mostrar Todos Alumnos\n0.Salir");
+			System.out.println("\nSeleccione con que opcion de alumnos desea trabajar:\n1.Crear Alumno\t\t4.Matricular Alumno\t7.Mostrar Todos Alumnos"
+					+ "\n2.Borrar Alumno\t\t5.Desmatricular Alumno\n3.Modificar Alumno\t6.Buscar Alumno\n0.Salir");
 			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
@@ -64,16 +65,18 @@ public class Menu {
 				check = false;
 				break;
 			default:
-				System.out.println("Valor no valido.");
+				System.out.println("\nValor no valido.");
 			}
 		} while (check);
+		System.out.println();
 	}
 	
 	private static void menuCurso() {
 		boolean check = true;
 		do {
-			System.out.println("Seleccione con que opcion de cursos desea trabajar:\n1.Crear Curso\n2.Borrar Curso\n3.Modificar Curso\n4.Matricular Alumno"
-					+ "\n5.Desmatricular Alumno\n6.Vincular Profesor\n7.Desvincular Profesor\n8.Buscar Curso\n9.Mostrar Todos Cursos\n0.Salir");
+			System.out.println("\nSeleccione con que opcion de cursos desea trabajar:\n1.Crear Curso\t\t4.Matricular Alumno"
+					+ "\t7.Desvincular Profesor\n2.Borrar Curso\t\t5.Desmatricular Alumno\t8.Buscar Curso\n3.Modificar Curso"
+					+ "\t6.Vincular Profesor\t9.Mostrar Todos Cursos\n0.Salir");
 			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
@@ -107,15 +110,16 @@ public class Menu {
 				check = false;
 				break;
 			default:
-				System.out.println("Valor no valido.");
+				System.out.println("\nValor no valido.");
 			}
 		} while (check);
+		System.out.println();
 	}
 	private static void menuProfesor() {
 		boolean check = true;
 		do {
-			System.out.println("Seleccione con que opcion de profesores desea trabajar:\n1.Crear Profesor\n2.Borrar Profesor\n3.Modificar Profesor\n4.Vincular Curso"
-					+ "\n5.Desvincular Curso\n6.Buscar Profesor\n7.Mostrar Todos Profesores\n0.Salir");
+			System.out.println("\nSeleccione con que opcion de profesores desea trabajar:\n1.Crear Profesor\t4.Vincular Curso\t7.Mostrar Todos Profesores"
+					+ "\n2.Borrar Profesor\t5.Desvincular Curso\n3.Modificar Profesor\t6.Buscar Profesor\n0.Salir");
 			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
@@ -143,9 +147,10 @@ public class Menu {
 				check = false;
 				break;
 			default:
-				System.out.println("Valor no valido.");
+				System.out.println("\nValor no valido.");
 			}
 		} while (check);
+		System.out.println();
 	}
 
 }

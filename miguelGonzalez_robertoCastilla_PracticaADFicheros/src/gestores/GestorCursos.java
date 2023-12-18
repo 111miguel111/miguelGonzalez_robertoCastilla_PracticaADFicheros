@@ -281,6 +281,7 @@ public class GestorCursos {
 			if (curso != null) {
 				Curso curso2 = null;
 				Curso curso3 = new Curso(curso.getNombre(), curso.getDescripcion());
+				Curso.restarCont();//Tras crear un curso que no es nuevo se resta 1 al contador
 
 				cursos = GestorDatos.getListaCursos();
 				for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
@@ -288,7 +289,7 @@ public class GestorCursos {
 						boolean check = true;
 						System.out.println("Se ha encontrado el curso: " + curso.toString());
 						do {
-							System.out.println("¿Que desea modificar?\n1.Nombre\n2.Descripcion \n3.Todo \0.Salir");
+							System.out.println("¿Que desea modificar?\n1.Nombre\n2.Descripcion\n3.Todo\n0.Salir");
 							String opcion = Utiles.scanNumero();
 							switch (opcion) {
 							case "1":

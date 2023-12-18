@@ -27,7 +27,13 @@ public class Curso implements Serializable{
 		alumnos=new HashMap<String,Alumno>();
 	}
 	
-
+	/**
+	 * Metodo para restar uno al contador cuando se crean Cursos que no son nuevos
+	 */
+	public static void restarCont() {
+		cont-=1;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(nombre);

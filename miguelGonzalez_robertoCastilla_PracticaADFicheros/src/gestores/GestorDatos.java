@@ -377,6 +377,7 @@ public class GestorDatos {
 				if (cursoTexto.split("¬")[1].equals(nombre)) {
 					curso = new Curso(cursoTexto.split("¬")[1], cursoTexto.split("¬")[2]);
 					curso.setCodigo(cursoTexto.split("¬")[0]);
+					Curso.restarCont();//Tras crear un curso que no es nuevo se resta 1 al contador
 					// Se comprueba que el texto de profesor no sea un campo vacio y se crea
 					if (cursoProf != "") {
 						curso.setProfesor(new Profesor(cursoProf.split("¬")[0], cursoProf.split("¬")[1],
@@ -433,6 +434,7 @@ public class GestorDatos {
 				if (cursoTexto != "") {
 					Curso curso = new Curso(cursoTexto.split("¬")[1], cursoTexto.split("¬")[2]);
 					curso.setCodigo(cursoTexto.split("¬")[0]);
+					Curso.restarCont();//Tras crear un curso que no es nuevo se resta 1 al contador
 					// Se comprueba si la linea del profesor esta vacio y si no lo crea y agrega al
 					// curso
 					if (cursoProf != "") {
