@@ -34,7 +34,7 @@ public class GestorDatos {
 			try {
 				archivoAlum.createNewFile();
 			} catch (IOException e) {
-				System.out.println("Error al crear el archivo");
+				System.out.println("\nError al crear el archivo");
 			}
 		}
 	}
@@ -74,7 +74,7 @@ public class GestorDatos {
 			fileOut.close();
 
 		} catch (IOException e) {
-			System.out.println("Error al escribir el archivo");
+			System.out.println("\nError al escribir el archivo");
 		}
 	}
 
@@ -112,14 +112,14 @@ public class GestorDatos {
 			}
 		} catch (IOException e) {
 		} catch (ClassNotFoundException e) {
-			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
+			System.out.println("\nError al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
 				if (entrada != null) {
 					entrada.close();
 				}
 			} catch (IOException e) {
-				System.out.println("Esta en null el ObjectInputStream");
+				System.out.println("\nEsta en null el ObjectInputStream");
 			}
 		}
 		// Si no se encuentra al alumno se devuelve un null
@@ -148,11 +148,11 @@ public class GestorDatos {
 				listaAlum.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("No se ha encontrado el archivo");
+			System.out.println("\nNo se ha encontrado el archivo");
 		} catch (IOException e2) {
-			//System.out.println("Fichero vacio");
+			//System.out.println("\nFichero vacio");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
+			System.out.println("\nError al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
 				if (entrada != null) {
@@ -176,7 +176,7 @@ public class GestorDatos {
 			try {
 				archivoProf.createNewFile();
 			} catch (IOException e) {
-				System.out.println("Error al crear el archivo");
+				System.out.println("\nError al crear el archivo");
 			}
 		}
 	}
@@ -199,7 +199,7 @@ public class GestorDatos {
 			salida.close();
 			fileOut.close();
 		} catch (IOException e) {
-			System.out.println("Error al escribir el archivo");
+			System.out.println("\nError al escribir el archivo");
 		}
 	}
 
@@ -243,12 +243,12 @@ public class GestorDatos {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("No se ha encontrado el archivo");
+			System.out.println("\nNo se ha encontrado el archivo");
 		} catch (IOException e2) {
-			//System.out.println("Fichero vacio");
+			//System.out.println("\nFichero vacio");
 			// e2.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
+			System.out.println("\nError al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
 				if (entrada != null) {
@@ -256,7 +256,7 @@ public class GestorDatos {
 				}
 			} catch (Exception e) {
 				// e.printStackTrace();
-				System.out.println("No se pudo cerrar el ObjectInputStream");
+				System.out.println("\nNo se pudo cerrar el ObjectInputStream");
 			}
 		}
 		// Si no se encuentra al profesor se devuelve un null
@@ -279,19 +279,19 @@ public class GestorDatos {
 				listaProf.put(profesor.getDni(), profesor);
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("No se ha encontrado el archivo");
+			System.out.println("\nNo se ha encontrado el archivo");
 		} catch (IOException e2) {
-			//System.out.println("Fichero vacio");
+			//System.out.println("\nFichero vacio");
 			// e2.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			System.out.println("Error al leer el archivo: Objeto inesperado encontrado en lectura");
+			System.out.println("\nError al leer el archivo: Objeto inesperado encontrado en lectura");
 		} finally {
 			try {
 				if (entrada != null) {
 					entrada.close();
 				}
 			} catch (Exception e) {
-				System.out.println("No se pudo cerrar el ObjectInputStream");
+				System.out.println("\nNo se pudo cerrar el ObjectInputStream");
 			}
 		}
 		return listaProf;
@@ -307,7 +307,7 @@ public class GestorDatos {
 			try {
 				archivoCurso.createNewFile();
 			} catch (IOException e) {
-				System.out.println("Error al crear el archivo");
+				System.out.println("\nError al crear el archivo");
 			}
 		}
 	}
@@ -333,9 +333,9 @@ public class GestorDatos {
 			// Se cierran el printWriter y el bufferedWriter
 			bw.close();
 			myWriter.close();
-			System.out.println("Se ha escrito en el archivo");
+			System.out.println("\nSe ha escrito en el archivo");
 		} catch (IOException e) {
-			System.out.println("Error al escribir el archivo");
+			System.out.println("\nError al escribir el archivo");
 			// e.printStackTrace();
 		}
 	}
@@ -404,7 +404,7 @@ public class GestorDatos {
 			}
 			sc.close();
 		} catch (FileNotFoundException e1) {
-			System.out.println("No se ha encontrado el archivo");
+			System.out.println("\nNo se ha encontrado el archivo");
 			//e1.printStackTrace();
 		}
 		return curso;
@@ -461,7 +461,7 @@ public class GestorDatos {
 			sc.close();
 		} catch (FileNotFoundException e1) {
 			//e1.printStackTrace();
-			System.out.println("No se ha encontrado el archivo");
+			System.out.println("\nNo se ha encontrado el archivo");
 		}
 		return listaCurso;
 	}
@@ -484,14 +484,14 @@ public class GestorDatos {
 			entrada = new ObjectInputStream(new FileInputStream(archivoAlum));
 			Alumno.setCont((int) entrada.readInt());
 		} catch (IOException e) {
-			System.out.println("No se han podido cargar los contadores");
+			System.out.println("\nNo se han podido cargar los contadores");
 		} finally {
 			if (entrada != null) {
 				try {
 					entrada.close();
 				} catch (IOException e) {
 					// e.printStackTrace();
-					System.out.println("Error al cerrar object input stream");
+					System.out.println("\nError al cerrar object input stream");
 				}
 			}
 		}
@@ -505,16 +505,16 @@ public class GestorDatos {
 			}
 
 		} catch (IOException e) {
-			System.out.println("No se han podido cargar los contadores");
+			System.out.println("\nNo se han podido cargar los contadores");
 		} catch (NoSuchElementException e) {
-			System.out.println("Contador vacio");
+			System.out.println("\nContador vacio");
 		} finally {
 			if (entrada != null) {
 				try {
 					entrada.close();
 				} catch (IOException e) {
 					// e.printStackTrace();
-					System.out.println("Error al cerrar object input stream");
+					System.out.println("\nError al cerrar object input stream");
 				}
 			}
 		}

@@ -35,24 +35,24 @@ public class GestorAlumnos {
 									cursosAlum.put(curso.getNombre(), curso);
 									alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 									GestorDatos.escribirTodosAlum(alumnos);
-									System.out.println("El alumno: " + alumno.getNombre()
+									System.out.println("\nEl alumno: " + alumno.getNombre()
 											+ " ha sido matriculado en el curso: " + curso.getNombre());
 									alumnosCurso.put(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 									cursos.get(curso.getNombre()).setAlumnos(alumnosCurso);
 									GestorDatos.escribirTodosCursos(cursos);
 								}
 							} else {
-								System.out.println("Lo sentimos pero: " + alumno.getNombre()
+								System.out.println("\nLo sentimos pero: " + alumno.getNombre()
 										+ " ya esta matriculado en: " + curso.getNombre());
 							}
 						}
 					}
 				}
 			} else {
-				System.out.println("No hay cursos, crea algun curso antes");
+				System.out.println("\nNo hay cursos, crea algun curso antes");
 			}
 		} else {
-			System.out.println("No hay alumnos, crea algun alumno antes");
+			System.out.println("\nNo hay alumnos, crea algun alumno antes");
 		}
 	}
 	/**
@@ -82,7 +82,7 @@ public class GestorAlumnos {
 									cursosAlum.remove(curso.getNombre(),curso);
 									alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 									GestorDatos.escribirTodosAlum(alumnos);
-									System.out.println("El alumno: " + alumno.getNombre()
+									System.out.println("\nEl alumno: " + alumno.getNombre()
 											+ " ha sido desmatriculado del curso: " + curso.getNombre());
 	
 									alumnosCurso.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
@@ -90,17 +90,17 @@ public class GestorAlumnos {
 									GestorDatos.escribirTodosCursos(cursos);
 								}
 							} else {
-								System.out.println("Lo sentimos pero: " + alumno.getNombre()
+								System.out.println("\nLo sentimos pero: " + alumno.getNombre()
 										+ " no esta matriculado en: " + curso.getNombre());
 							}
 						}
 					}
 				}
 			} else {
-				System.out.println("No hay cursos, por lo que nadie esta matriculado");
+				System.out.println("\nNo hay cursos, por lo que nadie esta matriculado");
 			}
 		} else {
-			System.out.println("No hay alumnos, por lo que no hay nada que desmatricular");
+			System.out.println("\nNo hay alumnos, por lo que no hay nada que desmatricular");
 		}
 	}
 	/**
@@ -108,27 +108,27 @@ public class GestorAlumnos {
 	 */
 	public static void crearAlumno() {
 		Alumno alumno = null;
-		System.out.println("Introduzca el nombre del alumno");
+		System.out.println("\nIntroduzca el nombre del alumno");
 		String nombreAlum = Utiles.scanPalabras();
 		if (nombreAlum != null) {
-			System.out.println("Introduzca los apellidos del alumno");
+			System.out.println("\nIntroduzca los apellidos del alumno");
 			String apellidosAlum = Utiles.scanPalabras();
 			if (apellidosAlum != null) {
 				alumno = confirmarInexistenciaAlumno(nombreAlum, apellidosAlum);
 				if (alumno == null) {
-					System.out.println("Introduzca la direccion del alumno");
+					System.out.println("\nIntroduzca la direccion del alumno");
 					String direccionAlum = Utiles.scanTodoTrim();
 					if (direccionAlum != null) {
-						System.out.println("Introduzca el telefono del alumno");
+						System.out.println("\nIntroduzca el telefono del alumno");
 						String telefonoAlum = Utiles.scanTelefono();
 						if (telefonoAlum != null) {
-							System.out.println("Introduzca la fecha de nacimiento del alumno");
+							System.out.println("\nIntroduzca la fecha de nacimiento del alumno");
 							String fechaNacimientoAlum = Utiles.scanFecha();
 							if (fechaNacimientoAlum != null) {
 								alumno = new Alumno(nombreAlum, apellidosAlum, direccionAlum, telefonoAlum,
 										fechaNacimientoAlum);
 								GestorDatos.escribirAlum(alumno);// falta confirmacion
-								System.out.println("El alumno ha sido creado exitosamente");
+								System.out.println("\nEl alumno ha sido creado exitosamente");
 
 							}
 						}
@@ -165,7 +165,7 @@ public class GestorAlumnos {
 			}
 		}
 		}else {
-			System.out.println("No hay alumnos, crea algun alumno antes");
+			System.out.println("\nNo hay alumnos, crea algun alumno antes");
 		}
 
 	}
@@ -189,14 +189,14 @@ public class GestorAlumnos {
 			
 				alumnos = GestorDatos.getListaAlum();
 				boolean check = true;
-				System.out.println("Se ha encontrado el alumno: " + alumno.toString());
+				System.out.println("\nSe ha encontrado el alumno: " + alumno.toString());
 				do {
 					System.out.println(
 							"Que desea modificar?\n1.Nombre \n2.Apellidos \n3.Direccion \n4.Telefono \n5.Fecha de nacimiento \n6.Todo \n0.Salir ");
 					String opcion = Utiles.scanNumero();
 					switch (opcion) {
 					case "1":
-						System.out.println("Introduzca el nombre del alumno");
+						System.out.println("\nIntroduzca el nombre del alumno");
 						nombreAlum = Utiles.scanPalabras();
 						if (nombreAlum != null) {
 							if (apellidosAlum != null) {
@@ -213,7 +213,7 @@ public class GestorAlumnos {
 						}
 						break;
 					case "2":
-						System.out.println("Introduzca los apellidos del alumno");
+						System.out.println("\nIntroduzca los apellidos del alumno");
 						apellidosAlum = Utiles.scanPalabras();
 						if (apellidosAlum != null) {
 							if (nombreAlum != null) {
@@ -230,42 +230,42 @@ public class GestorAlumnos {
 						}
 						break;
 					case "3":
-						System.out.println("Introduzca la direccion del alumno");
+						System.out.println("\nIntroduzca la direccion del alumno");
 						direccionAlum = Utiles.scanTodoTrim();
 						if (direccionAlum != null) {
 							alumno3.setDireccion(direccionAlum);
 						}
 						break;
 					case "4":
-						System.out.println("Introduzca el telefono del alumno");
+						System.out.println("\nIntroduzca el telefono del alumno");
 						telefonoAlum = Utiles.scanTelefono();
 						if (telefonoAlum != null) {
 							alumno3.setTelefono(telefonoAlum);
 						}
 						break;
 					case "5":
-						System.out.println("Introduzca la fecha de nacimiento del alumno");
+						System.out.println("\nIntroduzca la fecha de nacimiento del alumno");
 						fechaNacimientoAlum = Utiles.scanFecha();
 						if (fechaNacimientoAlum != null) {
 							alumno3.setFechaNacimiento(fechaNacimientoAlum);
 						}
 						break;
 					case "6":
-						System.out.println("Introduzca el nombre del alumno");
+						System.out.println("\nIntroduzca el nombre del alumno");
 						nombreAlum = Utiles.scanPalabras();
 						if (nombreAlum != null) {
-							System.out.println("Introduzca los apellidos del alumno");
+							System.out.println("\nIntroduzca los apellidos del alumno");
 							apellidosAlum = Utiles.scanPalabras();
 							if (apellidosAlum != null) {
 								alumno2 = confirmarInexistenciaAlumno(nombreAlum, apellidosAlum);
 								if (alumno2 == null) {
-									System.out.println("Introduzca la direccion del alumno");
+									System.out.println("\nIntroduzca la direccion del alumno");
 									direccionAlum = Utiles.scanTodoTrim();
 									if (direccionAlum != null) {
-										System.out.println("Introduzca el telefono del alumno");
+										System.out.println("\nIntroduzca el telefono del alumno");
 										telefonoAlum = Utiles.scanTelefono();
 										if (telefonoAlum != null) {
-											System.out.println("Introduzca la fecha de nacimiento del alumno");
+											System.out.println("\nIntroduzca la fecha de nacimiento del alumno");
 											fechaNacimientoAlum = Utiles.scanFecha();
 											if (fechaNacimientoAlum != null) {
 												alumno3.setNombre(nombreAlum);
@@ -288,7 +288,7 @@ public class GestorAlumnos {
 						check = false;
 						break;
 					default:
-						System.out.println("Valor no valido.");
+						System.out.println("\nValor no valido.");
 					}
 				} while (check);
 
@@ -321,7 +321,7 @@ public class GestorAlumnos {
 			
 		}
 		}else {
-			System.out.println("No hay alumnos, crea algun alumno antes");
+			System.out.println("\nNo hay alumnos, crea algun alumno antes");
 		}
 	}
 	/**
@@ -335,8 +335,7 @@ public class GestorAlumnos {
 		if (alumno == null) {
 			
 		} else {
-			System.out.println("Se ha encontrado un alumno con el mismo nombre y apellidos");
-			System.out.println("");
+			System.out.println("\nSe ha encontrado un alumno con el mismo nombre y apellidos\n");
 		}
 
 		return alumno;
@@ -352,26 +351,24 @@ public class GestorAlumnos {
 		do {
 			check = true;
 			if (errorCont < 5) {
-				System.out.println("Introduzca el nombre del alumno");
+				System.out.println("\nIntroduzca el nombre del alumno");
 				String nombreAlum = Utiles.scanPalabras();
 				if (nombreAlum != null) {
-					System.out.println("Introduzca los apellidos del alumno");
+					System.out.println("\nIntroduzca los apellidos del alumno");
 					String apellidosAlum = Utiles.scanPalabras();
 					if (apellidosAlum != null) {
 						alumno = GestorDatos.buscarAlum(nombreAlum, apellidosAlum);
 						if (alumno == null) {
-							System.out.println("No se ha encontrado el alumno vuelva a introducir los datos");
-							System.out.println("");
+							System.out.println("\nNo se ha encontrado el alumno vuelva a introducir los datos\n");
 							check = false;
 						} else {
-							System.out.println("Se ha encontrado el alumno");
+							System.out.println("\nSe ha encontrado el alumno");
 						}
 					}
 				}
 				errorCont++;
 			} else {
-				System.out.println("Excedido numero de intentos (" + errorCont + ")");
-				System.out.println("");
+				System.out.println("\nExcedido numero de intentos (" + errorCont + ")\n");
 			}
 		} while (!check);
 
@@ -388,21 +385,20 @@ public class GestorAlumnos {
 		do {
 			check = true;
 			if (errorCont < 5) {
-				System.out.println("Introduzca el nombre del curso");
+				System.out.println("\nIntroduzca el nombre del curso");
 				String nombreCurso = Utiles.scanPalabras();
 				if (nombreCurso != null) {
 					curso = GestorDatos.buscarCurso(nombreCurso);
 					if (curso == null) {
-						System.out.println("No se ha encontrado el curso vuelva a introducir los datos");
-						System.out.println("");
+						System.out.println("\nNo se ha encontrado el curso vuelva a introducir los datos\n");
 						check = false;
 					} else {
-						System.out.println("Se ha encontrado el curso");
+						System.out.println("\nSe ha encontrado el curso");
 					}
 				}
 				errorCont++;
 			} else {
-				System.out.println("Excedido numero de intentos (" + errorCont + ")");
+				System.out.println("\nExcedido numero de intentos (" + errorCont + ")");
 			}
 		} while (!check);
 		return curso;
@@ -419,8 +415,7 @@ public class GestorAlumnos {
 			System.out.println(alumno.toString());
 		}
 		}else {
-			System.out.println("No hay alumnos, crea algun alumno antes");
-			System.out.println("");
+			System.out.println("\nNo hay alumnos, crea algun alumno antes\n");
 		}
 	}
 	/**

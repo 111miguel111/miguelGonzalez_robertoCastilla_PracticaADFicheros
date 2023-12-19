@@ -1,6 +1,5 @@
 package principal;
 
-import clases.Curso;
 import gestores.*;
 
 public class Menu {
@@ -11,7 +10,7 @@ public class Menu {
 		GestorDatos.setContadores();
 		boolean check = true;
 		do {
-			System.out.println("Seleccione con que desea trabajar:\n1.Alumnos\n2.Profesores\n3.Cursos\n0.Salir");
+			System.out.println("\nSeleccione con que desea trabajar:\n1.Alumnos\n2.Profesores\n3.Cursos\n0.Salir");
 			String opcion = Utiles.scanLibre();
 			switch (opcion) {
 			case "1":
@@ -27,10 +26,10 @@ public class Menu {
 				check = false;
 				break;
 			default:
-				System.out.println("Valor no valido.");
+				System.out.println("\nValor no valido.");
 			}
 		} while (check);
-		System.out.println("Fin del programa");
+		System.out.println("\nFin del programa");
 	}
 
 	private static void menuAlumno() {
