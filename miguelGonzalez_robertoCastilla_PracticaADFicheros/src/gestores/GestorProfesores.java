@@ -19,10 +19,10 @@ public class GestorProfesores {
 
 				Profesor profesor = buscarProfesor();
 				if (profesor != null) {
-					System.out.println(profesor.toString());
+					System.out.println("\n"+profesor.toString());
 					Curso curso = buscarCurso();
 					if (curso != null) {
-						System.out.println(curso.toString());
+						System.out.println("\n"+curso.toString());
 						if (profesor != null && curso != null) {
 							profesores = GestorDatos.getListaProf();
 							cursos = GestorDatos.getListaCursos();
@@ -366,7 +366,7 @@ public class GestorProfesores {
 	public static void mostrarProfesores() {
 		HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 		for (HashMap.Entry<String, Profesor> entry : profesores.entrySet()) {
-			System.out.println(entry.getValue().toString());
+			System.out.println("\n"+entry.getValue().toString());
 		}
 	}
 

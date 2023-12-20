@@ -424,7 +424,7 @@ public class GestorAlumnos {
 	public static void mostrarAlumnos() {
 		HashMap<String, Alumno> alumnos = GestorDatos.getListaAlum();
 		for (HashMap.Entry<String, Alumno> entry : alumnos.entrySet()) {
-			System.out.println(entry.getValue().toString());
+			System.out.println("\n"+entry.getValue().toString());
 		}
 	}
 

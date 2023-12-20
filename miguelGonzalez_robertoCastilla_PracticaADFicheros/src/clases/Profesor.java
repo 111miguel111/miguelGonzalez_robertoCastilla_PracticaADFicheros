@@ -72,12 +72,12 @@ public class Profesor implements Serializable{
 		return cursos;
 	}
 	public String getCursosString() {
-		String cursosString="\n cursos{";
+		String cursosString="\n Cursos";
 		for(HashMap.Entry<String, Curso> entry : this.cursos.entrySet()) {
 		    String key = entry.getKey();
-		    cursosString=cursosString+"[ nombre= "+ entry.getValue().getNombre() +", descripcion= "+ entry.getValue().getDescripcion() +", codigo= "+ entry.getValue().getCodigo()+" ]\n";
+		    cursosString=cursosString+"{ nombre= "+ entry.getValue().getNombre() +", descripcion= "+ entry.getValue().getDescripcion() +", codigo= "+ entry.getValue().getCodigo()+" }\n";
 		}
-		cursosString=cursosString+"}\n";
+		cursosString=cursosString;
 		return cursosString;
 	}
 
@@ -89,10 +89,10 @@ public class Profesor implements Serializable{
 	public String toString() {
 		if(this.cursos.isEmpty()) {
 			return "Profesor [ nombre= " + nombre + "\n dni= " + dni + "\n direccion= " + direccion + "\n telefono= " + telefono
-					+  " ]";
+					+  "\n]";
 		}else {
 			return "Profesor [ nombre=" + nombre + "\n dni=" + dni + "\n direccion=" + direccion + "\n telefono=" + telefono
-					+ getCursosString() + " ]";
+					+ getCursosString() + "]";
 		}
 	}
 	

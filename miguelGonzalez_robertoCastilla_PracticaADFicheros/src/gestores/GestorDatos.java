@@ -333,7 +333,7 @@ public class GestorDatos {
 			// Se cierran el printWriter y el bufferedWriter
 			bw.close();
 			myWriter.close();
-			System.out.println("\nSe ha escrito en el archivo");
+			//System.out.println("\nSe ha escrito en el archivo");
 		} catch (IOException e) {
 			System.out.println("\nError al escribir el archivo");
 			// e.printStackTrace();

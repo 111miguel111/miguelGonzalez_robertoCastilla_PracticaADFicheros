@@ -77,12 +77,12 @@ public class Curso implements Serializable{
 		return alumnos;
 	}
 	public String getAlumnosString() {
-		String alumnosString="\n alumnos{";
+		String alumnosString="\n Alumnos ";
 		for(HashMap.Entry<String, Alumno> entry : this.alumnos.entrySet()) {
 		    String key = entry.getKey();
-		    alumnosString=alumnosString+ "[ nombre= "+entry.getValue().getNombre() +", apellidos= "+entry.getValue().getApellidos()+", direccion= "+entry.getValue().getDireccion()+", telefono= "+entry.getValue().getTelefono()+", fechaNacimiento= "+entry.getValue().getFechaNacimiento()+" ]\n";
+		    alumnosString=alumnosString+ "{ nombre= "+entry.getValue().getNombre() +", apellidos= "+entry.getValue().getApellidos()+", direccion= "+entry.getValue().getDireccion()+", telefono= "+entry.getValue().getTelefono()+", fechaNacimiento= "+entry.getValue().getFechaNacimiento()+" }";
 		}
-		alumnosString=alumnosString+"}\n";
+		alumnosString=alumnosString;
 		return alumnosString;
 	}
 	public String getAlumnosStringDatos() {
@@ -106,7 +106,7 @@ public class Curso implements Serializable{
 		return profesor;
 	}
 	public String getProfesorString() {
-		return "\nprofesor {nombre= " + this.profesor.getNombre() + " dni= " + this.profesor.getDni() + ", direccion= " + this.profesor.getDireccion() + ", telefono= " + this.profesor.getTelefono() +"}\n";
+		return "\n Profesor { nombre= " + this.profesor.getNombre() + " dni= " + this.profesor.getDni() + ", direccion= " + this.profesor.getDireccion() + ", telefono= " + this.profesor.getTelefono() +" }\n";
 	}
 	public String getProfesorStringDatos() {
 		return this.profesor.getNombre() + "¬" + this.profesor.getDni() + "¬" + this.profesor.getDireccion() + "¬" + this.profesor.getTelefono();
@@ -117,13 +117,13 @@ public class Curso implements Serializable{
 	@Override
 	public String toString() {
 		if(!this.alumnos.isEmpty()&&this.profesor!=null) {
-			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + getProfesorString() + " ]";
+			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + getProfesorString() + "]";
 		}else if(this.alumnos.isEmpty()&&this.profesor!=null) {
-			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getProfesorString() + " ]";
+			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getProfesorString() + "]";
 		}else if(!this.alumnos.isEmpty()&&this.profesor==null) {
-			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + " ]";
+			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + getAlumnosString() + "]";
 		}else{
-			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + " ]";
+			return "Curso [ codigo= "+codigo+"\n nombre= " + nombre + "\n descripcion= " + descripcion + "\n]";
 		}
 	}
 	public String toStringDatos() {

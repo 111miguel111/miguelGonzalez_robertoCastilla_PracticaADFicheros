@@ -109,12 +109,12 @@ public class Alumno implements Serializable{
 		return cursos;
 	}
 	public String getCursosString() {
-		String cursosString="\n cursos{";
+		String cursosString="\n Cursos ";
 		for(HashMap.Entry<String, Curso> entry : this.cursos.entrySet()) {
 		    String key = entry.getKey();
-		    cursosString=cursosString+"[ nombre= "+ entry.getValue().getNombre() +", descripcion= "+ entry.getValue().getDescripcion() +", codigo= "+ entry.getValue().getCodigo()+" ]\n";
+		    cursosString=cursosString+"{ nombre= "+ entry.getValue().getNombre() +", descripcion= "+ entry.getValue().getDescripcion() +", codigo= "+ entry.getValue().getCodigo()+" }\n";
 		}
-		cursosString=cursosString+"}\n";
+		cursosString=cursosString;
 		return cursosString;
 	}
 
@@ -128,10 +128,10 @@ public class Alumno implements Serializable{
 	public String toString() {
 		if(this.cursos.isEmpty()) {
 			return "Alumno [ numero expediente= "+numExpediente+"\n nombre= " + nombre + "\n apellidos= " + apellidos + "\n direccion= " + direccion + "\n telefono= "
-					+ telefono + "\n fechaNacimiento= " + fechaNacimiento +  " ]";
+					+ telefono + "\n fechaNacimiento= " + fechaNacimiento +  "\n]";
 		}else {
 			return "Alumno [ numero expediente= "+numExpediente+"\n nombre= " + nombre + "\n apellidos= " + apellidos + "\n direccion= " + direccion + "\n telefono= "
-					+ telefono + "\n fechaNacimiento= " + fechaNacimiento + getCursosString() + " ]";
+					+ telefono + "\n fechaNacimiento= " + fechaNacimiento + getCursosString() + "]";
 		}
 		
 	}

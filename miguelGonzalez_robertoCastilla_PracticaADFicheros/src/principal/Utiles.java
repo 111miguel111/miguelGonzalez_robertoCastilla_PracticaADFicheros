@@ -20,13 +20,13 @@ public class Utiles {
 	 *         que no se ha aceptado el cambio
 	 */
 	static public String confirmarAccion() {
-		System.out.println("Seguro que quiere realizar la accion?\nSi o No");
+		System.out.println("\nSeguro que quiere realizar la accion?\nSi o No");
 		String respuesta = scanPalabras().trim();
 		if (respuesta.equalsIgnoreCase("si")) {
 			respuesta = null;
-			System.out.println("Confirmacion aceptada , la accion se realizara");
+			System.out.println("\n"+"Confirmacion aceptada , la accion se realizara");
 		} else {
-			System.out.println("Confirmacion denegada , la accion no se realizara");
+			System.out.println("\n"+"Confirmacion denegada , la accion no se realizara");
 		}
 		return respuesta;
 	}

@@ -561,7 +561,7 @@ public class GestorCursos {
 	public static void mostrarCursos() {
 		HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
 		for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
-			System.out.println(entry.getValue().toString());
+			System.out.println("\n"+entry.getValue().toString());
 		}
 	}
 
