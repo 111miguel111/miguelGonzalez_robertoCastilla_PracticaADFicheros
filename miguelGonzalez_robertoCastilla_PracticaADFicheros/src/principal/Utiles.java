@@ -22,11 +22,13 @@ public class Utiles {
 	static public String confirmarAccion() {
 		System.out.println("\nSeguro que quiere realizar la accion?\nSi o No");
 		String respuesta = scanPalabras().trim();
-		if (respuesta.equalsIgnoreCase("si")) {
-			respuesta = null;
-			System.out.println("\n"+"Confirmacion aceptada , la accion se realizara");
-		} else {
-			System.out.println("\n"+"Confirmacion denegada , la accion no se realizara");
+		if(respuesta!=null) {
+			if (respuesta.equalsIgnoreCase("si")) {
+				respuesta = null;
+				System.out.println("\n"+"Confirmacion aceptada , la accion se realizara");
+			} else {
+				System.out.println("\n"+"Confirmacion denegada , la accion no se realizara");
+			}
 		}
 		return respuesta;
 	}
