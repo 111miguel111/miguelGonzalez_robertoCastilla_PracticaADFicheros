@@ -19,21 +19,22 @@ public class Utiles {
 	 * @return Si se escribe si devuelve null, en cualquier otro caso contara como
 	 *         que no se ha aceptado el cambio
 	 */
-	static public String confirmarAccion() {
+	static public boolean confirmarAccion() {
 		System.out.println("\nSeguro que quiere realizar la accion?\nSi o No");
-		String respuesta = scanPalabras().trim();
+		String respuesta = scanPalabras();
+		boolean check;
 		if(respuesta!=null) {
-			if (respuesta.equalsIgnoreCase("si")) {
-				respuesta = true;
+			if (respuesta.trim().equalsIgnoreCase("si")) {
+				check = true;
 				System.out.println("\n"+"Confirmacion aceptada , la accion se realizara");
 			} else {
-				respuesta = false;
+				check = false;
 				System.out.println("\n"+"Confirmacion denegada , la accion no se realizara");
 			}
 		}else {
-			respuesta=false;
+			check=false;
 		}
-		return respuesta;
+		return check;
 	}
 
 	/**
