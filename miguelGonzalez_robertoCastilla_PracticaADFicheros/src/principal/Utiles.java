@@ -30,8 +30,10 @@ public class Utiles {
 				respuesta = false;
 				System.out.println("\n"+"Confirmacion denegada , la accion no se realizara");
 			}
+		}else {
+			respuesta=false;
 		}
-		return false;
+		return respuesta;
 	}
 
 	/**
