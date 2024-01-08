@@ -24,13 +24,14 @@ public class Utiles {
 		String respuesta = scanPalabras().trim();
 		if(respuesta!=null) {
 			if (respuesta.equalsIgnoreCase("si")) {
-				respuesta = null;
+				respuesta = true;
 				System.out.println("\n"+"Confirmacion aceptada , la accion se realizara");
 			} else {
+				respuesta = false;
 				System.out.println("\n"+"Confirmacion denegada , la accion no se realizara");
 			}
 		}
-		return respuesta;
+		return false;
 	}
 
 	/**
