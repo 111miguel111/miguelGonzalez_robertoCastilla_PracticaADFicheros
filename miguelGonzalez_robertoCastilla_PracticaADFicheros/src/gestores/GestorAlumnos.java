@@ -29,9 +29,8 @@ public class GestorAlumnos {
 									.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
 							HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
 							if (!(cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno))) {
-								if(Utiles.confirmarAccion()==null) {
+								if(Utiles.confirmarAccion()==true) {
 									
-								
 									cursosAlum.put(curso.getNombre(), curso);
 									alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
 									GestorDatos.escribirTodosAlum(alumnos);
@@ -77,7 +76,7 @@ public class GestorAlumnos {
 							HashMap<String, Curso> cursosAlum = alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
 							HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
 							if (cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno)) {
-								if(Utiles.confirmarAccion()==null) {
+								if(Utiles.confirmarAccion()==true) {
 									
 									cursosAlum.remove(curso.getNombre(),curso);
 									alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
@@ -157,7 +156,7 @@ public class GestorAlumnos {
 				}
 				cursos.get(entry.getKey()).setAlumnos(alumnosCurso);
 			}
-			if (Utiles.confirmarAccion() == null) {
+			if (Utiles.confirmarAccion() == true) {
 
 				alumnos.remove(alumno.getNombre() + "_" + alumno.getApellidos(), alumno);
 				GestorDatos.escribirTodosAlum(alumnos);
@@ -292,7 +291,7 @@ public class GestorAlumnos {
 					}
 				} while (check);
 
-				if (Utiles.confirmarAccion() == null) {
+				if (Utiles.confirmarAccion() == true) {
 					if(alumno.getCursos()!=null) {
 						HashMap<String, Curso> cursos=GestorDatos.getListaCursos();
 						HashMap<String, Curso> cursosAlumn=alumno.getCursos();

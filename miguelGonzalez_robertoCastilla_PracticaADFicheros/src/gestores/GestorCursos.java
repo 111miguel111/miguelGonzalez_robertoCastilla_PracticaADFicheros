@@ -29,7 +29,7 @@ public class GestorCursos {
 									System.out.println("\nEl profesor: " + curso.getProfesor().getNombre()
 											+ " ya esta vinculado al curso: " + curso.getNombre());
 								}
-								if (Utiles.confirmarAccion() == null) {
+								if (Utiles.confirmarAccion() == true) {
 									cursos.get(curso.getNombre()).setProfesor(profesor);
 									cursosProfesor.put(curso.getNombre(), curso);
 									profesores.get(profesor.getDni()).setCursos(cursosProfesor);
@@ -76,7 +76,7 @@ public class GestorCursos {
 							cursos = GestorDatos.getListaCursos();
 							HashMap<String, Curso> cursosProfesor = profesor.getCursos();
 							if (cursosProfesor.containsValue(curso) && curso.getProfesor().equals(profesor)) {
-								if(Utiles.confirmarAccion()==null) {
+								if(Utiles.confirmarAccion()==true) {
 									cursos.get(curso.getNombre()).setProfesor(null);
 									cursosProfesor.remove(curso.getNombre(), curso);
 									profesores.get(profesor.getDni()).setCursos(cursosProfesor);
@@ -123,7 +123,7 @@ public class GestorCursos {
 									.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
 							HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
 							if (!(cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno))) {
-								if(Utiles.confirmarAccion()==null) {
+								if(Utiles.confirmarAccion()==true) {
 									
 								
 									cursosAlum.put(curso.getNombre(), curso);
@@ -172,7 +172,7 @@ public class GestorCursos {
 							HashMap<String, Curso> cursosAlum = alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).getCursos();
 							HashMap<String, Alumno> alumnosCurso = cursos.get(curso.getNombre()).getAlumnos();
 							if (cursosAlum.containsValue(curso) && alumnosCurso.containsValue(alumno)) {
-								if(Utiles.confirmarAccion()==null) {
+								if(Utiles.confirmarAccion()==true) {
 									
 									cursosAlum.remove(curso.getNombre(),curso);
 									alumnos.get(alumno.getNombre() + "_" + alumno.getApellidos()).setCursos(cursosAlum);
@@ -253,7 +253,7 @@ public class GestorCursos {
 					}
 					profesores.get(entry.getKey()).setCursos(cursosProfesor);
 				}
-				if (Utiles.confirmarAccion() == null) {
+				if (Utiles.confirmarAccion() == true) {
 					cursos.remove(curso.getNombre());
 					GestorDatos.escribirTodosProf(profesores);
 					GestorDatos.escribirTodosAlum(alumnos);
@@ -332,7 +332,7 @@ public class GestorCursos {
 							}
 						} while (check);
 						// AHORA SI TENDRIA QUE MODIFICAR EN CONDICIONES EL CURSO
-						if (Utiles.confirmarAccion() == null) {
+						if (Utiles.confirmarAccion() == true) {
 							if (curso.getProfesor() != null) {
 								HashMap<String, Profesor> profesores = GestorDatos.getListaProf();
 								for (HashMap.Entry<String, Profesor> entryAux : profesores.entrySet()) {

@@ -32,7 +32,7 @@ public class GestorProfesores {
 									System.out.println("\nEl profesor: " + curso.getProfesor().getNombre()
 											+ " ya esta vinculado al curso: " + curso.getNombre());
 								}
-								if (Utiles.confirmarAccion() == null) {
+								if (Utiles.confirmarAccion() == true) {
 									cursos.get(curso.getNombre()).setProfesor(profesor);
 									cursosProfesor.put(curso.getNombre(), curso);
 									profesores.get(profesor.getDni()).setCursos(cursosProfesor);
@@ -78,7 +78,7 @@ public class GestorProfesores {
 							cursos = GestorDatos.getListaCursos();
 							HashMap<String, Curso> cursosProfesor = profesor.getCursos();
 							if (cursosProfesor.containsValue(curso) && curso.getProfesor().equals(profesor)) {
-								if(Utiles.confirmarAccion()==null) {
+								if(Utiles.confirmarAccion()==true) {
 									cursos.get(curso.getNombre()).setProfesor(null);
 									cursosProfesor.remove(curso.getNombre(), curso);
 									profesores.get(profesor.getDni()).setCursos(cursosProfesor);
@@ -140,7 +140,7 @@ public class GestorProfesores {
 		if (profesor != null) {
 			System.out.println(profesor.toString());
 			profesores = GestorDatos.getListaProf();
-			if (Utiles.confirmarAccion() == null) {
+			if (Utiles.confirmarAccion() == true) {
 				HashMap<String, Curso> cursos = GestorDatos.getListaCursos();
 				for (HashMap.Entry<String, Curso> entry : cursos.entrySet()) {
 					Profesor profesorAux = entry.getValue().getProfesor();
@@ -251,7 +251,7 @@ public class GestorProfesores {
 						}
 					} while (check);
 						
-						if (Utiles.confirmarAccion() == null) {
+						if (Utiles.confirmarAccion() == true) {
 							if(profesor.getCursos()!=null) {
 								HashMap<String, Curso> cursos=GestorDatos.getListaCursos();
 								HashMap<String, Curso> cursosProf=profesor.getCursos();
